@@ -1,6 +1,6 @@
 <div align="center">
 
-# ❗ [REPLACE ME]  GeoML Python Starter
+# Lacuna fund climate health
 
 </div>
 
@@ -13,9 +13,7 @@
 
 # 📜 Description
 
-❗ [REPLACE ME]
-
-Minimal Python starter template for Geo projects. This is pre-configured for installing common geo python libs, such as GDAL, Geopandas, GeoWrangler, etc.
+Working with domain experts to create a dataset that links climate, health, socioeconomic vulnerabilities, and other exposure indicators. 
 
 <br/>
 <br/>
@@ -45,7 +43,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 2. Create a local conda env and activate it. This will create a conda env folder in your project directory.
 ```
 make conda-env
-conda activate ./env
+conda activate <env name>
 ```
 
 3. Run the one-time set-up make command.

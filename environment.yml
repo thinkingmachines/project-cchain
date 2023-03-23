@@ -1,4 +1,4 @@
-name: ml-geo-starter
+name: lacuna-fund
 channels:
   - conda-forge
   - defaults
