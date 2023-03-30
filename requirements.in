@@ -1,14 +1,15 @@
 black
-earthengine-api
-gdal
 geopandas
-geowrangler
-jupyterlab
+# geowrangler
+# use latest version not yet on pypi
+# git+https://github.com/thinkingmachines/geowrangler.git
+git+https://github.com/thinkingmachines/geowrangler.git@feat/optimize-bingtilegrid
 loguru
 numpy
 pandas
 pandas-gbq
 pre-commit
 pytest
+tqdm
 rasterio
 rasterstats
