@@ -1,5 +1,6 @@
 black
 geopandas
+gdal==3.5.2
 # geowrangler
 # use latest version not yet on pypi
 # git+https://github.com/thinkingmachines/geowrangler.git
