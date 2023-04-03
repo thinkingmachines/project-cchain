@@ -13,7 +13,21 @@
 
 # 📜 Description
 
-Working with domain experts to create a dataset that links climate, health, socioeconomic vulnerabilities, and other exposure indicators. 
+Working with domain experts to create a dataset that links climate, health, socioeconomic vulnerabilities, and exposure indicators.
+
+# 🗄 File Organization
+
+## Data Directory
+
+1. `01-admin-bounds` - official administrative boundaries for the target areas
+2. `02-raw` - subdivided further per partner and data source
+3. `03-processed` - subdivided further per partner and data source
+4. `04-output` - final tables that would be used for the linked dataset
+5. `05-gis` - map plots
+
+## Notebooks
+
+Directory is divided based on each organization/partner in this project.
 
 <br/>
 <br/>
