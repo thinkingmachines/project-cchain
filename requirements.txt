@@ -45,6 +45,10 @@ cligj==0.7.2
     #   fiona
     #   rasterio
     #   rasterstats
+contourpy==1.0.7
+    # via matplotlib
+cycler==0.11.0
+    # via matplotlib
 db-dtypes==1.0.5
     # via pandas-gbq
 distlib==0.3.6
@@ -61,6 +65,8 @@ fiona==1.8.22
     # via
     #   geopandas
     #   rasterstats
+fonttools==4.39.3
+    # via matplotlib
 gdal==3.5.2
     # via -r requirements.in
 geopandas==0.10.2
@@ -113,14 +119,20 @@ identify==2.5.21
     # via pre-commit
 idna==3.4
     # via requests
+importlib-resources==5.12.0
+    # via matplotlib
 iniconfig==2.0.0
     # via pytest
 joblib==1.2.0
     # via scikit-learn
+kiwisolver==1.4.4
+    # via matplotlib
 loguru==0.6.0
     # via
     #   -r requirements.in
     #   geowrangler
+matplotlib==3.7.1
+    # via -r requirements.in
 morecantile==3.3.0
     # via geowrangler
 munch==2.5.0
@@ -132,8 +144,10 @@ nodeenv==1.7.0
 numpy==1.24.2
     # via
     #   -r requirements.in
+    #   contourpy
     #   db-dtypes
     #   geowrangler
+    #   matplotlib
     #   pandas
     #   pandas-gbq
     #   pyarrow
@@ -152,6 +166,7 @@ packaging==23.0
     #   db-dtypes
     #   fastcore
     #   google-cloud-bigquery
+    #   matplotlib
     #   pytest
 pandas==1.5.3
     # via
@@ -164,6 +179,8 @@ pandas-gbq==0.19.1
     # via -r requirements.in
 pathspec==0.11.1
     # via black
+pillow==9.5.0
+    # via matplotlib
 platformdirs==3.1.1
     # via
     #   black
@@ -201,7 +218,9 @@ pydata-google-auth==1.7.0
 pygeos==0.12.0
     # via geowrangler
 pyparsing==3.0.9
-    # via snuggs
+    # via
+    #   matplotlib
+    #   snuggs
 pyproj==3.4.1
     # via
     #   geopandas
@@ -211,6 +230,7 @@ pytest==7.2.2
 python-dateutil==2.8.2
     # via
     #   google-cloud-bigquery
+    #   matplotlib
     #   pandas
 pytz==2022.7.1
     # via pandas
@@ -268,6 +288,8 @@ urllib3==1.26.15
     # via requests
 virtualenv==20.21.0
     # via pre-commit
+zipp==3.15.0
+    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
