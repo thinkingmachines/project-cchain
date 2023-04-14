@@ -9,7 +9,7 @@ conda-env:
 	conda env create -f environment.yml --no-default-packages
 
 setup:
-	conda install -c conda-forge gdal -y
+	conda install -c conda-forge gdal=3.5.2 -y
 	pip install pip-tools
 	pip-sync requirements.txt
 	pre-commit install
