@@ -1,10 +1,12 @@
 from pathlib import Path
 from typing import Union
 
+import geopandas as gpd
 from geopandas import GeoDataFrame
 from geowrangler import distance_zonal_stats as dzs
 from geowrangler import vector_zonal_stats as vzs
 from geowrangler.datasets import geofabrik
+from loguru import logger
 from shapely.geometry import GeometryCollection, MultiPolygon, Polygon
 from shapely.geometry.polygon import orient
 from shapely.validation import explain_validity, make_valid
