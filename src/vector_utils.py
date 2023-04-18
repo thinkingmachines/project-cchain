@@ -5,7 +5,6 @@ import geopandas as gpd
 from geopandas import GeoDataFrame
 from geowrangler import distance_zonal_stats as dzs
 from geowrangler import vector_zonal_stats as vzs
-from geowrangler.datasets import geofabrik
 from loguru import logger
 from shapely.geometry import GeometryCollection, MultiPolygon, Polygon
 from shapely.geometry.polygon import orient
@@ -97,6 +96,58 @@ def add_osm_poi_features(
         aoi = dzs.create_distance_zonal_stats(
             aoi.to_crs(metric_crs),
             osm[osm["fclass"] == poi_type].to_crs(metric_crs),
+            max_distance=nearest_poi_max_distance,
+            aggregations=[],
+            distance_col=col_name,
+        ).to_crs("epsg:4326")
+
+        # If no POI was found within the distance limit, set the distance to the max distance
+        aoi[col_name] = aoi[col_name].fillna(value=nearest_poi_max_distance)
+
+    return aoi
+
+
+def add_osm_point_features(
+    aoi,
+    points_gdf,
+    types_col,
+    metric_crs="epsg:3857",
+    inplace=False,
+    nearest_poi_max_distance=10000,
+):
+    """Generates features for the AOI based on point data."""
+
+    # Create a copy of the AOI gdf if not inplace to avoid modifying the original gdf
+    if not inplace:
+        aoi = aoi.copy()
+
+    # GeoWrangler: Count number of all POIs per tile
+    aoi = vzs.create_zonal_stats(
+        aoi,
+        points_gdf,
+        overlap_method="intersects",
+        aggregations=[{"func": "count", "output": "poi_count", "fillna": True}],
+    )
+
+    poi_types = points_gdf[types_col].unique().tolist()
+
+    # Count specific aoi types
+    for poi_type in poi_types:
+        # GeoWrangler: Count with vector zonal stats
+        aoi = vzs.create_zonal_stats(
+            aoi,
+            points_gdf[points_gdf["fclass"] == poi_type],
+            overlap_method="intersects",
+            aggregations=[
+                {"func": "count", "output": f"{poi_type}_count", "fillna": True}
+            ],
+        )
+
+        # GeoWrangler: Distance with distance zonal stats
+        col_name = f"{poi_type}_nearest"
+        aoi = dzs.create_distance_zonal_stats(
+            aoi.to_crs(metric_crs),
+            points_gdf[points_gdf["fclass"] == poi_type].to_crs(metric_crs),
             max_distance=nearest_poi_max_distance,
             aggregations=[],
             distance_col=col_name,
