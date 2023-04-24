@@ -107,7 +107,7 @@ def add_osm_poi_features(
     return aoi
 
 
-def add_osm_point_features(
+def add_point_features(
     aoi,
     points_gdf,
     types_col,
@@ -136,7 +136,7 @@ def add_osm_point_features(
         # GeoWrangler: Count with vector zonal stats
         aoi = vzs.create_zonal_stats(
             aoi,
-            points_gdf[points_gdf["fclass"] == poi_type],
+            points_gdf[points_gdf[types_col] == poi_type],
             overlap_method="intersects",
             aggregations=[
                 {"func": "count", "output": f"{poi_type}_count", "fillna": True}
@@ -147,7 +147,7 @@ def add_osm_point_features(
         col_name = f"{poi_type}_nearest"
         aoi = dzs.create_distance_zonal_stats(
             aoi.to_crs(metric_crs),
-            points_gdf[points_gdf["fclass"] == poi_type].to_crs(metric_crs),
+            points_gdf[points_gdf[types_col] == poi_type].to_crs(metric_crs),
             max_distance=nearest_poi_max_distance,
             aggregations=[],
             distance_col=col_name,
