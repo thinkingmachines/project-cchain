@@ -71,6 +71,8 @@ def add_osm_poi_features(
     if not inplace:
         aoi = aoi.copy()
 
+    aoi["osm_year"] = year
+
     # GeoWrangler: Count number of all POIs per tile
     aoi = vzs.create_zonal_stats(
         aoi,
@@ -87,12 +89,12 @@ def add_osm_poi_features(
             osm[osm["fclass"] == poi_type],
             overlap_method="intersects",
             aggregations=[
-                {"func": "count", "output": f"{poi_type}_count", "fillna": True}
+                {"func": "count", "output": f"osm_poi_{poi_type}_count", "fillna": True}
             ],
         )
 
         # GeoWrangler: Distance with distance zonal stats
-        col_name = f"{poi_type}_nearest"
+        col_name = f"osm_poi_{poi_type}_nearest"
         aoi = dzs.create_distance_zonal_stats(
             aoi.to_crs(metric_crs),
             osm[osm["fclass"] == poi_type].to_crs(metric_crs),
