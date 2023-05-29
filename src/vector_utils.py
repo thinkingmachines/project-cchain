@@ -11,7 +11,7 @@ from shapely.geometry.polygon import orient
 from shapely.validation import explain_validity, make_valid
 
 # Set directories
-DATA_DIR = Path("../../data/")
+DATA_DIR = Path("../../../data/")
 ADMIN_FPATH = DATA_DIR / "01-admin-bounds"
 RAW_FPATH = DATA_DIR / "02-raw"
 PROCESSED_FPATH = DATA_DIR / "03-processed"
@@ -191,12 +191,14 @@ def add_osm_water_features(
     if not inplace:
         aoi = aoi.copy()
 
+    aoi["osm_year"] = year
+
     poi_types = water_gdf["fclass"].unique().tolist()
 
     # Count specific aoi types
     for poi_type in poi_types:
         # GeoWrangler: Distance with distance zonal stats
-        col_name = f"{poi_type}_nearest"
+        col_name = f"osm_{poi_type}_nearest"
         aoi = dzs.create_distance_zonal_stats(
             aoi.to_crs(metric_crs),
             water_gdf[water_gdf["fclass"] == poi_type].to_crs(metric_crs),
