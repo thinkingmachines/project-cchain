@@ -1,4 +1,5 @@
 black
+folium
 geopandas
 gdal==3.5.2
 # geowrangler
@@ -6,11 +7,14 @@ gdal==3.5.2
 # git+https://github.com/thinkingmachines/geowrangler.git
 git+https://github.com/thinkingmachines/geowrangler.git@feat/optimize-bingtilegrid
 loguru
+mapclassify
+matplotlib
 numpy
 pandas
 pandas-gbq
 pre-commit
 pytest
+seaborn
 tqdm
 rasterio
 rasterstats
