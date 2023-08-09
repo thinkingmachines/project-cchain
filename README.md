@@ -13,7 +13,9 @@
 
 # 📜 Description
 
-Working with domain experts to create a dataset that links climate, health, socioeconomic vulnerabilities, and exposure indicators.
+The Lacuna Fund Climate x Health project aims to develop a dataset that links health data to climate, environmental conditions, and socioeconomic vulnerabilities that spans 20 years along with a baseline ML model for 12 target cities in the Philippines.  
+
+We aim to open source the linked dataset and the baseline ML model in order for more research to be developed on the impact of environmental and societal conditions to health and to further create better policies on for communities. 
 
 # 🗄 File Organization
 
