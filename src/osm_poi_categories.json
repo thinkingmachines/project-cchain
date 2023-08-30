@@ -1,0 +1,12 @@
+{
+    "health": ["clinic", "dentist", "doctors", "hospital","optician", "pharmacy"],
+    "crit_lifelines": ["atm","bank", "college", "community_centre", "comms_tower", "convenience",
+    "fire_station", "kindergarten", "lighthouse", "market_place", "park", "public_building", "police", "school",
+    "shelter", "supermarket", "telephone", "tower", "town_hall", "university"],
+    "power": ["cable", "compensator", "connection", "converter", "generator", "insulator", "line",
+    "busbar", "bay", "minor_line", "plant", "pole", "portal", "substation", "tower", "transformer"],
+    "telco": ["exchange", "connection_point", "distribution_point", "service_device", "data_center"],
+    "water": ["drinking_water", "water_mill", "water_tower", "water_works",  "water_well"],
+    "sanitation": ["sanitary_dump_station", "toilet", "recycling", "waste_basket", "wastewater_plant",
+    "waste_transfer_station"]
+}
