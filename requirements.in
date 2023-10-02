@@ -2,14 +2,12 @@ black
 folium
 geopandas
 gdal==3.5.2
-# geowrangler
-# use latest version not yet on pypi
-# git+https://github.com/thinkingmachines/geowrangler.git
-git+https://github.com/thinkingmachines/geowrangler.git@feat/optimize-bingtilegrid
+geowrangler==0.1.1
 loguru
 mapclassify
 matplotlib
 numpy
+openpyxl
 pandas
 pandas-gbq
 pre-commit
