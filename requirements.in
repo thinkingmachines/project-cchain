@@ -1,5 +1,7 @@
 black
+earthengine-api
 folium
+geemap
 geopandas
 gdal==3.5.2
 geowrangler==0.1.1
@@ -11,6 +13,7 @@ openpyxl
 pandas
 pandas-gbq
 pre-commit
+pygeos
 pytest
 seaborn
 tqdm
