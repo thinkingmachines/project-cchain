@@ -71,9 +71,8 @@ def add_osm_poi_features(
     if not inplace:
         aoi = aoi.copy()
 
-
-    aoi["osm_year"] = year
-    aoi["osm_year"] = aoi["osm_year"].astype(int)
+    aoi["date"] = f"{year}-01-01"
+    aoi["freq"] = "Y"
     # GeoWrangler: Count number of all POIs per tile
     aoi = vzs.create_zonal_stats(
         aoi,
@@ -192,9 +191,8 @@ def add_osm_water_features(
     if not inplace:
         aoi = aoi.copy()
 
-
-    aoi["osm_year"] = year
-    aoi["osm_year"] = aoi["osm_year"].astype(int)
+    aoi["date"] = f"{year}-01-01"
+    aoi["freq"] = "Y"
     poi_types = water_gdf["fclass"].unique().tolist()
 
     # Count specific aoi types
