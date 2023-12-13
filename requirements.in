@@ -7,6 +7,7 @@ loguru
 mapclassify
 matplotlib
 numpy
+openpyxl
 pandas
 pandas-gbq
 pre-commit
