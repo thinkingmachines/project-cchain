@@ -1,4 +1,5 @@
 black
+duckdb
 folium
 geopandas
 gdal==3.5.2
