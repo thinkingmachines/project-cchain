@@ -113,6 +113,7 @@ def add_point_features(
     aoi,
     points_gdf,
     types_col,
+    poi_types=[],
     metric_crs="epsg:3857",
     inplace=False,
     nearest_poi_max_distance=10000,
@@ -131,7 +132,8 @@ def add_point_features(
         aggregations=[{"func": "count", "output": "poi_count", "fillna": True}],
     )
 
-    poi_types = points_gdf[types_col].unique().tolist()
+    if not poi_types:
+        poi_types = points_gdf[types_col].unique().tolist()
 
     # Count specific aoi types
     for poi_type in poi_types:
