@@ -1,4 +1,5 @@
 black
+duckdb
 folium
 geopandas
 gdal==3.5.2
@@ -11,6 +12,7 @@ openpyxl
 pandas
 pandas-gbq
 pre-commit
+pygeos
 pytest
 seaborn
 tqdm
