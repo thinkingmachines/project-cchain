@@ -1,6 +1,8 @@
 black
+earthengine-api
 duckdb
 folium
+geemap
 geopandas
 gdal==3.5.2
 geowrangler==0.1.1
