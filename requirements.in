@@ -1,5 +1,6 @@
 black
 earthengine-api
+duckdb
 folium
 geemap
 geopandas

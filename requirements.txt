@@ -81,6 +81,8 @@ earthengine-api==0.1.371
     #   geemap
 eerepr==0.0.4
     # via geemap
+duckdb==0.9.2
+    # via -r requirements.in
 et-xmlfile==1.1.0
     # via openpyxl
 exceptiongroup==1.1.1
