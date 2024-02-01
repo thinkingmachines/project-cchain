@@ -1,0 +1,7 @@
+{
+    "health": ["hospital", "clinic"],
+    "crit_lifelines": ["supermarket", "civic", "college", "fire_station", "public", "school", "university", "police", "roof"],
+    "water": ["water_tower"],
+    "sanitation": ["toilets"],
+    "all_poi":["hospital", "clinic", "supermarket", "civic", "college", "fire_station", "public", "school", "university", "police", "roof", "water_tower", "toilets", "hotel", "retail", "cathedral", "chapel", "church", "government"]
+}
