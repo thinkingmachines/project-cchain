@@ -9,6 +9,7 @@ geowrangler==0.1.1
 loguru
 mapclassify
 matplotlib
+nbformat
 numpy
 openpyxl
 pandas
@@ -17,6 +18,7 @@ pre-commit
 pygeos
 pytest
 seaborn
+shap
 tqdm
 rasterio
 rasterstats
