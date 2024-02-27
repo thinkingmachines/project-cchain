@@ -65,7 +65,8 @@ def create_outbreak_summary(tagged_df, target_class):
      target_class: class to summarize
     """
     # Create a boolean mask for rows with outbreak_tag = 1
-    tagged_df.sort_values(by=["ADM4_PCODE", "start_of_week"], inplace=True)
+    # tagged_df.sort_values(by=["ADM4_PCODE", "start_of_week"], inplace=True)
+    tagged_df.sort_values(by=["start_of_week"], inplace=True)
     outbreak_mask = tagged_df[target_class] == 1
 
     # Calculate a group ID for each consecutive outbreak period within the same barangay
@@ -76,7 +77,7 @@ def create_outbreak_summary(tagged_df, target_class):
     outbreak_df = tagged_df[outbreak_mask]
     # Group by 'barangay' and 'outbreak_group' and calculate start date, end date, and length
     outbreak_summary = (
-        outbreak_df.groupby(["ADM4_PCODE", "outbreak_group"])
+        outbreak_df.groupby(["outbreak_group"])  # adm4_pcode
         .agg(
             start_date=("start_of_week", "min"),
             end_date=("start_of_week", "max"),
