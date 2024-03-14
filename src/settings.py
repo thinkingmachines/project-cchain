@@ -10,6 +10,9 @@ PROCESSED_DIR = DATA_DIR / "03-processed"
 OUTPUT_DIR = DATA_DIR / "04-output"
 GIS_DIR = DATA_DIR / "05-gis"
 
+PROJ_CRS = "EPSG:4326"
+METRIC_CRS = "EPSG:3857"
+
 CLIMATE_VARIABLES_LIST = [
     "CO",
     "HI",
