@@ -25,6 +25,20 @@ def combine_indiv_files(directory, list_of_filenames):
     return result_df
 
 
+def merge_multi_dfs(df_list, merge_on_cols=["date", "ADM4_PCODE"]):
+    merged_df = pd.DataFrame()
+
+    # Merge dataframes one by one
+    for df in df_list:
+        if merged_df.empty:
+            merged_df = df
+        else:
+            # Merge on 'date' and 'adm4_pcode' columns
+            merged_df = pd.merge(merged_df, df, on=merge_on_cols, how="outer")
+
+    return merged_df
+
+
 # Insert "year" column for joining of annual datasets
 def add_year(df):
     """
@@ -133,37 +147,6 @@ def climate_weighted_avg(climate_var, prepped_df, admin_df, min_year=2013):
 
 
 def convert_to_city(
-    df,  # to aggregate
-    key_columns=["ADM3_PCODE", "ADM4_PCODE", "date", "year", "freq", "Year"],
-    agg_list=[
-        ("sum", "sum"),
-        ("mean", "mean"),
-        ("min", "min"),
-        ("max", "max"),
-        ("std", "std"),
-    ],
-):
-
-    # Define aggregation functions for each column
-    aggregation_functions = {}
-    for column in df.columns:
-        if column not in key_columns:
-            aggregation_functions[
-                column
-            ] = agg_list  # Include multiple aggregation functions
-    key_columns.remove("ADM4_PCODE")
-    # Group by key columns and aggregate other columns
-    aggregated_df = df.groupby(key_columns).agg(aggregation_functions).reset_index()
-
-    # Flatten MultiIndex column names
-    aggregated_df.columns = [
-        f"{col[0]}_{col[1]}" if col[1] else col[0] for col in aggregated_df.columns
-    ]
-
-    return aggregated_df
-
-
-def convert_to_city_select_cols(
     df,  # to aggregate
     key_columns=["ADM3_PCODE", "ADM4_PCODE", "date", "year", "freq", "Year"],
     agg_list=[
