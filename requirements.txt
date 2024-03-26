@@ -332,7 +332,9 @@ platformdirs==3.1.1
     #   jupyter-core
     #   virtualenv
 plotly==5.17.0
-    # via geemap
+    # via
+    #   -r requirements.in
+    #   geemap
 pluggy==1.0.0
     # via pytest
 pre-commit==3.2.0

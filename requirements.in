@@ -14,6 +14,7 @@ numpy
 openpyxl
 pandas
 pandas-gbq
+plotly
 pre-commit
 pygeos
 pytest
