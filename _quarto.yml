@@ -1,0 +1,25 @@
+project:
+  type: website
+  output-dir: docs
+
+title: The Project CCHAIN Dataset 
+
+website:
+  title: The Project CCHAIN Dataset 
+  navbar:
+    title: false
+    background: primary
+
+  sidebar:
+    contents:
+      - href: index.qmd
+        text: Main
+      - section: "Open Linked Dataset"
+      - section: "Open Buildings Dataset"
+      - section: "Open Model"
+
+format:
+  html: 
+    theme: united
+    fontsize: 1.1em
+    linestretch: 1.7

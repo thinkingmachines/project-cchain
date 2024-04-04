@@ -1,0 +1,46 @@
+---
+title: The Project CCHAIN Dataset 
+---
+
+*Linking Village-Level Data on Climatic Impact-Drivers, Socioeconomic
+Vulnerability, and Environmental Conditions to Health Impacts across
+12 Philippine Cities*
+
+
+The Project Climate Change, Health, and Artificial Intelligence (Project CCHAIN) dataset is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health dimensions at the barangay (village) level across 12 Philippine cities. 
+
+# Quick links
+
+- Data download links 
+    - [Google Drive](foo.com)
+    - [Kaggle](foo.com)
+    - [HDX](foo.com)
+- Full data documentation site [here](https://studio.foursquare.com/public/590c4ab2-b855-463a-90dd-9917b97b8b57) 
+
+# About
+
+The Philippines is among the world’s most vulnerable countries to climate change – simultaneously exposed to typhoons, sea level rise, and extreme heat, while striving to address income inequality and rising disease burdens. 
+
+
+While there is growing interest in modeling the health impacts of climate change in the country, significant data workflow logistics and multi-disciplinary expertise is required to assemble and process health, climate, and socioeconomic data from diverse sources, formats, geographic and historical coverage and resolutions. 
+
+
+ A dataset of building outlines containing roof attributes based on satellite imagery is also provided to aid in generating more detailed data at the community level.  The dataset will be used to build a baseline village-level outbreak prediction machine learning model which simulates potential impacts of communicable diseases like dengue.
+
+
+Data is sourced from local and national health facilities, climate and weather institutions, open source geospatial platforms, and previously conducted household surveys to ensure that the dataset represents the variety of socioeconomic, climatological, and geographic conditions across the Philippines. The resulting open-source datasets will provide policy-makers, civil society, enterprises, academe, and the communities themselves with a baseline picture of the historical and spatial connection between climate and health in the Philippines and can promote investments in the creation of more open and analysis-ready datasets.
+
+## The Project Team
+
+
+Thinking Machines Data Science, Inc. (TM) is a Southeast Asian technology consultancy that builds custom AI and data platforms to help organizations make smarter decisions with data. Since its founding in 2015, Thinking Machines has worked on over a hundred data science projects with dozens of clients from across the private, public, non-profit, and development sectors.
+
+
+EpiMetrics, Inc. (EM) is a for-profit health research institution geared towards the achievement of health equity through rigorous and creative conception, execution, translation, and
+communication of health systems and policy research in the Philippines.
+
+
+Manila Observatory (MO) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
+
+
+The Philippine Action for Community-led Shelter Initiatives, Inc. (PACSII) is a non- governmental organization that serves as the intermediary support institution of the Homeless People's Federation Philippines through capacity-building, research and advocacy, resource mobilization and fund management. PACSII envisions the transformation of urban poor and informal settler communities into secure, safe, resilient, self-determining,
