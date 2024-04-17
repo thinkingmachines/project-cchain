@@ -2,24 +2,36 @@ project:
   type: website
   output-dir: docs
 
-title: The Project CCHAIN Dataset 
-
 website:
-  title: The Project CCHAIN Dataset 
+  title: Project CCHAIN
+  favicon: site/assets/icon.png
+  open-graph: true
+  twitter-card: true
   navbar:
     title: false
-    background: primary
-
-  sidebar:
-    contents:
-      - href: index.qmd
-        text: Main
-      - section: "Open Linked Dataset"
-      - section: "Open Buildings Dataset"
-      - section: "Open Model"
-
+    background: "#ec4646"
+    search: true
+    left:
+      - text: "Home"
+        file: site/index.qmd
+      - text: "About"
+        file: site/about.qmd
+      - text: "Open data"
+        file: site/open_data.qmd
+      - text: "Open code"
+        file: site/open_code.qmd
+      - text: "Open model"
+        file: site/open_model.qmd
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://code.com
+          - text: Report a Bug
+            url:  https://bugs.com
 format:
   html: 
+    toc: true
     theme: united
     fontsize: 1.1em
-    linestretch: 1.7
+    linestretch: 1.7 
