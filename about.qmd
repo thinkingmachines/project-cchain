@@ -1,0 +1,37 @@
+---
+---
+
+# The Problem
+
+The Philippines is among the world’s most vulnerable countries to climate change – simultaneously exposed to typhoons, sea level rise, and extreme heat, while striving to address income inequality and rising disease burdens. 
+
+While there is growing interest in modeling the health impacts of climate change in the country, significant data workflow logistics and multi-disciplinary expertise is required to assemble and process health, climate, and socioeconomic data from diverse sources, formats, geographic and historical coverage and resolutions. 
+
+Moreover, focusing on the barangay, the smallest administrative unit in the Philippines, helps disaggregate health risks for vulnerable communities, particularly those in informal settlements, and provides actionable insights for local governments. In addition, creating a small yet sufficient elements-at-risk dataset for settlements with useful attributes can aid in generating even more detailed data at the community level. 
+
+The project team aims to ease entry and encourage more studies in the field by doing all the needed work in assembling the Project CCHAIN dataset.
+
+It is our hope that this endeavor can promote investments in the creation of more open and analysis-ready datasets.
+
+## Geographical Coverage 
+
+We selected **12 key cities** with a variety of geographic, socioeconomic, and climatological conditions. All in all, a total of **744** baranggays are covered by the dataset.
+
+![](assets/cities_covered.png)
+
+
+
+## The Project Team
+
+
+[Thinking Machines Data Science, Inc. (TM)](ttps://epimetrics.com.ph/) is a Southeast Asian technology consultancy that builds custom AI and data platforms to help organizations make smarter decisions with data. Since its founding in 2015, Thinking Machines has worked on over a hundred data science projects with dozens of clients from across the private, public, non-profit, and development sectors.
+
+
+[EpiMetrics, Inc. (EM)](https://epimetrics.com.ph/) is a health research institution engaged in the achievement of health equity through rigorous and creative conception, execution, translation, and communication of health systems and policy research
+
+
+[Manila Observatory (MO)](https://www.observatory.ph/) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
+
+
+The [Philippine Action for Community-led Shelter Initiatives, Inc. (PACSII)](https://pacsii.org/) is a non- governmental organization that serves as the intermediary support institution of the Homeless People's Federation Philippines (HDFPI) through capacity-building, research and advocacy, resource mobilization and fund management. PACSII envisions the transformation of urban poor and informal settler communities into secure, safe, resilient, self-determining, and inclusive urban
+communities with sustainable economic and ecological development.

@@ -1,0 +1,27 @@
+---
+title: Open Data
+---
+
+
+# Overview
+
+Linked dataset
+
+# Linked Dataset
+
+The linked dataset is structured as follows.
+
+## Health Tables
+
+Loren Ipsum
+
+## Environment Tables
+
+Loren Ipsum
+
+## Sociodemographic Tables
+
+Loren Ipsum
+
+## Elements at Risk Table
+ Loren Ipsum

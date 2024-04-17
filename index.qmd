@@ -1,0 +1,40 @@
+---
+format: html
+---
+
+![](assets/full_logo.png)
+
+#### *Linking Village-Level Data on Climatic Impact-Drivers, Socioeconomic Vulnerability, and Environmental Conditions to Health Impacts across 12 Philippine Cities*
+</br>
+</br>
+The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health dimensions at the barangay (village) level across 12 Philippine cities. 
+
+This project is supported by the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/).
+
+# Quick links
+
+- Download data links:
+    - [Google Drive](foo.com)
+    - [Kaggle](foo.com)
+    - [HDX](foo.com)
+- Full data documentation site [here](https://studio.foursquare.com/public/590c4ab2-b855-463a-90dd-9917b97b8b57) 
+- Request informal settlement community survey data [here](https://forms.google.com)
+
+
+# Project Team
+
+::: {layout-ncol=4}
+
+![Thinking Machines](assets/tm.png)
+
+![Epimetrics](assets/epimetrics.png)
+
+![Manila Observatory](assets/mo.png)
+
+![PACSII](assets/pacsii.png)
+
+:::
+
+# Contact Us
+
+For inquiries, send a message to [data-for-development@thinkingmachin.es](data-for-development@thinkingmachin.es) 

@@ -4,7 +4,7 @@ project:
 
 website:
   title: Project CCHAIN
-  favicon: site/assets/icon.png
+  favicon: assets/icon.png
   open-graph: true
   twitter-card: true
   navbar:
@@ -13,22 +13,22 @@ website:
     search: true
     left:
       - text: "Home"
-        file: site/index.qmd
+        file: index.qmd
       - text: "About"
-        file: site/about.qmd
+        file: about.qmd
       - text: "Open data"
-        file: site/open_data.qmd
-      - text: "Open code"
-        file: site/open_code.qmd
+        file: open_data.qmd
+      - text: "Open viz"
+        file: open_viz.qmd
       - text: "Open model"
-        file: site/open_model.qmd
+        file: open_model.qmd
     tools:
       - icon: github
         menu:
           - text: Source Code
-            url:  https://code.com
+            url:  https://github.com/thinkingmachines/project-cchain/
           - text: Report a Bug
-            url:  https://bugs.com
+            url:  https://github.com/thinkingmachines/project-cchain/issues/
 format:
   html: 
     toc: true
