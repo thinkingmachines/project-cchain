@@ -9,7 +9,6 @@ format: html
 </br>
 The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health variables at the barangay (village) level across 12 Philippine cities. 
 
-This project is supported by the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/).
 
 # Quick links
 
@@ -18,10 +17,12 @@ This project is supported by the [Lacuna Fund](https://lacunafund.org/) and [Wel
     - [Kaggle](foo.com)
     - [HDX](foo.com)
 - See full data documentation on [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) 
-- To access informal settlement community survey data, send your request for approval [here](https://forms.google.com)
+- To access the informal settlement community survey data, send your request for approval [here](https://forms.google.com)
 
 
 # Project Team
+
+Consortium members
 
 ::: {layout-ncol=4}
 
@@ -35,6 +36,16 @@ This project is supported by the [Lacuna Fund](https://lacunafund.org/) and [Wel
 
 :::
 
+Supported by
+
+::: {layout-ncol=3}
+
+![[Lacuna Fund](https://lacunafund.org/)](assets/lacuna_fund.png)
+
+![[Wellcome Trust](https://wellcome.org/)](assets/wellcome_trust.png)
+
+:::
+
 # Contact Us
 
-For [general project] inquiries, send a message to [data-for-development@thinkingmachin.es](data-for-development@thinkingmachin.es) 
+For general project inquiries, send a message to [data-for-development@thinkingmachin.es](data-for-development@thinkingmachin.es) 

@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Project CCHAIN - Using the linked dataset in a baseline model for predicting disease outbreak periods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/icon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<meta property="og:title" content="Project CCHAIN - Using the linked dataset in a baseline model for predicting disease outbreak periods">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Project CCHAIN">
+<meta name="twitter:title" content="Project CCHAIN - Using the linked dataset in a baseline model for predicting disease outbreak periods">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open_data.html"> 
+<span class="menu-text">Open data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open_viz.html"> 
+<span class="menu-text">Open viz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../notebooks/baseline-model/baseline-model-demo.html" aria-current="page"> 
+<span class="menu-text">Open model</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/thinkingmachines/project-cchain/">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/thinkingmachines/project-cchain/issues/">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#load-the-labeled-linked-dataset" id="toc-load-the-labeled-linked-dataset" class="nav-link active" data-scroll-target="#load-the-labeled-linked-dataset">Load the labeled linked dataset</a></li>
+  <li><a href="#filter-select-and-create-features" id="toc-filter-select-and-create-features" class="nav-link" data-scroll-target="#filter-select-and-create-features">Filter, select, and create features</a>
+  <ul class="collapse">
+  <li><a href="#filter-to-year-with-existing-osm-and-population-data" id="toc-filter-to-year-with-existing-osm-and-population-data" class="nav-link" data-scroll-target="#filter-to-year-with-existing-osm-and-population-data">1. Filter to year with existing OSM and population data</a></li>
+  <li><a href="#inspect-missing-data" id="toc-inspect-missing-data" class="nav-link" data-scroll-target="#inspect-missing-data">2. Inspect missing data</a></li>
+  <li><a href="#remove-columns-that-could-cause-the-model-confusion" id="toc-remove-columns-that-could-cause-the-model-confusion" class="nav-link" data-scroll-target="#remove-columns-that-could-cause-the-model-confusion">3. Remove columns that could cause the model confusion</a></li>
+  <li><a href="#handle-rows-with-null-values" id="toc-handle-rows-with-null-values" class="nav-link" data-scroll-target="#handle-rows-with-null-values">4. Handle rows with null values</a></li>
+  <li><a href="#create-outbreak-label" id="toc-create-outbreak-label" class="nav-link" data-scroll-target="#create-outbreak-label">5. Create outbreak label</a></li>
+  <li><a href="#create-lagged-features-for-cases" id="toc-create-lagged-features-for-cases" class="nav-link" data-scroll-target="#create-lagged-features-for-cases">5. Create lagged features for <code>Cases</code></a></li>
+  </ul></li>
+  <li><a href="#setup-model-training" id="toc-setup-model-training" class="nav-link" data-scroll-target="#setup-model-training">Setup model training</a>
+  <ul class="collapse">
+  <li><a href="#split-to-train-test-set" id="toc-split-to-train-test-set" class="nav-link" data-scroll-target="#split-to-train-test-set">1. Split to train-test set</a></li>
+  <li><a href="#check-train-and-test-split" id="toc-check-train-and-test-split" class="nav-link" data-scroll-target="#check-train-and-test-split">2. Check train and test split</a></li>
+  </ul></li>
+  <li><a href="#train-a-randomforest-classifier" id="toc-train-a-randomforest-classifier" class="nav-link" data-scroll-target="#train-a-randomforest-classifier">Train a RandomForest Classifier</a>
+  <ul class="collapse">
+  <li><a href="#optimize-model-parameters-using-gridsearchcv" id="toc-optimize-model-parameters-using-gridsearchcv" class="nav-link" data-scroll-target="#optimize-model-parameters-using-gridsearchcv">1. Optimize model parameters using <code>GridSearchCV</code></a></li>
+  <li><a href="#check-model-performance" id="toc-check-model-performance" class="nav-link" data-scroll-target="#check-model-performance">2. Check model performance</a></li>
+  </ul></li>
+  <li><a href="#inspect-model-results" id="toc-inspect-model-results" class="nav-link" data-scroll-target="#inspect-model-results">Inspect model results</a>
+  <ul class="collapse">
+  <li><a href="#make-predictions-on-the-test-set" id="toc-make-predictions-on-the-test-set" class="nav-link" data-scroll-target="#make-predictions-on-the-test-set">1. Make predictions on the test set</a></li>
+  <li><a href="#visualize-results-and-metrics" id="toc-visualize-results-and-metrics" class="nav-link" data-scroll-target="#visualize-results-and-metrics">2. Visualize results and metrics</a></li>
+  <li><a href="#identify-features-that-best-explains-outbreak-prediction" id="toc-identify-features-that-best-explains-outbreak-prediction" class="nav-link" data-scroll-target="#identify-features-that-best-explains-outbreak-prediction">3. Identify features that best explains outbreak prediction</a></li>
+  </ul></li>
+  <li><a href="#analyzing-outbreak-predictions" id="toc-analyzing-outbreak-predictions" class="nav-link" data-scroll-target="#analyzing-outbreak-predictions">Analyzing outbreak predictions</a>
+  <ul class="collapse">
+  <li><a href="#visualizing-actual-vs.-predicted-outbreaks-periods" id="toc-visualizing-actual-vs.-predicted-outbreaks-periods" class="nav-link" data-scroll-target="#visualizing-actual-vs.-predicted-outbreaks-periods">1. Visualizing Actual vs.&nbsp;Predicted Outbreaks Periods</a></li>
+  <li><a href="#visualize-actual-number-of-cases-with-predicted-label" id="toc-visualize-actual-number-of-cases-with-predicted-label" class="nav-link" data-scroll-target="#visualize-actual-number-of-cases-with-predicted-label">2. Visualize actual Number of Cases with Predicted label</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using the linked dataset in a baseline model for predicting disease outbreak periods</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN linked dataset in a machine learning use case.</p>
+<p><strong>Objective</strong>: Predict dengue outbreaks and the number of cases for Zamboanga City at the weekly scale</p>
+<p>The following must be included as features for the model:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Climate</td>
+<td>temperature, humidity, rainfall, solar radiation, wind speed, vegetation, air quality</td>
+</tr>
+<tr class="even">
+<td>Demographics</td>
+<td>population, population density</td>
+</tr>
+<tr class="odd">
+<td>Facilities</td>
+<td>clinics, hospitals, sanitation, water source,</td>
+</tr>
+<tr class="even">
+<td>Economic activity</td>
+<td>nightlights radiance</td>
+</tr>
+</tbody>
+</table>
+<p>For this model, we will define the training and testing set as follows:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Set</th>
+<th>Time covered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training</td>
+<td>Jan 2014-Mar 2019 (75 mos)</td>
+</tr>
+<tr class="even">
+<td>Testing</td>
+<td>Apr 2014-Dec 2020 (20 mos)</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-2" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../../"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.model_data_prep <span class="im">import</span> create_outbreak_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="149">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> TimeSeriesSplit, GridSearchCV</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor, RandomForestClassifier</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    r2_score,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    mean_absolute_error,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    mean_squared_error,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    confusion_matrix,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    classification_report,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    ConfusionMatrixDisplay,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LinearSegmentedColormap</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="151">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>PROCESSED_DIR <span class="op">=</span> Path(<span class="st">"../../data/03-processed/"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># LINKED_DATA = PROCESSED_DIR / "linked_df_city_weekly_dengue.csv"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>LINKED_DATA <span class="op">=</span> (</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    PROCESSED_DIR <span class="op">/</span> <span class="st">"linked_training_data/linked_df_pidsr_city_weekly_dengue.csv"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="load-the-labeled-linked-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-labeled-linked-dataset">Load the labeled linked dataset</h2>
+<p>Generate the linked dataset using the <a href="colab">Linking Colaboratory Notebook</a> and download locally. Specifications on the temporal coverage, tables, and columns needed are listed in the summary at the start of this notebook.</p>
+<div id="cell-6" class="cell" data-execution_count="152">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>linked_data <span class="op">=</span> pd.read_csv(LINKED_DATA)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>linked_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="152">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Source</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">Week</th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">Region</th>
+<th data-quarto-table-cell-role="th">PSGC_Region</th>
+<th data-quarto-table-cell-role="th">Municipality</th>
+<th data-quarto-table-cell-role="th">ADM3_PCODE</th>
+<th data-quarto-table-cell-role="th">ICD</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">google_bldgs_density_mean</th>
+<th data-quarto-table-cell-role="th">google_bldgs_pct_built_up_area_sum</th>
+<th data-quarto-table-cell-role="th">google_bldgs_pct_built_up_area_mean</th>
+<th data-quarto-table-cell-role="th">travel_time</th>
+<th data-quarto-table-cell-role="th">hospital_pop_reached_total</th>
+<th data-quarto-table-cell-role="th">hospital_pct_population_reached</th>
+<th data-quarto-table-cell-role="th">healthcenter_pop_reached_total</th>
+<th data-quarto-table-cell-role="th">healthcenter_pct_population_reached</th>
+<th data-quarto-table-cell-role="th">rhu_pop_reached_total</th>
+<th data-quarto-table-cell-role="th">rhu_pct_population_reached</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>PIDSR-DOH</td>
+<td>2008.0</td>
+<td>1.0</td>
+<td>1</td>
+<td>2008-01-07</td>
+<td>Region IX</td>
+<td>PH090000000</td>
+<td>Zamboanga City</td>
+<td>PH097332000</td>
+<td>A90-A91</td>
+<td>...</td>
+<td>0.001116</td>
+<td>908.037478</td>
+<td>8.99047</td>
+<td>5</td>
+<td>124434.91</td>
+<td>14.46</td>
+<td>456862.05</td>
+<td>53.09</td>
+<td>301674.11</td>
+<td>35.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>PIDSR-DOH</td>
+<td>2008.0</td>
+<td>1.0</td>
+<td>2</td>
+<td>2008-01-07</td>
+<td>Region IX</td>
+<td>PH090000000</td>
+<td>Zamboanga City</td>
+<td>PH097332000</td>
+<td>A90-A91</td>
+<td>...</td>
+<td>0.001116</td>
+<td>908.037478</td>
+<td>8.99047</td>
+<td>5</td>
+<td>124434.91</td>
+<td>14.46</td>
+<td>456862.05</td>
+<td>53.09</td>
+<td>301674.11</td>
+<td>35.06</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>PIDSR-DOH</td>
+<td>2008.0</td>
+<td>1.0</td>
+<td>3</td>
+<td>2008-01-14</td>
+<td>Region IX</td>
+<td>PH090000000</td>
+<td>Zamboanga City</td>
+<td>PH097332000</td>
+<td>A90-A91</td>
+<td>...</td>
+<td>0.001116</td>
+<td>908.037478</td>
+<td>8.99047</td>
+<td>5</td>
+<td>124434.91</td>
+<td>14.46</td>
+<td>456862.05</td>
+<td>53.09</td>
+<td>301674.11</td>
+<td>35.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>PIDSR-DOH</td>
+<td>2008.0</td>
+<td>1.0</td>
+<td>4</td>
+<td>2008-01-21</td>
+<td>Region IX</td>
+<td>PH090000000</td>
+<td>Zamboanga City</td>
+<td>PH097332000</td>
+<td>A90-A91</td>
+<td>...</td>
+<td>0.001116</td>
+<td>908.037478</td>
+<td>8.99047</td>
+<td>5</td>
+<td>124434.91</td>
+<td>14.46</td>
+<td>456862.05</td>
+<td>53.09</td>
+<td>301674.11</td>
+<td>35.06</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>PIDSR-DOH</td>
+<td>2008.0</td>
+<td>1.0</td>
+<td>5</td>
+<td>2008-01-28</td>
+<td>Region IX</td>
+<td>PH090000000</td>
+<td>Zamboanga City</td>
+<td>PH097332000</td>
+<td>A90-A91</td>
+<td>...</td>
+<td>0.001116</td>
+<td>908.037478</td>
+<td>8.99047</td>
+<td>5</td>
+<td>124434.91</td>
+<td>14.46</td>
+<td>456862.05</td>
+<td>53.09</td>
+<td>301674.11</td>
+<td>35.06</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 255 columns</p>
+</div>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Remove once we replace with linked data from linking notebook</p>
+</blockquote>
+<p>Sort the dataframe by Date and place it at the left-most column.</p>
+<div id="cell-8" class="cell" data-execution_count="153">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>linked_data[<span class="st">"Date"</span>] <span class="op">=</span> pd.to_datetime(linked_data[<span class="st">"Date"</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>linked_data <span class="op">=</span> linked_data.sort_values(by<span class="op">=</span>[<span class="st">"Date"</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>linked_data <span class="op">=</span> linked_data.drop(columns<span class="op">=</span>[<span class="st">"start_of_week"</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>linked_data.insert(<span class="dv">0</span>, <span class="st">"Date"</span>, linked_data.pop(<span class="st">"Date"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filter-select-and-create-features" class="level2">
+<h2 class="anchored" data-anchor-id="filter-select-and-create-features">Filter, select, and create features</h2>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels to data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>to remove this part after we get generated dataset from linked notebook</p>
+</blockquote>
+<section id="filter-to-year-with-existing-osm-and-population-data" class="level3">
+<h3 class="anchored" data-anchor-id="filter-to-year-with-existing-osm-and-population-data">1. Filter to year with existing OSM and population data</h3>
+<p>OSM-related features are only available from year 2014 onwards and the population features are only availble until year 2020.</p>
+<div id="cell-12" class="cell" data-execution_count="154">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>linked_data <span class="op">=</span> linked_data[(linked_data[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2014</span>) <span class="op">&amp;</span> (linked_data[<span class="st">"year"</span>] <span class="op">&lt;=</span> <span class="dv">2020</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>linked_data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="155">
+<pre><code>(364, 254)</code></pre>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="156">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linked_data.columns.tolist())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Date', 'Source', 'year', 'Month', 'Week', 'Region', 'PSGC_Region', 'Municipality', 'ADM3_PCODE', 'ICD', 'Disease', 'Cases', 'Claims', 'Deaths', 'Case_Type', 'Date_Type', 'outbreak', 'outbreak_group', 'CO_AVG_mean', 'CO_MIN_mean', 'CO_MAX_mean', 'CO_STD_mean', 'WEIGHTED_AVG_CO_mean', 'HI_AVG_mean', 'HI_MIN_mean', 'HI_MAX_mean', 'HI_STD_mean', 'WEIGHTED_AVG_HI_mean', 'NDVI_AVG_mean', 'NDVI_MIN_mean', 'NDVI_MAX_mean', 'NDVI_STD_mean', 'WEIGHTED_AVG_NDVI_mean', 'NO2_AVG_mean', 'NO2_MIN_mean', 'NO2_MAX_mean', 'NO2_STD_mean', 'WEIGHTED_AVG_NO2_mean', 'O3_AVG_mean', 'O3_MIN_mean', 'O3_MAX_mean', 'O3_STD_mean', 'WEIGHTED_AVG_O3_mean', 'PM10_AVG_mean', 'PM10_MIN_mean', 'PM10_MAX_mean', 'PM10_STD_mean', 'WEIGHTED_AVG_PM10_mean', 'PM25_AVG_mean', 'PM25_MIN_mean', 'PM25_MAX_mean', 'PM25_STD_mean', 'WEIGHTED_AVG_PM25_mean', 'PNP_AVG_mean', 'PNP_MIN_mean', 'PNP_MAX_mean', 'PNP_STD_mean', 'WEIGHTED_AVG_PNP_mean', 'PR_AVG_mean', 'PR_MIN_mean', 'PR_MAX_mean', 'PR_STD_mean', 'WEIGHTED_AVG_PR_mean', 'RH_AVG_mean', 'RH_MIN_mean', 'RH_MAX_mean', 'RH_STD_mean', 'WEIGHTED_AVG_RH_mean', 'SO2_AVG_mean', 'SO2_MIN_mean', 'SO2_MAX_mean', 'SO2_STD_mean', 'WEIGHTED_AVG_SO2_mean', 'SPI3_AVG_mean', 'SPI3_MIN_mean', 'SPI3_MAX_mean', 'SPI3_STD_mean', 'WEIGHTED_AVG_SPI3_mean', 'SPI6_AVG_mean', 'SPI6_MIN_mean', 'SPI6_MAX_mean', 'SPI6_STD_mean', 'WEIGHTED_AVG_SPI6_mean', 'SR_AVG_mean', 'SR_MIN_mean', 'SR_MAX_mean', 'SR_STD_mean', 'WEIGHTED_AVG_SR_mean', 'Tave_AVG_mean', 'Tave_MIN_mean', 'Tave_MAX_mean', 'Tave_STD_mean', 'WEIGHTED_AVG_Tave_mean', 'Tmax_AVG_mean', 'Tmax_MIN_mean', 'Tmax_MAX_mean', 'Tmax_STD_mean', 'WEIGHTED_AVG_Tmax_mean', 'Tmin_AVG_mean', 'Tmin_MIN_mean', 'Tmin_MAX_mean', 'Tmin_STD_mean', 'WEIGHTED_AVG_Tmin_mean', 'UVR_AVG_mean', 'UVR_MIN_mean', 'UVR_MAX_mean', 'UVR_STD_mean', 'WEIGHTED_AVG_UVR_mean', 'WS_AVG_mean', 'WS_MIN_mean', 'WS_MAX_mean', 'WS_STD_mean', 'WEIGHTED_AVG_WS_mean', 'poi_count_sum', 'poi_count_mean', 'clinic_count_sum', 'clinic_count_mean', 'dentist_count_sum', 'dentist_count_mean', 'doctors_count_sum', 'doctors_count_mean', 'hospital_count_sum', 'hospital_count_mean', 'optician_count_sum', 'optician_count_mean', 'pharmacy_count_sum', 'pharmacy_count_mean', 'drinking_water_count_sum', 'drinking_water_count_mean', 'water_mill_count_sum', 'water_mill_count_mean', 'water_tower_count_sum', 'water_tower_count_mean', 'water_works_count_sum', 'water_works_count_mean', 'water_well_count_sum', 'water_well_count_mean', 'sanitary_dump_station_count_sum', 'sanitary_dump_station_count_mean', 'toilet_count_sum', 'toilet_count_mean', 'recycling_count_sum', 'recycling_count_mean', 'waste_basket_count_sum', 'waste_basket_count_mean', 'wastewater_plant_count_sum', 'wastewater_plant_count_mean', 'waste_transfer_station_count_sum', 'waste_transfer_station_count_mean', 'weighted_avg_clinic_nearest_mean', 'weighted_avg_dentist_nearest_mean', 'weighted_avg_doctors_nearest_mean', 'weighted_avg_hospital_nearest_mean', 'weighted_avg_optician_nearest_mean', 'weighted_avg_pharmacy_nearest_mean', 'weighted_avg_drinking_water_nearest_mean', 'weighted_avg_water_mill_nearest_mean', 'weighted_avg_water_tower_nearest_mean', 'weighted_avg_water_works_nearest_mean', 'weighted_avg_water_well_nearest_mean', 'weighted_avg_sanitary_dump_station_nearest_mean', 'weighted_avg_toilet_nearest_mean', 'weighted_avg_recycling_nearest_mean', 'weighted_avg_waste_basket_nearest_mean', 'weighted_avg_wastewater_plant_nearest_mean', 'weighted_avg_waste_transfer_station_nearest_mean', 'weighted_avg_osm_river_nearest_mean', 'weighted_avg_osm_stream_nearest_mean', 'weighted_avg_osm_canal_nearest_mean', 'weighted_avg_osm_drain_nearest_mean', 'weighted_avg_osm_wetland_nearest_mean', 'weighted_avg_osm_reservoir_nearest_mean', 'weighted_avg_osm_water_nearest_mean', 'weighted_avg_osm_riverbank_nearest_mean', 'weighted_avg_osm_dock_nearest_mean', 'pop_count_total', 'pop_density_per_m2', 'brgy_pop_count_mean', 'brgy_total_area_mean', 'avg_rad_min_mean', 'avg_rad_max_mean', 'avg_rad_mean_mean', 'avg_rad_std_mean', 'avg_rad_median_mean', 'doh_pois_count_sum', 'doh_pois_count_mean', 'doh_brgy_health_station_count_sum', 'doh_brgy_health_station_count_mean', 'doh_rural_health_unit_count_sum', 'doh_rural_health_unit_count_mean', 'doh_hospital_count_sum', 'doh_hospital_count_mean', 'doh_birthing_home_lying_in_clinic_count_sum', 'doh_birthing_home_lying_in_clinic_count_mean', 'doh_infirmary_count_sum', 'doh_infirmary_count_mean', 'doh_drug_abuse_treatment_rehabilitation_center_count_sum', 'doh_drug_abuse_treatment_rehabilitation_center_count_mean', 'doh_social_hygiene_clinic_count_sum', 'doh_social_hygiene_clinic_count_mean', 'doh_medical_clinic_count_sum', 'doh_medical_clinic_count_mean', 'weighted_avg_doh_brgy_health_station_nearest_mean', 'weighted_avg_doh_rural_health_unit_nearest_mean', 'weighted_avg_doh_hospital_nearest_mean', 'weighted_avg_doh_birthing_home_lying_in_clinic_nearest_mean', 'weighted_avg_doh_infirmary_nearest_mean', 'weighted_avg_doh_drug_abuse_treatment_rehabilitation_center_nearest_mean', 'weighted_avg_doh_social_hygiene_clinic_nearest_mean', 'weighted_avg_doh_medical_clinic_nearest_mean', 'pct_area_flood_hazard_100yr_low_mean', 'pct_area_flood_hazard_100yr_med_mean', 'pct_area_flood_hazard_100yr_high_mean', 'pct_area_flood_hazard_25yr_low_mean', 'pct_area_flood_hazard_25yr_med_mean', 'pct_area_flood_hazard_25yr_high_mean', 'pct_area_flood_hazard_5yr_low_mean', 'pct_area_flood_hazard_5yr_med_mean', 'pct_area_flood_hazard_5yr_high_mean', 'pct_area_landslide_hazard_low_mean', 'pct_area_landslide_hazard_med_mean', 'pct_area_landslide_hazard_high_mean', 'pct_area_bare_sparse_vegetation_mean', 'pct_area_builtup_mean', 'pct_area_cropland_mean', 'pct_area_grassland_mean', 'pct_area_herbaceous_wetland_mean', 'pct_area_mangroves_mean', 'pct_area_permanent_water_bodies_mean', 'pct_area_shrubland_mean', 'pct_area_tree_cover_mean', 'google_bldgs_count_sum', 'google_bldgs_count_mean', 'google_bldgs_area_total_sum', 'google_bldgs_area_total_mean', 'google_bldgs_area_mean_sum', 'google_bldgs_area_mean_mean', 'google_bldgs_count_lt100_sqm_sum', 'google_bldgs_count_lt100_sqm_mean', 'google_bldgs_count_100_200_sqm_sum', 'google_bldgs_count_100_200_sqm_mean', 'google_bldgs_count_gt_200_sqm_sum', 'google_bldgs_count_gt_200_sqm_mean', 'google_bldgs_density_sum', 'google_bldgs_density_mean', 'google_bldgs_pct_built_up_area_sum', 'google_bldgs_pct_built_up_area_mean', 'travel_time', 'hospital_pop_reached_total', 'hospital_pct_population_reached', 'healthcenter_pop_reached_total', 'healthcenter_pct_population_reached', 'rhu_pop_reached_total', 'rhu_pct_population_reached']</code></pre>
+</div>
+</div>
+</section>
+<section id="inspect-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="inspect-missing-data">2. Inspect missing data</h3>
+<div id="cell-16" class="cell" data-execution_count="157">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(linked_data.columns[linked_data.isnull().<span class="bu">any</span>()].tolist())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Claims', 'Deaths', 'PNP_AVG_mean', 'PNP_MIN_mean', 'PNP_MAX_mean', 'PNP_STD_mean', 'WEIGHTED_AVG_PNP_mean', 'SPI3_AVG_mean', 'SPI3_MIN_mean', 'SPI3_MAX_mean', 'SPI3_STD_mean', 'WEIGHTED_AVG_SPI3_mean', 'SPI6_AVG_mean', 'SPI6_MIN_mean', 'SPI6_MAX_mean', 'SPI6_STD_mean', 'WEIGHTED_AVG_SPI6_mean']</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>to remove this part after we get generated dataset from linked notebook</p>
+</blockquote>
+</section>
+<section id="remove-columns-that-could-cause-the-model-confusion" class="level3">
+<h3 class="anchored" data-anchor-id="remove-columns-that-could-cause-the-model-confusion">3. Remove columns that could cause the model confusion</h3>
+<div id="cell-18" class="cell" data-execution_count="158">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove ookla for now</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>filtered_linked_df <span class="op">=</span> linked_data.drop(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Source"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"year"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Month"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Week"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Region"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PSGC_Region"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Municipality"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ICD"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Disease"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Claims"</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Deaths"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Case_Type"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Date_Type"</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"outbreak_group"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># remove climate features with nulls</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PNP_AVG_mean"</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PNP_MIN_mean"</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PNP_MAX_mean"</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"PNP_STD_mean"</span>,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"WEIGHTED_AVG_PNP_mean"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI3_AVG_mean"</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI3_MIN_mean"</span>,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI3_MAX_mean"</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI3_STD_mean"</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">"WEIGHTED_AVG_SPI3_mean"</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI6_AVG_mean"</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI6_MIN_mean"</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI6_MAX_mean"</span>,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SPI6_STD_mean"</span>,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"WEIGHTED_AVG_SPI6_mean"</span>,</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># remove static columns</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="co"># health facility POIs that are static</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_pois_count_sum"</span>,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_pois_count_mean"</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_brgy_health_station_count_sum"</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_brgy_health_station_count_mean"</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_rural_health_unit_count_sum"</span>,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_rural_health_unit_count_mean"</span>,</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_hospital_count_sum"</span>,</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_hospital_count_mean"</span>,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_birthing_home_lying_in_clinic_count_sum"</span>,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_birthing_home_lying_in_clinic_count_mean"</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_infirmary_count_sum"</span>,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_infirmary_count_mean"</span>,</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_drug_abuse_treatment_rehabilitation_center_count_sum"</span>,</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_drug_abuse_treatment_rehabilitation_center_count_mean"</span>,</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_social_hygiene_clinic_count_sum"</span>,</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_social_hygiene_clinic_count_mean"</span>,</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_medical_clinic_count_sum"</span>,</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"doh_medical_clinic_count_mean"</span>,</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_brgy_health_station_nearest_mean"</span>,</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_rural_health_unit_nearest_mean"</span>,</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_hospital_nearest_mean"</span>,</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_birthing_home_lying_in_clinic_nearest_mean"</span>,</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_infirmary_nearest_mean"</span>,</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_drug_abuse_treatment_rehabilitation_center_nearest_mean"</span>,</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_social_hygiene_clinic_nearest_mean"</span>,</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"weighted_avg_doh_medical_clinic_nearest_mean"</span>,</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>        <span class="co"># static flood hazard features</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_100yr_low_mean"</span>,</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_100yr_med_mean"</span>,</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_100yr_high_mean"</span>,</span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_25yr_low_mean"</span>,</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_25yr_med_mean"</span>,</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_25yr_high_mean"</span>,</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_5yr_low_mean"</span>,</span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_5yr_med_mean"</span>,</span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_flood_hazard_5yr_high_mean"</span>,</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_landslide_hazard_low_mean"</span>,</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_landslide_hazard_med_mean"</span>,</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_landslide_hazard_high_mean"</span>,</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># static landcover features</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_bare_sparse_vegetation_mean"</span>,</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_builtup_mean"</span>,</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_cropland_mean"</span>,</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_grassland_mean"</span>,</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_herbaceous_wetland_mean"</span>,</span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_mangroves_mean"</span>,</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_permanent_water_bodies_mean"</span>,</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_shrubland_mean"</span>,</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pct_area_tree_cover_mean"</span>,</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>        <span class="co"># static infrastructure features</span></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_sum"</span>,</span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_mean"</span>,</span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_area_total_sum"</span>,</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_area_total_mean"</span>,</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_area_mean_sum"</span>,</span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_area_mean_mean"</span>,</span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_lt100_sqm_sum"</span>,</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_lt100_sqm_mean"</span>,</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_100_200_sqm_sum"</span>,</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_100_200_sqm_mean"</span>,</span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_gt_200_sqm_sum"</span>,</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_count_gt_200_sqm_mean"</span>,</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_density_sum"</span>,</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_density_mean"</span>,</span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_pct_built_up_area_sum"</span>,</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>        <span class="st">"google_bldgs_pct_built_up_area_mean"</span>,</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>        <span class="co"># static isochrone features</span></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>        <span class="st">"travel_time"</span>,</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hospital_pop_reached_total"</span>,</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>        <span class="st">"hospital_pct_population_reached"</span>,</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>        <span class="st">"healthcenter_pop_reached_total"</span>,</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>        <span class="st">"healthcenter_pct_population_reached"</span>,</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rhu_pop_reached_total"</span>,</span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rhu_pct_population_reached"</span>,</span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>to remove this part after we get generated dataset from linked notebook</p>
+</blockquote>
+</section>
+<section id="handle-rows-with-null-values" class="level3">
+<h3 class="anchored" data-anchor-id="handle-rows-with-null-values">4. Handle rows with null values</h3>
+<ul>
+<li>Replace null values for <code>Nightlight</code> features with 0</li>
+</ul>
+<div id="cell-20" class="cell" data-execution_count="159">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ntl_features <span class="op">=</span> [</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avg_rad_min_mean"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avg_rad_max_mean"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avg_rad_mean_mean"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avg_rad_std_mean"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"avg_rad_median_mean"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>filtered_linked_df[ntl_features] <span class="op">=</span> filtered_linked_df[ntl_features].fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-outbreak-label" class="level3">
+<h3 class="anchored" data-anchor-id="create-outbreak-label">5. Create outbreak label</h3>
+<p>We will now create another column indicating if that week is an outbreak week or not based on the number of cases. This is an important prerequisite step for our modeling. For this demonstration, we define an outbreak as follows:</p>
+<ol type="1">
+<li><p>The <strong>start</strong> of an outbreak occurs when the week’s cases equal to or higher than a threshold.</p>
+<ul>
+<li>The <strong>threshold</strong> is defined as the 75th percentile of weekly cases based on years when a substantial number of cases are recorded.</li>
+</ul></li>
+<li><p>The <strong>end</strong> of an outbreak occurs during the week when cases fall below the threshold for at least 2 weeks.</p></li>
+</ol>
+<p>We use this definition to create column <code>outbreak</code> containing 1 if the week is classified as an outbreak, and 0 if its a non-outbreak.</p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Add code here</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get substantial years with high number of cases recorded</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>agg_year <span class="op">=</span> linked_data.groupby([<span class="st">"Year"</span>])[<span class="st">"Cases"</span>].<span class="bu">sum</span>().reset_index(name<span class="op">=</span><span class="st">"Cases"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>agg_year.linked_data(<span class="st">"Cases"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After getting the years with the highest number of cases recorded, we will temporarily subset the data and get the distribution of the throughout those years only. Use the <code>.describe()</code> function to see the percentiles.</p>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>top_years_list <span class="op">=</span> [</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2011.0</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2012.0</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2013.0</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2017.0</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2018.0</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2019.0</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2020.0</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2021.0</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2022.0</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>subset_zamb <span class="op">=</span> linked_data[linked_data[<span class="st">"Year"</span>].isin(top_years_list)]</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>subset_zamb[<span class="st">"Cases"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Update the <code>OUTBREAK_THRESHOLD</code> to serve as the marker whether a week will be tagged as an outbreak or not.</p>
+<div id="cell-26" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit this value to your identified threshold</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set your threshold value</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>OUTBREAK_THRESHOLD <span class="op">=</span> <span class="dv">44</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After running the step below, you should be able to see an additional column <code>outbreak</code> at the rightmost part of the table containing 0s and 1s. This means that the health data has been labeled and now prepared for modeling.</p>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'outbreak' initialized with zeros</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>linked_data[<span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Track weeks satisfying the threshold, and count consecutive outbreak weeks</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>consecutive_weeks_below_threshold <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>previous_outbreak <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> linked_data.iterrows():</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">"Cases"</span>] <span class="op">&gt;</span> OUTBREAK_THRESHOLD:</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        consecutive_weeks_below_threshold <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        previous_outbreak <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># check if previous week was an outbreak</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if yes, continue to tag current week as outbreak</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># part of observation period</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> previous_outbreak <span class="kw">and</span> consecutive_weeks_below_threshold <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>            consecutive_weeks_below_threshold <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> consecutive_weeks_below_threshold <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>            previous_outbreak <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>linked_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-lagged-features-for-cases" class="level3">
+<h3 class="anchored" data-anchor-id="create-lagged-features-for-cases">5. Create lagged features for <code>Cases</code></h3>
+<p>Adding previous week’s cases as features may help enhance the model’s capability in predicting future cases.</p>
+<p>You can try experimenting with the lagged features by adding or removing them.</p>
+<div id="cell-31" class="cell" data-execution_count="160">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by barangay and return the date of the previous number of cases</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>filtered_linked_df <span class="op">=</span> filtered_linked_df.assign(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    prev_1_wk_numcases<span class="op">=</span>filtered_linked_df[<span class="st">"Cases"</span>].shift(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases a week before</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    prev_2_wk_numcases<span class="op">=</span>filtered_linked_df[<span class="st">"Cases"</span>].shift(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases 2 weeks before</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    prev_3_wk_numcases<span class="op">=</span>filtered_linked_df[<span class="st">"Cases"</span>].shift(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases 3 weeks before</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    prev_1_mo_numcases<span class="op">=</span>filtered_linked_df[<span class="st">"Cases"</span>].shift(</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases 1 month before</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>filtered_linked_df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="160">
+<pre><code>(364, 159)</code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="161">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print out final columns</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(filtered_linked_df.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Date', 'ADM3_PCODE', 'Cases', 'outbreak', 'CO_AVG_mean', 'CO_MIN_mean', 'CO_MAX_mean', 'CO_STD_mean', 'WEIGHTED_AVG_CO_mean', 'HI_AVG_mean', 'HI_MIN_mean', 'HI_MAX_mean', 'HI_STD_mean', 'WEIGHTED_AVG_HI_mean', 'NDVI_AVG_mean', 'NDVI_MIN_mean', 'NDVI_MAX_mean', 'NDVI_STD_mean', 'WEIGHTED_AVG_NDVI_mean', 'NO2_AVG_mean', 'NO2_MIN_mean', 'NO2_MAX_mean', 'NO2_STD_mean', 'WEIGHTED_AVG_NO2_mean', 'O3_AVG_mean', 'O3_MIN_mean', 'O3_MAX_mean', 'O3_STD_mean', 'WEIGHTED_AVG_O3_mean', 'PM10_AVG_mean', 'PM10_MIN_mean', 'PM10_MAX_mean', 'PM10_STD_mean', 'WEIGHTED_AVG_PM10_mean', 'PM25_AVG_mean', 'PM25_MIN_mean', 'PM25_MAX_mean', 'PM25_STD_mean', 'WEIGHTED_AVG_PM25_mean', 'PR_AVG_mean', 'PR_MIN_mean', 'PR_MAX_mean', 'PR_STD_mean', 'WEIGHTED_AVG_PR_mean', 'RH_AVG_mean', 'RH_MIN_mean', 'RH_MAX_mean', 'RH_STD_mean', 'WEIGHTED_AVG_RH_mean', 'SO2_AVG_mean', 'SO2_MIN_mean', 'SO2_MAX_mean', 'SO2_STD_mean', 'WEIGHTED_AVG_SO2_mean', 'SR_AVG_mean', 'SR_MIN_mean', 'SR_MAX_mean', 'SR_STD_mean', 'WEIGHTED_AVG_SR_mean', 'Tave_AVG_mean', 'Tave_MIN_mean', 'Tave_MAX_mean', 'Tave_STD_mean', 'WEIGHTED_AVG_Tave_mean', 'Tmax_AVG_mean', 'Tmax_MIN_mean', 'Tmax_MAX_mean', 'Tmax_STD_mean', 'WEIGHTED_AVG_Tmax_mean', 'Tmin_AVG_mean', 'Tmin_MIN_mean', 'Tmin_MAX_mean', 'Tmin_STD_mean', 'WEIGHTED_AVG_Tmin_mean', 'UVR_AVG_mean', 'UVR_MIN_mean', 'UVR_MAX_mean', 'UVR_STD_mean', 'WEIGHTED_AVG_UVR_mean', 'WS_AVG_mean', 'WS_MIN_mean', 'WS_MAX_mean', 'WS_STD_mean', 'WEIGHTED_AVG_WS_mean', 'poi_count_sum', 'poi_count_mean', 'clinic_count_sum', 'clinic_count_mean', 'dentist_count_sum', 'dentist_count_mean', 'doctors_count_sum', 'doctors_count_mean', 'hospital_count_sum', 'hospital_count_mean', 'optician_count_sum', 'optician_count_mean', 'pharmacy_count_sum', 'pharmacy_count_mean', 'drinking_water_count_sum', 'drinking_water_count_mean', 'water_mill_count_sum', 'water_mill_count_mean', 'water_tower_count_sum', 'water_tower_count_mean', 'water_works_count_sum', 'water_works_count_mean', 'water_well_count_sum', 'water_well_count_mean', 'sanitary_dump_station_count_sum', 'sanitary_dump_station_count_mean', 'toilet_count_sum', 'toilet_count_mean', 'recycling_count_sum', 'recycling_count_mean', 'waste_basket_count_sum', 'waste_basket_count_mean', 'wastewater_plant_count_sum', 'wastewater_plant_count_mean', 'waste_transfer_station_count_sum', 'waste_transfer_station_count_mean', 'weighted_avg_clinic_nearest_mean', 'weighted_avg_dentist_nearest_mean', 'weighted_avg_doctors_nearest_mean', 'weighted_avg_hospital_nearest_mean', 'weighted_avg_optician_nearest_mean', 'weighted_avg_pharmacy_nearest_mean', 'weighted_avg_drinking_water_nearest_mean', 'weighted_avg_water_mill_nearest_mean', 'weighted_avg_water_tower_nearest_mean', 'weighted_avg_water_works_nearest_mean', 'weighted_avg_water_well_nearest_mean', 'weighted_avg_sanitary_dump_station_nearest_mean', 'weighted_avg_toilet_nearest_mean', 'weighted_avg_recycling_nearest_mean', 'weighted_avg_waste_basket_nearest_mean', 'weighted_avg_wastewater_plant_nearest_mean', 'weighted_avg_waste_transfer_station_nearest_mean', 'weighted_avg_osm_river_nearest_mean', 'weighted_avg_osm_stream_nearest_mean', 'weighted_avg_osm_canal_nearest_mean', 'weighted_avg_osm_drain_nearest_mean', 'weighted_avg_osm_wetland_nearest_mean', 'weighted_avg_osm_reservoir_nearest_mean', 'weighted_avg_osm_water_nearest_mean', 'weighted_avg_osm_riverbank_nearest_mean', 'weighted_avg_osm_dock_nearest_mean', 'pop_count_total', 'pop_density_per_m2', 'brgy_pop_count_mean', 'brgy_total_area_mean', 'avg_rad_min_mean', 'avg_rad_max_mean', 'avg_rad_mean_mean', 'avg_rad_std_mean', 'avg_rad_median_mean', 'prev_1_wk_numcases', 'prev_2_wk_numcases', 'prev_3_wk_numcases', 'prev_1_mo_numcases']</code></pre>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="162">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filtered_linked_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="162">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Date</th>
+<th data-quarto-table-cell-role="th">ADM3_PCODE</th>
+<th data-quarto-table-cell-role="th">Cases</th>
+<th data-quarto-table-cell-role="th">outbreak</th>
+<th data-quarto-table-cell-role="th">CO_AVG_mean</th>
+<th data-quarto-table-cell-role="th">CO_MIN_mean</th>
+<th data-quarto-table-cell-role="th">CO_MAX_mean</th>
+<th data-quarto-table-cell-role="th">CO_STD_mean</th>
+<th data-quarto-table-cell-role="th">WEIGHTED_AVG_CO_mean</th>
+<th data-quarto-table-cell-role="th">HI_AVG_mean</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">brgy_total_area_mean</th>
+<th data-quarto-table-cell-role="th">avg_rad_min_mean</th>
+<th data-quarto-table-cell-role="th">avg_rad_max_mean</th>
+<th data-quarto-table-cell-role="th">avg_rad_mean_mean</th>
+<th data-quarto-table-cell-role="th">avg_rad_std_mean</th>
+<th data-quarto-table-cell-role="th">avg_rad_median_mean</th>
+<th data-quarto-table-cell-role="th">prev_1_wk_numcases</th>
+<th data-quarto-table-cell-role="th">prev_2_wk_numcases</th>
+<th data-quarto-table-cell-role="th">prev_3_wk_numcases</th>
+<th data-quarto-table-cell-role="th">prev_1_mo_numcases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">312</td>
+<td>2014-01-06</td>
+<td>PH097332000</td>
+<td>0.0</td>
+<td>0</td>
+<td>0.071684</td>
+<td>0.061561</td>
+<td>0.081937</td>
+<td>0.007905</td>
+<td>0.071684</td>
+<td>27.839929</td>
+<td>...</td>
+<td>1.515541e+07</td>
+<td>1.738257</td>
+<td>5.266028</td>
+<td>2.946094</td>
+<td>1.036254</td>
+<td>2.805252</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">313</td>
+<td>2014-01-06</td>
+<td>PH097332000</td>
+<td>0.0</td>
+<td>0</td>
+<td>0.071684</td>
+<td>0.061561</td>
+<td>0.081937</td>
+<td>0.007905</td>
+<td>0.071684</td>
+<td>27.839929</td>
+<td>...</td>
+<td>1.515541e+07</td>
+<td>1.738257</td>
+<td>5.266028</td>
+<td>2.946094</td>
+<td>1.036254</td>
+<td>2.805252</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">314</td>
+<td>2014-01-13</td>
+<td>PH097332000</td>
+<td>0.0</td>
+<td>0</td>
+<td>0.080858</td>
+<td>0.069232</td>
+<td>0.093571</td>
+<td>0.008738</td>
+<td>0.080858</td>
+<td>26.511542</td>
+<td>...</td>
+<td>1.515541e+07</td>
+<td>1.738257</td>
+<td>5.266028</td>
+<td>2.946094</td>
+<td>1.036254</td>
+<td>2.805252</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">315</td>
+<td>2014-01-20</td>
+<td>PH097332000</td>
+<td>0.0</td>
+<td>0</td>
+<td>0.081604</td>
+<td>0.075696</td>
+<td>0.091231</td>
+<td>0.005616</td>
+<td>0.081604</td>
+<td>26.305700</td>
+<td>...</td>
+<td>1.515541e+07</td>
+<td>1.738257</td>
+<td>5.266028</td>
+<td>2.946094</td>
+<td>1.036254</td>
+<td>2.805252</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">316</td>
+<td>2014-01-27</td>
+<td>PH097332000</td>
+<td>0.0</td>
+<td>0</td>
+<td>0.074839</td>
+<td>0.071346</td>
+<td>0.081812</td>
+<td>0.004384</td>
+<td>0.074839</td>
+<td>26.145516</td>
+<td>...</td>
+<td>1.515541e+07</td>
+<td>1.738257</td>
+<td>5.266028</td>
+<td>2.946094</td>
+<td>1.036254</td>
+<td>2.805252</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 159 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="setup-model-training" class="level2">
+<h2 class="anchored" data-anchor-id="setup-model-training">Setup model training</h2>
+<section id="split-to-train-test-set" class="level3">
+<h3 class="anchored" data-anchor-id="split-to-train-test-set">1. Split to train-test set</h3>
+<p>We use <code>TimeSeriesSplit</code> to properly cross-validate the model.</p>
+<div id="cell-36" class="cell" data-execution_count="163">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>filtered_linked_df <span class="op">=</span> filtered_linked_df.set_index(<span class="st">"Date"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-37" class="cell" data-execution_count="164">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split features and target label</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> filtered_linked_df.drop(labels<span class="op">=</span>[<span class="st">"outbreak"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> filtered_linked_df[<span class="st">"outbreak"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-38" class="cell" data-execution_count="165">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tss <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train_index, test_index <span class="kw">in</span> tss.split(X):</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    X_train, X_test <span class="op">=</span> X.iloc[train_index, :], X.iloc[test_index, :]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    y_train, y_test <span class="op">=</span> y.iloc[train_index], y.iloc[test_index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="166">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set these aside to link back later to the predictions for analysis</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>brgy_tests <span class="op">=</span> X_test[<span class="st">"ADM3_PCODE"</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>numcases_test <span class="op">=</span> X_test[<span class="st">"Cases"</span>]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># drop the columns above</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.drop(columns<span class="op">=</span>[<span class="st">"ADM3_PCODE"</span>, <span class="st">"Cases"</span>])</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test.drop(columns<span class="op">=</span>[<span class="st">"ADM3_PCODE"</span>, <span class="st">"Cases"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-train-and-test-split" class="level3">
+<h3 class="anchored" data-anchor-id="check-train-and-test-split">2. Check train and test split</h3>
+<p>Check the exact lengths of the train-test split. For our use case, having a test set consisting of a year and 6 months is enough. This may be changed depending on the disease chosen.</p>
+<p>You may experiment the splits by changing the <code>n_splits</code> parameter in the TimeSeriesSplit step above. Increasing the <code>n_splits</code> would give a narrower time period for the test set.</p>
+<div id="cell-41" class="cell" data-execution_count="167">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(X_train), <span class="bu">len</span>(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="167">
+<pre><code>(273, 91)</code></pre>
+</div>
+</div>
+<div id="cell-42" class="cell" data-execution_count="168">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># training data date coverage</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>X_train.index.<span class="bu">min</span>(), X_train.index.<span class="bu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="168">
+<pre><code>(Timestamp('2014-01-06 00:00:00'), Timestamp('2019-03-25 00:00:00'))</code></pre>
+</div>
+</div>
+<div id="cell-43" class="cell" data-execution_count="169">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># testing data date coverage</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>X_test.index.<span class="bu">min</span>(), X_test.index.<span class="bu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="169">
+<pre><code>(Timestamp('2019-04-01 00:00:00'), Timestamp('2020-12-21 00:00:00'))</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="train-a-randomforest-classifier" class="level2">
+<h2 class="anchored" data-anchor-id="train-a-randomforest-classifier">Train a RandomForest Classifier</h2>
+<section id="optimize-model-parameters-using-gridsearchcv" class="level3">
+<h3 class="anchored" data-anchor-id="optimize-model-parameters-using-gridsearchcv">1. Optimize model parameters using <code>GridSearchCV</code></h3>
+<div id="cell-46" class="cell" data-execution_count="170">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model and parameter space to optimize</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>classifier <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_estimators"</span>: [<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>],</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_depth"</span>: [<span class="va">None</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>],</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-47" class="cell" data-execution_count="171">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_grid_search <span class="op">=</span> GridSearchCV(classifier, param_grid, verbose<span class="op">=</span><span class="dv">1</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>model_grid_search.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 25 candidates, totalling 125 fits</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="171">
+<style>#sk-container-id-4 {color: black;background-color: white;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=5, estimator=RandomForestClassifier(random_state=42),
+             param_grid={'max_depth': [None, 5, 10, 15, 20],
+                         'n_estimators': [50, 100, 200, 300, 500]},
+             verbose=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox"><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">GridSearchCV</label><div class="sk-toggleable__content"><pre>GridSearchCV(cv=5, estimator=RandomForestClassifier(random_state=42),
+             param_grid={'max_depth': [None, 5, 10, 15, 20],
+                         'n_estimators': [50, 100, 200, 300, 500]},
+             verbose=1)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox"><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(random_state=42)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox"><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(random_state=42)</pre></div></div></div></div></div></div></div></div></div></div>
+</div>
+</div>
+<div id="cell-48" class="cell" data-execution_count="172">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best hyperparameters: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train best score: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_score_<span class="sc">:0.4}</span><span class="ss">"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Train best score std: </span><span class="sc">{</span>np<span class="sc">.</span>std(model_grid_search.cv_results_[<span class="st">'mean_test_score'</span>])<span class="sc">:0.4}</span><span class="ss">"</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best hyperparameters: {'max_depth': None, 'n_estimators': 50}
+Train best score: 0.8706
+Train best score std: 0.003837</code></pre>
+</div>
+</div>
+</section>
+<section id="check-model-performance" class="level3">
+<h3 class="anchored" data-anchor-id="check-model-performance">2. Check model performance</h3>
+<p>Apply the model with the best parameters to the test set to check its performance. The outputted score is the mean accuracy.</p>
+<div id="cell-51" class="cell" data-execution_count="173">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>test_score <span class="op">=</span> model_grid_search.score(X_test, y_test)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test best score: </span><span class="sc">{</span>test_score<span class="sc">:0.6}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test best score: 0.791209</code></pre>
+</div>
+</div>
+<div id="cell-52" class="cell" data-execution_count="174">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on test data</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>best_rf_classifier_model <span class="op">=</span> model_grid_search.best_estimator_</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> best_rf_classifier_model.score(X_test, y_test)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test Accuracy:"</span>, test_accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test Accuracy: 0.7912087912087912</code></pre>
+</div>
+</div>
+<p>The best model predicts outbreaks with 79.12% accuracy</p>
+</section>
+</section>
+<section id="inspect-model-results" class="level2">
+<h2 class="anchored" data-anchor-id="inspect-model-results">Inspect model results</h2>
+<section id="make-predictions-on-the-test-set" class="level3">
+<h3 class="anchored" data-anchor-id="make-predictions-on-the-test-set">1. Make predictions on the test set</h3>
+<p>Now that we have chosen the best model to use, we can now run the best RandomForest Classifier model on our test set and extract the predicted values.</p>
+<p>To get the discrete outbreak class prediction, outbreak (1) or not (0), run <code>.predict</code>. In this demonstration, we’d also like to include the predicted probabilities that comes along with the class predictions using the <code>predict_proba</code> function for analysis.</p>
+<div id="cell-57" class="cell" data-execution_count="175">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_rf_classifier_model.predict(X_test)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>y_pred_proba <span class="op">=</span> best_rf_classifier_model.predict_proba(X_test)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>pred_results <span class="op">=</span> pd.DataFrame(y_pred)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>pred_results.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="175">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>91.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>0.252747</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>0.436995</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>0.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-results-and-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-results-and-metrics">2. Visualize results and metrics</h3>
+<p>Review the results of the RF classification predictions using the <code>classification_report</code>. This summarizes on one table the accuracy, precision, recall, f1-score, and support (number of instances per class).</p>
+<p>Indicated in the classification report a mean accuracy of <strong>79.12%</strong> is achieved by the selected best model. Taking a look at other metrics, the model is able to correctly predict no outbreak weeks (0) more than outbreak weeks (1) with a recall of <strong>81.82%</strong> compared to predictions of outbreak with a recall of <strong>64.39%</strong>.</p>
+<p>Important to also look at the support column. Support simply refers to the number of instances that we have in our test set for each outbreak label. In our test set, we have 77 weeks that have no outbreaks and 14 weeks that have outbreaks.</p>
+<div id="cell-60" class="cell" data-execution_count="176">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, output_dict<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(report).transpose()</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>report_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="176">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">precision</th>
+<th data-quarto-table-cell-role="th">recall</th>
+<th data-quarto-table-cell-role="th">f1-score</th>
+<th data-quarto-table-cell-role="th">support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.926471</td>
+<td>0.818182</td>
+<td>0.868966</td>
+<td>77.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.391304</td>
+<td>0.642857</td>
+<td>0.486486</td>
+<td>14.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">accuracy</td>
+<td>0.791209</td>
+<td>0.791209</td>
+<td>0.791209</td>
+<td>0.791209</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">macro avg</td>
+<td>0.658887</td>
+<td>0.730519</td>
+<td>0.677726</td>
+<td>91.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">weighted avg</td>
+<td>0.844137</td>
+<td>0.791209</td>
+<td>0.810123</td>
+<td>91.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>To view how many of our predictions are correct against the actual values, we can use a confusion matrix. After running the cell below, you should be able to see a 2x2 matrix of true labels and predicted labels.</p>
+<p><img src="https://assets-global.website-files.com/6266b596eef18c1931f938f9/644aea65cefe35380f198a5a_class_guide_cm08.png" width="40%"></p>
+<p>Based on the confusion matrix, we were able to correctly predict 63 no outbreak weeks out of 77 and for the outbreak weeks we were only able to predict 9 out of those 14 weeks from the test set. The model still experiences certain confusion when it comes to predicting for outbreak weeks since there are 5 weeks that were mislabeled as no outbreak (False Negatives) which could indicate a limitation of our dataset.</p>
+<div id="cell-62" class="cell" data-execution_count="177">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred, labels<span class="op">=</span>best_rf_classifier_model.classes_)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> ConfusionMatrixDisplay(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    confusion_matrix<span class="op">=</span>cm, display_labels<span class="op">=</span>best_rf_classifier_model.classes_</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>disp.plot()</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="baseline-model-demo_files/figure-html/cell-36-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To understand analyze the results of the model more, let’s visualize the predicted probabilities from the model through a colored histogram of the values.</p>
+<p>In the plot below, the predicted probabilities are on the x-axis and the y-axis is the number of those instances. The colors are based on the actual labels. The expectation is the bars colored as blue should skew to the left side and the red bars skew to the right indicating that the model is able to distinguish the presence of an outbreak based on the features we’ve given.</p>
+<p>Most of the outbreak weeks range from the 0.4 to 0.6 probabilities which indicates that the model finds difficulty in strongly distinguishing weeks with a dengue outbreak.</p>
+<div id="cell-64" class="cell" data-execution_count="178">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> y_pred_proba[:, <span class="dv">1</span>]  <span class="co"># prediction for outbreak</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">7</span>))</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>plt.hist(prediction[y_test <span class="op">==</span> <span class="dv">0</span>], bins<span class="op">=</span><span class="dv">50</span>, label<span class="op">=</span><span class="st">"No Outbreak"</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>plt.hist(prediction[y_test <span class="op">==</span> <span class="dv">1</span>], bins<span class="op">=</span><span class="dv">50</span>, label<span class="op">=</span><span class="st">"Outbreak"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=</span><span class="st">"r"</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Probability of being Outbreak Class"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of records in each bucket"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">15</span>, title<span class="op">=</span><span class="st">"Actual Labels"</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>plt.tick_params(axis<span class="op">=</span><span class="st">"both"</span>, labelsize<span class="op">=</span><span class="dv">8</span>, pad<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="baseline-model-demo_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="identify-features-that-best-explains-outbreak-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="identify-features-that-best-explains-outbreak-prediction">3. Identify features that best explains outbreak prediction</h3>
+<div id="cell-66" class="cell" data-execution_count="179">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(best_rf_classifier_model)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>shap_values <span class="op">=</span> explainer.shap_values(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From the SHAP, what impacted the predictions the most are the cases from the previous weeks, nighttime lights radiance, population, and distances to health facilities.</p>
+<p>It is interesting to observe that the nighttime lights features and presence of POIs impact the outbreak prediction. This indicates that how urbanized a city has a possible influence on determining an outbreak.</p>
+<div id="cell-68" class="cell" data-execution_count="180">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>shap.summary_plot(shap_values[<span class="dv">0</span>], X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="baseline-model-demo_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analyzing-outbreak-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="analyzing-outbreak-predictions">Analyzing outbreak predictions</h2>
+<p>Prepare the dataframe to include the actual number of cases and predictions on one table.</p>
+<div id="cell-71" class="cell" data-execution_count="181">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join back the predictions to the features for analysis.</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>analyze_df <span class="op">=</span> X_test.copy()</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>analyze_df[<span class="st">"ADM3_PCODE"</span>] <span class="op">=</span> brgy_tests</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>analyze_df[<span class="st">"Cases"</span>] <span class="op">=</span> numcases_test</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>analyze_df[<span class="st">"actual_class"</span>] <span class="op">=</span> y_test</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>analyze_df[<span class="st">"predicted_class"</span>] <span class="op">=</span> y_pred</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>analyze_df[<span class="st">"predicted_proba_outbreak"</span>] <span class="op">=</span> y_pred_proba[:, <span class="dv">1</span>]</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>analyze_df <span class="op">=</span> analyze_df.reset_index()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-72" class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>analyize_df.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="visualizing-actual-vs.-predicted-outbreaks-periods" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-actual-vs.-predicted-outbreaks-periods">1. Visualizing Actual vs.&nbsp;Predicted Outbreaks Periods</h3>
+<div id="cell-74" class="cell" data-execution_count="182">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>actual_outbreaks_summary <span class="op">=</span> create_outbreak_summary(analyze_df, <span class="st">"actual_class"</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>actual_outbreaks_summary[<span class="st">"category"</span>] <span class="op">=</span> <span class="st">"actual"</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>predicted_outbreaks_summary <span class="op">=</span> create_outbreak_summary(analyze_df, <span class="st">"predicted_class"</span>)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>predicted_outbreaks_summary[<span class="st">"category"</span>] <span class="op">=</span> <span class="st">"predicted"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-75" class="cell" data-execution_count="183">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>outbreak_lengths_results <span class="op">=</span> pd.concat(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    [actual_outbreaks_summary, predicted_outbreaks_summary]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>outbreak_lengths_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="183">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">outbreak_group</th>
+<th data-quarto-table-cell-role="th">start_date</th>
+<th data-quarto-table-cell-role="th">end_date</th>
+<th data-quarto-table-cell-role="th">actual_length_weeks</th>
+<th data-quarto-table-cell-role="th">category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>2019-04-22</td>
+<td>2019-05-06</td>
+<td>3</td>
+<td>actual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>2019-08-19</td>
+<td>2019-09-16</td>
+<td>5</td>
+<td>actual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>5</td>
+<td>2019-10-21</td>
+<td>2019-11-04</td>
+<td>3</td>
+<td>actual</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>7</td>
+<td>2019-11-25</td>
+<td>2019-12-09</td>
+<td>3</td>
+<td>actual</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>2019-04-29</td>
+<td>2019-04-29</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>2019-06-17</td>
+<td>2019-06-24</td>
+<td>2</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>5</td>
+<td>2019-07-08</td>
+<td>2019-07-08</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>7</td>
+<td>2019-07-29</td>
+<td>2019-07-29</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>9</td>
+<td>2019-08-19</td>
+<td>2019-09-09</td>
+<td>4</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>11</td>
+<td>2019-10-28</td>
+<td>2019-11-04</td>
+<td>2</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>13</td>
+<td>2019-12-02</td>
+<td>2019-12-16</td>
+<td>3</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>15</td>
+<td>2020-01-06</td>
+<td>2020-01-06</td>
+<td>2</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>17</td>
+<td>2020-01-27</td>
+<td>2020-02-03</td>
+<td>2</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>19</td>
+<td>2020-02-17</td>
+<td>2020-02-24</td>
+<td>2</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>21</td>
+<td>2020-06-29</td>
+<td>2020-06-29</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>23</td>
+<td>2020-08-17</td>
+<td>2020-08-17</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>25</td>
+<td>2020-10-19</td>
+<td>2020-10-19</td>
+<td>1</td>
+<td>predicted</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Running the cell below should produce a dumbbell plot that shows the actual outbreak periods from the health data versus the predicted outbreak periods.</p>
+<p>The resulting plot should look similar to this. The plot illustrates the outbreak periods from the dataframe prepared above. <br> <br> <img src="../../data/05-gis/outbreak_period_sample.png" width="90%"></p>
+<p><em>This is only a sample plot, the resulting plot will not be exactly the same dependeing on the range of the test set.</em></p>
+<div id="cell-77" class="cell" data-execution_count="184">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set custom colors</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>class_colors <span class="op">=</span> {<span class="st">"predicted"</span>: <span class="st">"#ee472f"</span>, <span class="st">"actual"</span>: <span class="st">"#53bed0"</span>}</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot start and end outbreak points</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.scatter(</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    outbreak_lengths_results,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>[<span class="st">"start_date"</span>, <span class="st">"end_date"</span>],</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"category"</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"category"</span>,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="st">"actual_length_weeks"</span>,</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>{<span class="st">"x"</span>: <span class="st">"Date"</span>},</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>    category_orders<span class="op">=</span>{<span class="st">"category"</span>: [<span class="st">"actual"</span>, <span class="st">"predicted"</span>]},</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>class_colors,</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row <span class="kw">in</span> outbreak_lengths_results.iterrows():</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>        go.Scatter(</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>            mode<span class="op">=</span><span class="st">"lines"</span>,</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># layer="below",</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>            line<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>class_colors[row[<span class="st">"category"</span>]],</span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>                width<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>                dash<span class="op">=</span><span class="st">"solid"</span>,</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># connect the two markers</span></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>[row[<span class="st">"start_date"</span>], row[<span class="st">"end_date"</span>]],</span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>[row[<span class="st">"category"</span>], row[<span class="st">"category"</span>]],</span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a>            showlegend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Update layout with title and axis titles</span></span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Dengue Outbreak Periods for Zamboanga City"</span>,</span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"Date"</span>,</span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"Category"</span>,</span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>                            <div id="c8a1def0-947c-4669-b69e-30513bec0c86" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c8a1def0-947c-4669-b69e-30513bec0c86")) {                    Plotly.newPlot(                        "c8a1def0-947c-4669-b69e-30513bec0c86",                        [{"hovertemplate":"category=%{y}\u003cbr\u003evalue=%{x}\u003cbr\u003eactual_length_weeks=%{marker.size}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"actual","marker":{"color":"#53bed0","size":[3,5,3,3,3,5,3,3],"sizemode":"area","sizeref":0.0125,"symbol":"circle"},"mode":"markers","name":"actual","orientation":"v","showlegend":true,"x":["2019-04-22T00:00:00","2019-08-19T00:00:00","2019-10-21T00:00:00","2019-11-25T00:00:00","2019-05-06T00:00:00","2019-09-16T00:00:00","2019-11-04T00:00:00","2019-12-09T00:00:00"],"xaxis":"x","y":["actual","actual","actual","actual","actual","actual","actual","actual"],"yaxis":"y","type":"scatter"},{"hovertemplate":"category=%{y}\u003cbr\u003evalue=%{x}\u003cbr\u003eactual_length_weeks=%{marker.size}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"predicted","marker":{"color":"#ee472f","size":[1,2,1,1,4,2,3,2,2,2,1,1,1,1,2,1,1,4,2,3,2,2,2,1,1,1],"sizemode":"area","sizeref":0.0125,"symbol":"circle"},"mode":"markers","name":"predicted","orientation":"v","showlegend":true,"x":["2019-04-29T00:00:00","2019-06-17T00:00:00","2019-07-08T00:00:00","2019-07-29T00:00:00","2019-08-19T00:00:00","2019-10-28T00:00:00","2019-12-02T00:00:00","2020-01-06T00:00:00","2020-01-27T00:00:00","2020-02-17T00:00:00","2020-06-29T00:00:00","2020-08-17T00:00:00","2020-10-19T00:00:00","2019-04-29T00:00:00","2019-06-24T00:00:00","2019-07-08T00:00:00","2019-07-29T00:00:00","2019-09-09T00:00:00","2019-11-04T00:00:00","2019-12-16T00:00:00","2020-01-06T00:00:00","2020-02-03T00:00:00","2020-02-24T00:00:00","2020-06-29T00:00:00","2020-08-17T00:00:00","2020-10-19T00:00:00"],"xaxis":"x","y":["predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted","predicted"],"yaxis":"y","type":"scatter"},{"line":{"color":"#53bed0","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-04-22T00:00:00","2019-05-06T00:00:00"],"y":["actual","actual"],"type":"scatter"},{"line":{"color":"#53bed0","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-08-19T00:00:00","2019-09-16T00:00:00"],"y":["actual","actual"],"type":"scatter"},{"line":{"color":"#53bed0","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-10-21T00:00:00","2019-11-04T00:00:00"],"y":["actual","actual"],"type":"scatter"},{"line":{"color":"#53bed0","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-11-25T00:00:00","2019-12-09T00:00:00"],"y":["actual","actual"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-04-29T00:00:00","2019-04-29T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-06-17T00:00:00","2019-06-24T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-07-08T00:00:00","2019-07-08T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-07-29T00:00:00","2019-07-29T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-08-19T00:00:00","2019-09-09T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-10-28T00:00:00","2019-11-04T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2019-12-02T00:00:00","2019-12-16T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-01-06T00:00:00","2020-01-06T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-01-27T00:00:00","2020-02-03T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-02-17T00:00:00","2020-02-24T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-06-29T00:00:00","2020-06-29T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-08-17T00:00:00","2020-08-17T00:00:00"],"y":["predicted","predicted"],"type":"scatter"},{"line":{"color":"#ee472f","dash":"solid","width":3},"mode":"lines","showlegend":false,"x":["2020-10-19T00:00:00","2020-10-19T00:00:00"],"y":["predicted","predicted"],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Date"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Category"},"categoryorder":"array","categoryarray":["predicted","actual"]},"legend":{"title":{"text":"category"},"tracegroupgap":0,"itemsizing":"constant"},"margin":{"t":60},"title":{"text":"Dengue Outbreak Periods for Zamboanga City"}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('c8a1def0-947c-4669-b69e-30513bec0c86');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+</div>
+</div>
+<p>The actual outbreak periods are only 4 in total, however, the predicted outbreak periods are 13. Many of which look to be one week outbreak periods only.</p>
+<p>The outbreak periods predicted in 2019 coincides with the actual outbreak periods by only being off by a week or two. The one week outbreaks during 2019 also occur near the actual date of the outbreak. Meanwhile, for 2020 there should have been no outbreaks for that year, however, sparse 1-2 week outbreak periods were predicted. It is possible that training on the year 2019 where the dengue cases peaked the most could have influenced the model into continuously predicting outbreaks for 2020 in single weeks that have a high number of cases.</p>
+</section>
+<section id="visualize-actual-number-of-cases-with-predicted-label" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-actual-number-of-cases-with-predicted-label">2. Visualize actual Number of Cases with Predicted label</h3>
+<p>Let’s take a look now at the actual number of cases for the test set and what was the predicted outbreak label for them are.</p>
+<div id="cell-81" class="cell" data-execution_count="185">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define colors for each class</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>class_colors <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"#53bed0"</span>, <span class="dv">1</span>: <span class="st">"#ee472f"</span>}</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the bar plot</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>ax.bar(</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    analyze_df[<span class="st">"Date"</span>],</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    analyze_df[<span class="st">"Cases"</span>],</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Bar Plot"</span>,</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[class_colors[c] <span class="cf">for</span> c <span class="kw">in</span> analyze_df[<span class="st">"predicted_class"</span>]],</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels</span></span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create legend handles and labels for bar plot</span></span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>legend_handles <span class="op">=</span> [</span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a>    plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span>color) <span class="cf">for</span> color <span class="kw">in</span> class_colors.values()</span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb56-23"><a href="#cb56-23" aria-hidden="true" tabindex="-1"></a>legend_labels <span class="op">=</span> <span class="bu">list</span>(class_colors.keys())</span>
+<span id="cb56-24"><a href="#cb56-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-25"><a href="#cb56-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend for bar plot</span></span>
+<span id="cb56-26"><a href="#cb56-26" aria-hidden="true" tabindex="-1"></a>ax.legend(legend_handles, legend_labels, fontsize<span class="op">=</span><span class="st">"large"</span>, title<span class="op">=</span><span class="st">"Predicted Outbreak"</span>)</span>
+<span id="cb56-27"><a href="#cb56-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and axis labels</span></span>
+<span id="cb56-28"><a href="#cb56-28" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Dengue Outbreak Periods for Brgy. Tetuan in Zamboanga"</span>)</span>
+<span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Date"</span>)</span>
+<span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Number of Cases"</span>)</span>
+<span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="baseline-model-demo_files/figure-html/cell-45-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The model was able to determine outbreaks for the weeks in 2019 and 2020 with the highest number of cases for those years. For the rest of 2020, the number of cases are consistently low, however, for the weeks that seem to have a slight increase were labeled as an outbreak.</p>
+<p>To understand this more, let’s try to plot the probabilities along with the number of cases through a time series plot.</p>
+<div id="cell-83" class="cell" data-execution_count="186">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the line plot for actual cases with a different color</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    analyze_df[<span class="st">"Date"</span>],</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    analyze_df[<span class="st">"Cases"</span>],</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"#ff5733"</span>,  <span class="co"># Reddish color for better visibility</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Actual Cases"</span>,</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define your own gradient color</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>gradient_color <span class="op">=</span> <span class="st">"#53bed0"</span>  <span class="co"># Blueish color for the gradient</span></span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the number of points for the gradient</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>num_points <span class="op">=</span> <span class="bu">len</span>(analyze_df)</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a custom colormap with the gradient color</span></span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [(<span class="dv">0</span>, gradient_color), (<span class="dv">1</span>, gradient_color)]</span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> LinearSegmentedColormap.from_list(<span class="st">"custom_gradient"</span>, colors)</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a background gradient for predicted probabilities</span></span>
+<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(analyze_df) <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>    start_date <span class="op">=</span> analyze_df[<span class="st">"Date"</span>].iloc[i]</span>
+<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a>    end_date <span class="op">=</span> analyze_df[<span class="st">"Date"</span>].iloc[i <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a>    alpha <span class="op">=</span> analyze_df[<span class="st">"predicted_proba_outbreak"</span>].iloc[</span>
+<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a>        i</span>
+<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a>    ]  <span class="co"># Use predicted probability as alpha</span></span>
+<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a>    plt.fill_between(</span>
+<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a>        analyze_df[<span class="st">"Date"</span>],  <span class="co"># x-values (dates)</span></span>
+<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a>        analyze_df[<span class="st">"Cases"</span>].<span class="bu">min</span>(),  <span class="co"># Bottom y-value (minimum of actual cases)</span></span>
+<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a>        analyze_df[<span class="st">"Cases"</span>].<span class="bu">max</span>(),  <span class="co"># Top y-value (maximum of actual cases)</span></span>
+<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a>        where<span class="op">=</span>(</span>
+<span id="cb57-33"><a href="#cb57-33" aria-hidden="true" tabindex="-1"></a>            (analyze_df[<span class="st">"Date"</span>] <span class="op">&gt;=</span> start_date) <span class="op">&amp;</span> (analyze_df[<span class="st">"Date"</span>] <span class="op">&lt;=</span> end_date)</span>
+<span id="cb57-34"><a href="#cb57-34" aria-hidden="true" tabindex="-1"></a>        ),  <span class="co"># Condition for filling the area</span></span>
+<span id="cb57-35"><a href="#cb57-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>cmap(i <span class="op">/</span> num_points),  <span class="co"># Use colormap to set gradient color</span></span>
+<span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span>alpha,  <span class="co"># Set alpha based on predicted probability</span></span>
+<span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Predicted Probabilities"</span></span>
+<span id="cb57-38"><a href="#cb57-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb57-39"><a href="#cb57-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="va">None</span>,  <span class="co"># Include legend only for the first fill_between</span></span>
+<span id="cb57-40"><a href="#cb57-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb57-41"><a href="#cb57-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-42"><a href="#cb57-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend for the line plot and the gradient</span></span>
+<span id="cb57-43"><a href="#cb57-43" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb57-44"><a href="#cb57-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-45"><a href="#cb57-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting labels and title</span></span>
+<span id="cb57-46"><a href="#cb57-46" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
+<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cases"</span>)</span>
+<span id="cb57-48"><a href="#cb57-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Actual Cases with Predicted Probabilities"</span>)</span>
+<span id="cb57-49"><a href="#cb57-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-50"><a href="#cb57-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the plot</span></span>
+<span id="cb57-51"><a href="#cb57-51" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb57-52"><a href="#cb57-52" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb57-53"><a href="#cb57-53" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="baseline-model-demo_files/figure-html/cell-46-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this plot, the line plot represents the number of cases over time and the gradient in the background represents the predicted probablity of an outbreak for that week. The darker the color the more likely it is to be classified as an outbreak.</p>
+<p>Weeks with sudden spikes are able to identified by the model, howeever, these are not exact. For sudden spikes, the model seems to consider the weeks after to be the outbreak.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

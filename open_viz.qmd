@@ -2,10 +2,4 @@
 title: Open Visualizations
 ---
 
-# Overview
-
-Linked dataset Loren Ipsum
-
-# Visualize
-
-Loren Ipsum
+Coming soon!

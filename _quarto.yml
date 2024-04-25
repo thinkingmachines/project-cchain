@@ -21,7 +21,7 @@ website:
       - text: "Open viz"
         file: open_viz.qmd
       - text: "Open model"
-        file: open_model.qmd
+        href: notebooks/baseline-model/baseline-model-demo.ipynb
     tools:
       - icon: github
         menu:
