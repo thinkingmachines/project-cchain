@@ -1,10 +1,10 @@
 ---
-title: Open modle
+title: Open Model
 ---
 
 # Overview
 
-Linked dataset L oren Ipsum
+Linked dataset Loren Ipsum
 
 # Predicting Dengue Outbreaks
 

@@ -1,27 +1,158 @@
 ---
-title: Open Data
+title: The Project CCHAIN Linked Dataset
 ---
 
+## Overview
 
-# Overview
+The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities. 
 
-Linked dataset
+:::{.callout-warning icon=false appearance="simple"}
+## Quick links
 
-# Linked Dataset
+- Data download  [here](link)
+- Notebook to link the dataset [here](link) 
+- Full documentation [here](link)
+:::
 
-The linked dataset is structured as follows.
+The tables are designed in a way that users can **choose variables that are most relevant** to his/her focus city and use case, and **linked these variables together** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](link), or offline using the user's own code.
 
-## Health Tables
+:::{.callout-tip icon=false appearance="simple"}
+## Tips on using the data
 
-Loren Ipsum
+- **Focus on one location.** Starting with a detailed analysis of one location allows for a better understanding of the local dynamics, which may differ across locations.
+- **Do a literature review first** to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.
+- **Check data availability** on your focus location and make sure they fit the requirements of your study.
+:::
 
-## Environment Tables
+## Basics
 
-Loren Ipsum
+A central calendar, frequency, as well as the standard geography codes, geometry, area, and distance to coastlines are provided as tables for users.
 
-## Sociodemographic Tables
+| Table          | Variables                                                     |
+|----------------|---------------------------------------------------------------|
+| calendar       | date                                                          |
+| location       | PSGC admin codes and official English names from level 1 to 4 |
+| frequency      | description of update frequency strings                       |
+| brgy_geography | total area, distance to coast, geometry                       |
 
-Loren Ipsum
+## Health
 
-## Elements at Risk Table
- Loren Ipsum
+### Disease tables
+
+Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions.
+
+| Table                  | Source                                                                                     | Disease Outcome | Spatial Coverage |
+|------------------------|--------------------------------------------------------------------------------------------|-----------------|------------------|
+| disease_weekly_totals  | Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR) | cases           | city             |
+|                        | Philippine Statistical Authority                                                           | deaths          | city             |
+|                        | City Local Government Unit Health Offices                                                  | cases, deaths   | baranggay        |
+| disease_monthly_totals | Department of Health - Field Health Services Information System (DOH-FHSIS)                | cases           | city             |
+
+
+
+The dataset includes 11 diseases, identified as climate- and disaster-sensitive in the Philippines (Wong et al., 2018).
+
+
+| Disease Common Name           | ICD-10 Code | ICD-10 Description                                  |
+|-------------------------------|-------------|-----------------------------------------------------|
+| Dengue                        | A90         | Dengue fever [classical dengue]                     |
+| Unspecified diarrheal disease | R19.7       | Diarrhea, unspecified                               |
+| Acute bloody diarrhea         | A09         | Infectious gastroenteritis and colitis, unspecified |
+| Cholera                       | A00         | Cholera                                             |
+| Typhoid fever                 | A01         | Typhoid and paratyphoid fevers                      |
+| Pneumonia                     | J12-J18     | Various types of pneumonia                          |
+| Bronchitis                    | J40-J42 J20 | Various types of bronchitis Acute bronchitis        |
+| Tuberculosis                  | A15-A19     | Various types of tuberculosis                       |
+| Ischemic stroke               | I63         | Cerebral infarction                                 |
+| Diabetes mellitus             | E08-E13     | Various types of diabetes mellitus                  |
+| Asthma                        | J45         | Asthma                                              |
+| Ischemic heart disease        | I20-I25     | Ischemic heart diseases                             |
+| Hypertensive heart disease    | I11         | Hypertensive heart disease                          |
+| Dermatitis                    | L20-L30     | Various types of dermatitis                         |
+
+
+All disease data is standardized in accordance with the International Classification of Diseases (ICD-10) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy.
+
+
+## Climate
+
+The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.
+
+| Table                  | Variables                                                                                                                           |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| climate_atmosphere     | Mean, minimum and maximum temperature, precipitation, heat index, wind speed, relative humidity, solar radiation, UV radiation      |
+| climate_air_quality    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
+| climate_land           | Normalized difference vegetation index (NDVI)                                                                                       |
+| climate_indices        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
+| climate_timestep_check | NOT DATA, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
+
+## Environment 
+
+### Land and hazards tables
+
+The dataset also contains variables pertaining to land characteristics and hazards over the chosen cities. The dataset sources are in the form of shapefiles representing categorical variables (hazard level, type of cover), or presence of objects (e.g. buildings). While these sources are high resolution, all are only static and schedule of updates is unspecified.
+
+Data sources are shapefiles depicting categorical variables like hazard levels and land cover types, or the presence of objects such as buildings. Although these sources offer high resolution, they are static, and there is no specified update schedule.
+
+| Table                 | Categories                                                                                                          |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------|
+| esa_worldcover        | sparse vegetation, builtup, cropland, grassland, herbaceous_wetland, mangroves, water bodies, shrubland, tree cover |
+| google_open_buildings | all buildings, <100sqm buildings, 100-200 sqm buildings, >200sqm buildings                                          |
+| project_noah_hazards  | [low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period                               |
+
+
+### Places of interest tables
+
+Data on places of interest (POIs) are also included, particularly (1) total counts within barangay bounds and (2) distances to barangay centroid. Additionally, estimates of travel time to the nearest health facility (isochrone) are included using Mapbox Isochrone API. Details on the definitions of the POIs can be viewed in the OpenStreetMap documentation.
+
+| Table                                                                           | POI Categories                                                                                                                                                                               |
+|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| geoportal_doh_poi_health                                                        | health station, rural health unit, hospital, clinic, infirmary, drug abuse treatment rehab center, social hygiene clinic, birthing clinic, medical clinic                                    |
+| osm_poi_health                                                                  | clinic, dentist, doctor, hospital, optician, pharmacy                                                                                                                                        |
+| osm_poi_amenity                                                                 | atm, bank, college, community centre, convenience store, fire station, kindergarten, lighthouse, market place, park, police, school, shelter, supermarket, telephone, town hall, university  |
+| osm_poi_water_body                                                              | wetland, reservoir, water, riverbank, dock, river, stream, canal, drain                                                                                                                      |
+| osm_poi_sanitation                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
+| mapbox_health_facility_brgy_isochrones, mapbox_health_facility_city_isochrones  | barangay health center, hospital, rural health unit                                                                                                                                          |
+
+## Socioeconomics
+
+### Demography and income indicator tables
+
+The dataset contains population estimates, as well as emerging remote-sensed indicators of development such as nighttime lights, and internet speeds. These data are also aggregated at the barangay level.
+
+| Table                | Variables                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------|
+| worldpop_population  | population count and population density                                                     |
+| ookla_internet_speed | download and upload speeds, number of devices, latency of both fixed and mobile connections |
+| nighttime_lights     | cloud-free calibrated nighttime radiance measurements                                       |
+
+
+### Informal settlement community survey tables
+
+Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on scattered dates from 2001 to 2024.  The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and encoding inconsistencies.
+
+| Table                                    | Variables                                                                                                                                                                                            |
+|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| informal_settlement_community_surveys_v1 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances                                                                                                  |
+| informal_settlement_community_surveys_v2 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access   |
+
+Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). To submit a request, please use this [form](https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit).
+
+
+### Elements at risk table
+
+A dataset of 12,000 building outlines was also produced by manually annotating buildings over selected 250x250m tiles across the 12 cities. These tiles were carefully selected to focus on residential areas with diverse neighborhood densities, terrains, and levels of urbanization, as well as areas not yet mapped in OpenStreetMap. Each outline was drawn using a combination of visual inspection of satellite imagery, local knowledge, and validation from household survey data to cover all buildings present in the tile. 
+
+The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset. 
+
+
+
+Table source:  tm_open_buildings
+
+
+| Building Type            | Attributes                                                       |
+|--------------------------|------------------------------------------------------------------|
+| Settlement - single      | roof material, roof layout, roof area, is within gated community |
+| Settlement - dense       | none, outline drawn over extent of dense neighborhoods with overlapping rooftops    |
+| Nonsettlement            | height                                                           |
+

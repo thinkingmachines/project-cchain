@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project CCHAIN - Open Data</title>
+<title>Project CCHAIN - The Project CCHAIN Linked Dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,10 +69,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Project CCHAIN - Open Data">
+<meta property="og:title" content="Project CCHAIN - The Project CCHAIN Linked Dataset">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Project CCHAIN">
-<meta name="twitter:title" content="Project CCHAIN - Open Data">
+<meta name="twitter:title" content="Project CCHAIN - The Project CCHAIN Linked Dataset">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -141,12 +141,22 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#linked-dataset" id="toc-linked-dataset" class="nav-link" data-scroll-target="#linked-dataset">Linked Dataset</a>
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
+  <li><a href="#health" id="toc-health" class="nav-link" data-scroll-target="#health">Health</a>
   <ul class="collapse">
-  <li><a href="#health-tables" id="toc-health-tables" class="nav-link" data-scroll-target="#health-tables">Health Tables</a></li>
-  <li><a href="#environment-tables" id="toc-environment-tables" class="nav-link" data-scroll-target="#environment-tables">Environment Tables</a></li>
-  <li><a href="#sociodemographic-tables" id="toc-sociodemographic-tables" class="nav-link" data-scroll-target="#sociodemographic-tables">Sociodemographic Tables</a></li>
-  <li><a href="#elements-at-risk-table" id="toc-elements-at-risk-table" class="nav-link" data-scroll-target="#elements-at-risk-table">Elements at Risk Table</a></li>
+  <li><a href="#disease-tables" id="toc-disease-tables" class="nav-link" data-scroll-target="#disease-tables">Disease tables</a></li>
+  </ul></li>
+  <li><a href="#climate" id="toc-climate" class="nav-link" data-scroll-target="#climate">Climate</a></li>
+  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a>
+  <ul class="collapse">
+  <li><a href="#land-and-hazards-tables" id="toc-land-and-hazards-tables" class="nav-link" data-scroll-target="#land-and-hazards-tables">Land and hazards tables</a></li>
+  <li><a href="#places-of-interest-tables" id="toc-places-of-interest-tables" class="nav-link" data-scroll-target="#places-of-interest-tables">Places of interest tables</a></li>
+  </ul></li>
+  <li><a href="#socioeconomics" id="toc-socioeconomics" class="nav-link" data-scroll-target="#socioeconomics">Socioeconomics</a>
+  <ul class="collapse">
+  <li><a href="#demography-and-income-indicator-tables" id="toc-demography-and-income-indicator-tables" class="nav-link" data-scroll-target="#demography-and-income-indicator-tables">Demography and income indicator tables</a></li>
+  <li><a href="#informal-settlement-community-survey-tables" id="toc-informal-settlement-community-survey-tables" class="nav-link" data-scroll-target="#informal-settlement-community-survey-tables">Informal settlement community survey tables</a></li>
+  <li><a href="#elements-at-risk-table" id="toc-elements-at-risk-table" class="nav-link" data-scroll-target="#elements-at-risk-table">Elements at risk table</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -156,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Open Data</h1>
+<h1 class="title">The Project CCHAIN Linked Dataset</h1>
 </div>
 
 
@@ -173,28 +183,420 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p>Linked dataset</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The <strong>Project CCHAIN linked dataset</strong> is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities.</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quick links
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Data download <a href="link">here</a></li>
+<li>Notebook to link the dataset <a href="link">here</a></li>
+<li>Full documentation <a href="link">here</a></li>
+</ul>
+</div>
+</div>
+<p>The tables are designed in a way that users can <strong>choose variables that are most relevant</strong> to his/her focus city and use case, and <strong>linked these variables together</strong> to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided <a href="link">linking notebook</a>, or offline using the user’s own code.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips on using the data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Focus on one location.</strong> Starting with a detailed analysis of one location allows for a better understanding of the local dynamics, which may differ across locations.</li>
+<li><strong>Do a literature review first</strong> to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.</li>
+<li><strong>Check data availability</strong> on your focus location and make sure they fit the requirements of your study.</li>
+</ul>
+</div>
+</div>
 </section>
-<section id="linked-dataset" class="level1">
-<h1>Linked Dataset</h1>
-<p>The linked dataset is structured as follows.</p>
-<section id="health-tables" class="level2">
-<h2 class="anchored" data-anchor-id="health-tables">Health Tables</h2>
-<p>Loren Ipsum</p>
+<section id="basics" class="level2">
+<h2 class="anchored" data-anchor-id="basics">Basics</h2>
+<p>A central calendar, frequency, as well as the standard geography codes, geometry, area, and distance to coastlines are provided as tables for users.</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>calendar</td>
+<td>date</td>
+</tr>
+<tr class="even">
+<td>location</td>
+<td>PSGC admin codes and official English names from level 1 to 4</td>
+</tr>
+<tr class="odd">
+<td>frequency</td>
+<td>description of update frequency strings</td>
+</tr>
+<tr class="even">
+<td>brgy_geography</td>
+<td>total area, distance to coast, geometry</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="environment-tables" class="level2">
-<h2 class="anchored" data-anchor-id="environment-tables">Environment Tables</h2>
-<p>Loren Ipsum</p>
+<section id="health" class="level2">
+<h2 class="anchored" data-anchor-id="health">Health</h2>
+<section id="disease-tables" class="level3">
+<h3 class="anchored" data-anchor-id="disease-tables">Disease tables</h3>
+<p>Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions.</p>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 60%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Source</th>
+<th>Disease Outcome</th>
+<th>Spatial Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>disease_weekly_totals</td>
+<td>Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR)</td>
+<td>cases</td>
+<td>city</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Philippine Statistical Authority</td>
+<td>deaths</td>
+<td>city</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>City Local Government Unit Health Offices</td>
+<td>cases, deaths</td>
+<td>baranggay</td>
+</tr>
+<tr class="even">
+<td>disease_monthly_totals</td>
+<td>Department of Health - Field Health Services Information System (DOH-FHSIS)</td>
+<td>cases</td>
+<td>city</td>
+</tr>
+</tbody>
+</table>
+<p>The dataset includes 11 diseases, identified as climate- and disaster-sensitive in the Philippines (Wong et al., 2018).</p>
+<table class="table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 13%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Disease Common Name</th>
+<th>ICD-10 Code</th>
+<th>ICD-10 Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dengue</td>
+<td>A90</td>
+<td>Dengue fever [classical dengue]</td>
+</tr>
+<tr class="even">
+<td>Unspecified diarrheal disease</td>
+<td>R19.7</td>
+<td>Diarrhea, unspecified</td>
+</tr>
+<tr class="odd">
+<td>Acute bloody diarrhea</td>
+<td>A09</td>
+<td>Infectious gastroenteritis and colitis, unspecified</td>
+</tr>
+<tr class="even">
+<td>Cholera</td>
+<td>A00</td>
+<td>Cholera</td>
+</tr>
+<tr class="odd">
+<td>Typhoid fever</td>
+<td>A01</td>
+<td>Typhoid and paratyphoid fevers</td>
+</tr>
+<tr class="even">
+<td>Pneumonia</td>
+<td>J12-J18</td>
+<td>Various types of pneumonia</td>
+</tr>
+<tr class="odd">
+<td>Bronchitis</td>
+<td>J40-J42 J20</td>
+<td>Various types of bronchitis Acute bronchitis</td>
+</tr>
+<tr class="even">
+<td>Tuberculosis</td>
+<td>A15-A19</td>
+<td>Various types of tuberculosis</td>
+</tr>
+<tr class="odd">
+<td>Ischemic stroke</td>
+<td>I63</td>
+<td>Cerebral infarction</td>
+</tr>
+<tr class="even">
+<td>Diabetes mellitus</td>
+<td>E08-E13</td>
+<td>Various types of diabetes mellitus</td>
+</tr>
+<tr class="odd">
+<td>Asthma</td>
+<td>J45</td>
+<td>Asthma</td>
+</tr>
+<tr class="even">
+<td>Ischemic heart disease</td>
+<td>I20-I25</td>
+<td>Ischemic heart diseases</td>
+</tr>
+<tr class="odd">
+<td>Hypertensive heart disease</td>
+<td>I11</td>
+<td>Hypertensive heart disease</td>
+</tr>
+<tr class="even">
+<td>Dermatitis</td>
+<td>L20-L30</td>
+<td>Various types of dermatitis</td>
+</tr>
+</tbody>
+</table>
+<p>All disease data is standardized in accordance with the International Classification of Diseases (ICD-10) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy.</p>
 </section>
-<section id="sociodemographic-tables" class="level2">
-<h2 class="anchored" data-anchor-id="sociodemographic-tables">Sociodemographic Tables</h2>
-<p>Loren Ipsum</p>
 </section>
-<section id="elements-at-risk-table" class="level2">
-<h2 class="anchored" data-anchor-id="elements-at-risk-table">Elements at Risk Table</h2>
-<p>Loren Ipsum</p>
+<section id="climate" class="level2">
+<h2 class="anchored" data-anchor-id="climate">Climate</h2>
+<p>The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.</p>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>climate_atmosphere</td>
+<td>Mean, minimum and maximum temperature, precipitation, heat index, wind speed, relative humidity, solar radiation, UV radiation</td>
+</tr>
+<tr class="even">
+<td>climate_air_quality</td>
+<td>Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)</td>
+</tr>
+<tr class="odd">
+<td>climate_land</td>
+<td>Normalized difference vegetation index (NDVI)</td>
+</tr>
+<tr class="even">
+<td>climate_indices</td>
+<td>Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm)</td>
+</tr>
+<tr class="odd">
+<td>climate_timestep_check</td>
+<td>NOT DATA, log of hourly timesteps used in aggregating raw climate parameters to daily scale</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="environment" class="level2">
+<h2 class="anchored" data-anchor-id="environment">Environment</h2>
+<section id="land-and-hazards-tables" class="level3">
+<h3 class="anchored" data-anchor-id="land-and-hazards-tables">Land and hazards tables</h3>
+<p>The dataset also contains variables pertaining to land characteristics and hazards over the chosen cities. The dataset sources are in the form of shapefiles representing categorical variables (hazard level, type of cover), or presence of objects (e.g.&nbsp;buildings). While these sources are high resolution, all are only static and schedule of updates is unspecified.</p>
+<p>Data sources are shapefiles depicting categorical variables like hazard levels and land cover types, or the presence of objects such as buildings. Although these sources offer high resolution, they are static, and there is no specified update schedule.</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Categories</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>esa_worldcover</td>
+<td>sparse vegetation, builtup, cropland, grassland, herbaceous_wetland, mangroves, water bodies, shrubland, tree cover</td>
+</tr>
+<tr class="even">
+<td>google_open_buildings</td>
+<td>all buildings, &lt;100sqm buildings, 100-200 sqm buildings, &gt;200sqm buildings</td>
+</tr>
+<tr class="odd">
+<td>project_noah_hazards</td>
+<td>[low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="places-of-interest-tables" class="level3">
+<h3 class="anchored" data-anchor-id="places-of-interest-tables">Places of interest tables</h3>
+<p>Data on places of interest (POIs) are also included, particularly (1) total counts within barangay bounds and (2) distances to barangay centroid. Additionally, estimates of travel time to the nearest health facility (isochrone) are included using Mapbox Isochrone API. Details on the definitions of the POIs can be viewed in the OpenStreetMap documentation.</p>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>POI Categories</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>geoportal_doh_poi_health</td>
+<td>health station, rural health unit, hospital, clinic, infirmary, drug abuse treatment rehab center, social hygiene clinic, birthing clinic, medical clinic</td>
+</tr>
+<tr class="even">
+<td>osm_poi_health</td>
+<td>clinic, dentist, doctor, hospital, optician, pharmacy</td>
+</tr>
+<tr class="odd">
+<td>osm_poi_amenity</td>
+<td>atm, bank, college, community centre, convenience store, fire station, kindergarten, lighthouse, market place, park, police, school, shelter, supermarket, telephone, town hall, university</td>
+</tr>
+<tr class="even">
+<td>osm_poi_water_body</td>
+<td>wetland, reservoir, water, riverbank, dock, river, stream, canal, drain</td>
+</tr>
+<tr class="odd">
+<td>osm_poi_sanitation</td>
+<td>drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station</td>
+</tr>
+<tr class="even">
+<td>mapbox_health_facility_brgy_isochrones, mapbox_health_facility_city_isochrones</td>
+<td>barangay health center, hospital, rural health unit</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="socioeconomics" class="level2">
+<h2 class="anchored" data-anchor-id="socioeconomics">Socioeconomics</h2>
+<section id="demography-and-income-indicator-tables" class="level3">
+<h3 class="anchored" data-anchor-id="demography-and-income-indicator-tables">Demography and income indicator tables</h3>
+<p>The dataset contains population estimates, as well as emerging remote-sensed indicators of development such as nighttime lights, and internet speeds. These data are also aggregated at the barangay level.</p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>worldpop_population</td>
+<td>population count and population density</td>
+</tr>
+<tr class="even">
+<td>ookla_internet_speed</td>
+<td>download and upload speeds, number of devices, latency of both fixed and mobile connections</td>
+</tr>
+<tr class="odd">
+<td>nighttime_lights</td>
+<td>cloud-free calibrated nighttime radiance measurements</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="informal-settlement-community-survey-tables" class="level3">
+<h3 class="anchored" data-anchor-id="informal-settlement-community-survey-tables">Informal settlement community survey tables</h3>
+<p>Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on scattered dates from 2001 to 2024. The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and encoding inconsistencies.</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>informal_settlement_community_surveys_v1</td>
+<td>family composition, occupancy type, occupation, power source, water supply, toilet access, finances</td>
+</tr>
+<tr class="even">
+<td>informal_settlement_community_surveys_v2</td>
+<td>family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access</td>
+</tr>
+</tbody>
+</table>
+<p>Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII). To submit a request, please use this <a href="https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit">form</a>.</p>
+</section>
+<section id="elements-at-risk-table" class="level3">
+<h3 class="anchored" data-anchor-id="elements-at-risk-table">Elements at risk table</h3>
+<p>A dataset of 12,000 building outlines was also produced by manually annotating buildings over selected 250x250m tiles across the 12 cities. These tiles were carefully selected to focus on residential areas with diverse neighborhood densities, terrains, and levels of urbanization, as well as areas not yet mapped in OpenStreetMap. Each outline was drawn using a combination of visual inspection of satellite imagery, local knowledge, and validation from household survey data to cover all buildings present in the tile.</p>
+<p>The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset.</p>
+<p>Table source: tm_open_buildings</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Building Type</th>
+<th>Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Settlement - single</td>
+<td>roof material, roof layout, roof area, is within gated community</td>
+</tr>
+<tr class="even">
+<td>Settlement - dense</td>
+<td>none, outline drawn over extent of dense neighborhoods with overlapping rooftops</td>
+</tr>
+<tr class="odd">
+<td>Nonsettlement</td>
+<td>height</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
