@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Open viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./open_model.html"> 
+    <a class="nav-link" href="./notebooks/baseline-model/baseline-model-demo.html"> 
 <span class="menu-text">Open model</span></a>
   </li>  
 </ul>
@@ -141,6 +141,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing">Licensing</a></li>
   <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
   <li><a href="#health" id="toc-health" class="nav-link" data-scroll-target="#health">Health</a>
   <ul class="collapse">
@@ -150,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a>
   <ul class="collapse">
   <li><a href="#land-and-hazards-tables" id="toc-land-and-hazards-tables" class="nav-link" data-scroll-target="#land-and-hazards-tables">Land and hazards tables</a></li>
-  <li><a href="#places-of-interest-tables" id="toc-places-of-interest-tables" class="nav-link" data-scroll-target="#places-of-interest-tables">Places of interest tables</a></li>
+  <li><a href="#points-of-interest-tables" id="toc-points-of-interest-tables" class="nav-link" data-scroll-target="#points-of-interest-tables">Points of interest tables</a></li>
   </ul></li>
   <li><a href="#socioeconomics" id="toc-socioeconomics" class="nav-link" data-scroll-target="#socioeconomics">Socioeconomics</a>
   <ul class="collapse">
@@ -185,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The <strong>Project CCHAIN linked dataset</strong> is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities.</p>
+<p>The <strong>Project CCHAIN linked dataset</strong> is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities (Dagupan, Palayan, Navotas, Mandaluyong, Muntinlupa,Legazpi, Iloilo, Mandaue, Tacloban, Zamboanga, Cagayan de Oro, Davao)</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -203,7 +204,7 @@ Quick links
 </ul>
 </div>
 </div>
-<p>The tables are designed in a way that users can <strong>choose variables that are most relevant</strong> to his/her focus city and use case, and <strong>linked these variables together</strong> to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided <a href="link">linking notebook</a>, or offline using the user’s own code.</p>
+<p>The tables are designed in a way that users can <strong>choose variables that are most relevant</strong> to their focus city and use case, and <strong>link these variables</strong> to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided <a href="link">linking notebook</a>, or offline using the user’s own code.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -216,11 +217,15 @@ Tips on using the data
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Focus on one location.</strong> Starting with a detailed analysis of one location allows for a better understanding of the local dynamics, which may differ across locations.</li>
-<li><strong>Do a literature review first</strong> to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.</li>
+<li><strong>Do not use all variables at once- do a literature review first to identify possible key variables</strong>. to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.</li>
 <li><strong>Check data availability</strong> on your focus location and make sure they fit the requirements of your study.</li>
 </ul>
 </div>
 </div>
+</section>
+<section id="licensing" class="level2">
+<h2 class="anchored" data-anchor-id="licensing">Licensing</h2>
+<p>The Project CCHAIN dataset adapted the Open Database License (ODbL). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.</p>
 </section>
 <section id="basics" class="level2">
 <h2 class="anchored" data-anchor-id="basics">Basics</h2>
@@ -303,7 +308,7 @@ Tips on using the data
 </tr>
 </tbody>
 </table>
-<p>The dataset includes 11 diseases, identified as climate- and disaster-sensitive in the Philippines (Wong et al., 2018).</p>
+<p>The dataset includes 16 diseases, identified as climate- and disaster-sensitive in the Philippines (<a href="https://www.tandfonline.com/doi/pdf/10.1080/23288604.2017.1368432">Wong et al., 2018</a>, <a href="https://epimetrics.com.ph/determining-provincial-health-risk-to-climate-and-disasters-in-the-philippines/">Wong et al., 2022</a>), as well as some more diseases provided by the sources.</p>
 <table class="table">
 <colgroup>
 <col style="width: 31%">
@@ -319,54 +324,74 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>Dengue</td>
-<td>A90</td>
-<td>Dengue fever [classical dengue]</td>
-</tr>
-<tr class="even">
-<td>Unspecified diarrheal disease</td>
-<td>R19.7</td>
-<td>Diarrhea, unspecified</td>
-</tr>
-<tr class="odd">
-<td>Acute bloody diarrhea</td>
-<td>A09</td>
-<td>Infectious gastroenteritis and colitis, unspecified</td>
-</tr>
-<tr class="even">
 <td>Cholera</td>
 <td>A00</td>
 <td>Cholera</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Typhoid fever</td>
-<td>A01</td>
+<td>A01.0</td>
 <td>Typhoid and paratyphoid fevers</td>
 </tr>
+<tr class="odd">
+<td>Rotavirus</td>
+<td>A08.0</td>
+<td>Rotaviral enteritis</td>
+</tr>
 <tr class="even">
-<td>Pneumonia</td>
-<td>J12-J18</td>
-<td>Various types of pneumonia</td>
+<td>Gastroenterities</td>
+<td>A09</td>
+<td>Infectious gastroenteritis and colitis, unspecified</td>
 </tr>
 <tr class="odd">
-<td>Bronchitis</td>
-<td>J40-J42 J20</td>
-<td>Various types of bronchitis Acute bronchitis</td>
+<td>Acute bloody diarrhea</td>
+<td>A09.0</td>
+<td>Other and unspecified gastroenteritis and colitis of infectious origin</td>
 </tr>
 <tr class="even">
-<td>Tuberculosis</td>
-<td>A15-A19</td>
-<td>Various types of tuberculosis</td>
+<td>Leptospirosis</td>
+<td>A27</td>
+<td>Leptospirosis</td>
 </tr>
 <tr class="odd">
-<td>Ischemic stroke</td>
-<td>I63</td>
-<td>Cerebral infarction</td>
+<td>Rabies</td>
+<td>A82</td>
+<td>Rabies</td>
 </tr>
 <tr class="even">
-<td>Diabetes mellitus</td>
-<td>E08-E13</td>
+<td>Chikungunya</td>
+<td>A92.0</td>
+<td>Chikungunya virus disease</td>
+</tr>
+<tr class="odd">
+<td>Dengue</td>
+<td>A97</td>
+<td>Dengue fever [classical dengue]</td>
+</tr>
+<tr class="even">
+<td>Hepatitis-A</td>
+<td>B15</td>
+<td>Acute hepatitis A</td>
+</tr>
+<tr class="odd">
+<td>Diabetes</td>
+<td>E08-E14</td>
 <td>Various types of diabetes mellitus</td>
+</tr>
+<tr class="even">
+<td>Hypertensive CVD</td>
+<td>I11</td>
+<td>Hypertensive heart disease</td>
+</tr>
+<tr class="odd">
+<td>Angina pectoris</td>
+<td>I20</td>
+<td>Angina pectoris</td>
+</tr>
+<tr class="even">
+<td>Ischemic heart disease</td>
+<td>I21-I22</td>
+<td>Acute myocardial infarction, ST and non-SET elevation myocardial infarction</td>
 </tr>
 <tr class="odd">
 <td>Asthma</td>
@@ -374,19 +399,9 @@ Tips on using the data
 <td>Asthma</td>
 </tr>
 <tr class="even">
-<td>Ischemic heart disease</td>
-<td>I20-I25</td>
-<td>Ischemic heart diseases</td>
-</tr>
-<tr class="odd">
-<td>Hypertensive heart disease</td>
-<td>I11</td>
-<td>Hypertensive heart disease</td>
-</tr>
-<tr class="even">
-<td>Dermatitis</td>
-<td>L20-L30</td>
-<td>Various types of dermatitis</td>
+<td>Heat stroke</td>
+<td>T67</td>
+<td>Effects of heat and light, Heatstroke and sunstroke</td>
 </tr>
 </tbody>
 </table>
@@ -426,7 +441,7 @@ Tips on using the data
 </tr>
 <tr class="odd">
 <td>climate_timestep_check</td>
-<td>NOT DATA, log of hourly timesteps used in aggregating raw climate parameters to daily scale</td>
+<td><em>Not part of the dataset</em>, log of hourly timesteps used in aggregating raw climate parameters to daily scale</td>
 </tr>
 </tbody>
 </table>
@@ -464,9 +479,9 @@ Tips on using the data
 </tbody>
 </table>
 </section>
-<section id="places-of-interest-tables" class="level3">
-<h3 class="anchored" data-anchor-id="places-of-interest-tables">Places of interest tables</h3>
-<p>Data on places of interest (POIs) are also included, particularly (1) total counts within barangay bounds and (2) distances to barangay centroid. Additionally, estimates of travel time to the nearest health facility (isochrone) are included using Mapbox Isochrone API. Details on the definitions of the POIs can be viewed in the OpenStreetMap documentation.</p>
+<section id="points-of-interest-tables" class="level3">
+<h3 class="anchored" data-anchor-id="points-of-interest-tables">Points of interest tables</h3>
+<p>Data on points of interest (POIs) are also included, and the following were computed based on the POI coordinates: (1) total counts within barangay bounds and (2) distances to barangay centroid. Details on the definitions of the POIs can be viewed in the <a href="">OpenStreetMap documentation</a>. Additionally, accessibility measure by percent of population reachable at discrete travel times to the nearest health facility (isochrone) for the whole city and per baranggay level are provided using Mapbox Isochrone API.</p>
 <table class="table">
 <colgroup>
 <col style="width: 29%">
@@ -564,7 +579,8 @@ Tips on using the data
 </tr>
 </tbody>
 </table>
-<p>Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII). To submit a request, please use this <a href="https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit">form</a>.</p>
+<p>Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII).</p>
+<p>To submit a request, please use this <a href="https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit">form</a>.</p>
 </section>
 <section id="elements-at-risk-table" class="level3">
 <h3 class="anchored" data-anchor-id="elements-at-risk-table">Elements at risk table</h3>

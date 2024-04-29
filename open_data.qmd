@@ -4,7 +4,7 @@ title: The Project CCHAIN Linked Dataset
 
 ## Overview
 
-The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities. 
+The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities (Dagupan, Palayan, Navotas, Mandaluyong, Muntinlupa,Legazpi, Iloilo, Mandaue, Tacloban, Zamboanga, Cagayan de Oro, Davao)
 
 :::{.callout-warning icon=false appearance="simple"}
 ## Quick links
@@ -14,15 +14,20 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 - Full documentation [here](link)
 :::
 
-The tables are designed in a way that users can **choose variables that are most relevant** to his/her focus city and use case, and **linked these variables together** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](link), or offline using the user's own code.
+The tables are designed in a way that users can **choose variables that are most relevant** to their focus city and use case, and **link these variables** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](link), or offline using the user's own code.
 
 :::{.callout-tip icon=false appearance="simple"}
 ## Tips on using the data
 
 - **Focus on one location.** Starting with a detailed analysis of one location allows for a better understanding of the local dynamics, which may differ across locations.
-- **Do a literature review first** to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.
+- **Do not use all variables at once- do a literature review first to identify possible key variables**.  to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.
 - **Check data availability** on your focus location and make sure they fit the requirements of your study.
 :::
+
+## Licensing
+
+The Project CCHAIN dataset adapted the Open Database License (ODbL). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
+
 
 ## Basics
 
@@ -50,25 +55,27 @@ Disease data came from local and national sources, each focusing on different di
 
 
 
-The dataset includes 11 diseases, identified as climate- and disaster-sensitive in the Philippines (Wong et al., 2018).
+The dataset includes 16 diseases, identified as climate- and disaster-sensitive in the Philippines ([Wong et al., 2018](https://www.tandfonline.com/doi/pdf/10.1080/23288604.2017.1368432), [Wong et al., 2022](https://epimetrics.com.ph/determining-provincial-health-risk-to-climate-and-disasters-in-the-philippines/)), as well as some more diseases provided by the sources.
 
 
 | Disease Common Name           | ICD-10 Code | ICD-10 Description                                  |
 |-------------------------------|-------------|-----------------------------------------------------|
-| Dengue                        | A90         | Dengue fever [classical dengue]                     |
-| Unspecified diarrheal disease | R19.7       | Diarrhea, unspecified                               |
-| Acute bloody diarrhea         | A09         | Infectious gastroenteritis and colitis, unspecified |
 | Cholera                       | A00         | Cholera                                             |
-| Typhoid fever                 | A01         | Typhoid and paratyphoid fevers                      |
-| Pneumonia                     | J12-J18     | Various types of pneumonia                          |
-| Bronchitis                    | J40-J42 J20 | Various types of bronchitis Acute bronchitis        |
-| Tuberculosis                  | A15-A19     | Various types of tuberculosis                       |
-| Ischemic stroke               | I63         | Cerebral infarction                                 |
-| Diabetes mellitus             | E08-E13     | Various types of diabetes mellitus                  |
+| Typhoid fever                 | A01.0       | Typhoid and paratyphoid fevers                      |
+| Rotavirus                     | A08.0       | Rotaviral enteritis                                 |
+| Gastroenterities              | A09         | Infectious gastroenteritis and colitis, unspecified |
+| Acute bloody diarrhea         | A09.0       | Other and unspecified gastroenteritis and colitis of infectious origin |
+| Leptospirosis                 | A27         | Leptospirosis                                       |
+| Rabies                        | A82         | Rabies                                              |
+| Chikungunya                   | A92.0       | Chikungunya virus disease                           |
+| Dengue                        | A97         | Dengue fever [classical dengue]                     |
+| Hepatitis-A                   | B15         | Acute hepatitis A                                   |
+| Diabetes                      | E08-E14     | Various types of diabetes mellitus                  |
+| Hypertensive CVD              | I11         | Hypertensive heart disease                          |
+| Angina pectoris               | I20         | Angina pectoris                                     |
+| Ischemic heart disease        | I21-I22     | Acute myocardial infarction, ST and non-SET elevation myocardial infarction |
 | Asthma                        | J45         | Asthma                                              |
-| Ischemic heart disease        | I20-I25     | Ischemic heart diseases                             |
-| Hypertensive heart disease    | I11         | Hypertensive heart disease                          |
-| Dermatitis                    | L20-L30     | Various types of dermatitis                         |
+| Heat stroke                   | T67         | Effects of heat and light, Heatstroke and sunstroke |
 
 
 All disease data is standardized in accordance with the International Classification of Diseases (ICD-10) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy.
@@ -84,7 +91,7 @@ The dataset incorporates daily climate variables that have been recognized as si
 | climate_air_quality    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
 | climate_land           | Normalized difference vegetation index (NDVI)                                                                                       |
 | climate_indices        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
-| climate_timestep_check | NOT DATA, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
+| climate_timestep_check | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
 
 ## Environment 
 
@@ -101,9 +108,9 @@ Data sources are shapefiles depicting categorical variables like hazard levels a
 | project_noah_hazards  | [low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period                               |
 
 
-### Places of interest tables
+### Points of interest tables
 
-Data on places of interest (POIs) are also included, particularly (1) total counts within barangay bounds and (2) distances to barangay centroid. Additionally, estimates of travel time to the nearest health facility (isochrone) are included using Mapbox Isochrone API. Details on the definitions of the POIs can be viewed in the OpenStreetMap documentation.
+Data on points of interest (POIs) are also included, and the following were computed based on the POI coordinates: (1) total counts within barangay bounds and (2) distances to barangay centroid.  Details on the definitions of the POIs can be viewed in the [OpenStreetMap documentation](). Additionally, accessibility measure by percent of population reachable at discrete travel times to the nearest health facility (isochrone) for the whole city and per baranggay level are provided using Mapbox Isochrone API.
 
 | Table                                                                           | POI Categories                                                                                                                                                                               |
 |---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -136,7 +143,9 @@ Finally, the dataset also includes household surveys done on partner informal se
 | informal_settlement_community_surveys_v1 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances                                                                                                  |
 | informal_settlement_community_surveys_v2 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access   |
 
-Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). To submit a request, please use this [form](https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit).
+Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
+
+To submit a request, please use this [form](https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit).
 
 
 ### Elements at risk table
