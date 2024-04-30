@@ -5,11 +5,11 @@
 
 The Philippines is among the world’s most vulnerable countries to climate change – simultaneously exposed to typhoons, sea level rise, and extreme heat, while striving to address income inequality and rising disease burdens. 
 
-While there is growing interest in modeling the health impacts of climate change in the country, the lack of freely-accessible data remains a significant barrier to progress.
+While there is growing interest in modeling the health impacts of climate change in the country, the **lack of freely-accessible data** remains a significant barrier to progress.
 
-1. Significant data workflow logistics and multi-disciplinary expertise is required to assemble and process health, climate, and socioeconomic data from diverse sources, formats, geographic and historical coverage and resolutions. 
+1. **Significant data workflow logistics and multi-disciplinary expertise** is required to assemble and process health, climate, and socioeconomic data from diverse sources, formats, geographic and historical coverage and resolutions. 
 
-2. Limited available datasets at the barangay level, the smallest administrative unit in the Philippines, hinders the policy makers to make impactful health interventions, especially for vulnerable communities. 
+2. **Limited available datasets at the barangay level**, the smallest administrative unit in the Philippines, hinders the policy makers to make impactful health interventions, especially for vulnerable communities. 
 
  With the support of the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/), the project team aims to ease entry and encourage more studies in the field by doing all the needed work in assembling an open dataset of climate, environmental, socioeconomic, and health variables.
 
@@ -28,12 +28,36 @@ We selected **12 key cities** with a variety of geographic, socioeconomic, and c
 
 [Thinking Machines Data Science, Inc. (TM)](ttps://epimetrics.com.ph/) is a Southeast Asian technology consultancy that builds custom AI and data platforms to help organizations make smarter decisions with data. Since its founding in 2015, Thinking Machines has worked on over a hundred data science projects with dozens of clients from across the private, public, non-profit, and development sectors.
 
+**Team members**
+
+- Pia Faustino
+- Jace Peralta
+- Anica Araneta
+- Dafrose Bajaro
+- Abby Moreno
+- JT Miclat
+
 
 [EpiMetrics, Inc. (EM)](https://epimetrics.com.ph/) is a health research institution engaged in the achievement of health equity through rigorous and creative conception, execution, translation, and communication of health systems and policy research
 
+**Team members**
+
+- John Wong
+- Katya Baladad
+- Luis Desquitado
 
 [Manila Observatory (MO)](https://www.observatory.ph/) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
 
+**Team members**
+
+- Faye Cruz
+- Julie Dado
+- Leia Tonga
 
 The [Philippine Action for Community-led Shelter Initiatives, Inc. (PACSII)](https://pacsii.org/) is a non- governmental organization that serves as the intermediary support institution of the Homeless People's Federation Philippines (HDFPI) through capacity-building, research and advocacy, resource mobilization and fund management. PACSII envisions the transformation of urban poor and informal settler communities into secure, safe, resilient, self-determining, and inclusive urban
 communities with sustainable economic and ecological development.
+
+**Team members**
+
+- Ericka Nava
+- Ruby Haddad

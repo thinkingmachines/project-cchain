@@ -35,10 +35,10 @@ A central calendar, frequency, as well as the standard geography codes, geometry
 
 | Table          | Variables                                                     |
 |----------------|---------------------------------------------------------------|
-| calendar       | date                                                          |
-| location       | PSGC admin codes and official English names from level 1 to 4 |
-| frequency      | description of update frequency strings                       |
-| brgy_geography | total area, distance to coast, geometry                       |
+| [calendar](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=calendar)      | date                                                          |
+| [location](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=location)      | PSGC admin codes and official English names from level 1 to 4 |
+| [frequency](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=frequency)       | description of update frequency strings                       |
+| [brgy_geography](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography)  | total area, distance to coast, geometry                       |
 
 ## Health
 
@@ -48,10 +48,10 @@ Disease data came from local and national sources, each focusing on different di
 
 | Table                  | Source                                                                                     | Disease Outcome | Spatial Coverage |
 |------------------------|--------------------------------------------------------------------------------------------|-----------------|------------------|
-| disease_weekly_totals  | Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR) | cases           | city             |
+| [disease_weekly_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_weekly_totals)  | Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR) | cases           | city             |
 |                        | Philippine Statistical Authority                                                           | deaths          | city             |
 |                        | City Local Government Unit Health Offices                                                  | cases, deaths   | baranggay        |
-| disease_monthly_totals | Department of Health - Field Health Services Information System (DOH-FHSIS)                | cases           | city             |
+| [disease_monthly_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_monthly_totals) | Department of Health - Field Health Services Information System (DOH-FHSIS)                | cases           | city             |
 
 
 
@@ -87,11 +87,11 @@ The dataset incorporates daily climate variables that have been recognized as si
 
 | Table                  | Variables                                                                                                                           |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| climate_atmosphere     | Mean, minimum and maximum temperature, precipitation, heat index, wind speed, relative humidity, solar radiation, UV radiation      |
-| climate_air_quality    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
-| climate_land           | Normalized difference vegetation index (NDVI)                                                                                       |
-| climate_indices        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
-| climate_timestep_check | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
+| [climate_atmosphere](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere)     | Mean, minimum and maximum temperature, precipitation, heat index, wind speed, relative humidity, solar radiation, UV radiation      |
+| [climate_air_quality](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_air_quality)    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
+| [climate_land](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_land)           | Normalized difference vegetation index (NDVI)                                                                                       |
+| [climate_indices](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_indices)        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
+| [climate_timestep_check](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check) | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
 
 ## Environment 
 
@@ -103,9 +103,9 @@ Data sources are shapefiles depicting categorical variables like hazard levels a
 
 | Table                 | Categories                                                                                                          |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------|
-| esa_worldcover        | sparse vegetation, builtup, cropland, grassland, herbaceous_wetland, mangroves, water bodies, shrubland, tree cover |
-| google_open_buildings | all buildings, <100sqm buildings, 100-200 sqm buildings, >200sqm buildings                                          |
-| project_noah_hazards  | [low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period                               |
+| [esa_worldcover](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=esa_worldcover)       | sparse vegetation, builtup, cropland, grassland, herbaceous_wetland, mangroves, water bodies, shrubland, tree cover |
+| [google_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=google_open_buildings)  | all buildings, <100sqm buildings, 100-200 sqm buildings, >200sqm buildings                                          |
+| [project_noah_hazards](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=project_noah_hazards)   | [low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period                               |
 
 
 ### Points of interest tables
@@ -114,12 +114,12 @@ Data on points of interest (POIs) are also included, and the following were comp
 
 | Table                                                                           | POI Categories                                                                                                                                                                               |
 |---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| geoportal_doh_poi_health                                                        | health station, rural health unit, hospital, clinic, infirmary, drug abuse treatment rehab center, social hygiene clinic, birthing clinic, medical clinic                                    |
-| osm_poi_health                                                                  | clinic, dentist, doctor, hospital, optician, pharmacy                                                                                                                                        |
-| osm_poi_amenity                                                                 | atm, bank, college, community centre, convenience store, fire station, kindergarten, lighthouse, market place, park, police, school, shelter, supermarket, telephone, town hall, university  |
-| osm_poi_water_body                                                              | wetland, reservoir, water, riverbank, dock, river, stream, canal, drain                                                                                                                      |
-| osm_poi_sanitation                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
-| mapbox_health_facility_brgy_isochrones, mapbox_health_facility_city_isochrones  | barangay health center, hospital, rural health unit                                                                                                                                          |
+| [geoportal_doh_poi_health](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=geoportal_doh_poi_health)                                                   | health station, rural health unit, hospital, clinic, infirmary, drug abuse treatment rehab center, social hygiene clinic, birthing clinic, medical clinic                                    |
+| [osm_poi_health](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_health)                                                                  | clinic, dentist, doctor, hospital, optician, pharmacy                                                                                                                                        |
+| [osm_poi_amenity](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_amenity)                                                                 | atm, bank, college, community centre, convenience store, fire station, kindergarten, lighthouse, market place, park, police, school, shelter, supermarket, telephone, town hall, university  |
+|[osm_poi_water_body](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_water_body)                                                             | wetland, reservoir, water, riverbank, dock, river, stream, canal, drain                                                                                                                      |
+| [osm_poi_sanitation](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_sanitation)                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
+| [mapbox_health_facility_brgy_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones), [mapbox_health_facility_city_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_city_isochrones)  | barangay health center, hospital, rural health unit                                                                                                                                          |
 
 ## Socioeconomics
 
@@ -129,9 +129,9 @@ The dataset contains population estimates, as well as emerging remote-sensed ind
 
 | Table                | Variables                                                                                   |
 |----------------------|---------------------------------------------------------------------------------------------|
-| worldpop_population  | population count and population density                                                     |
-| ookla_internet_speed | download and upload speeds, number of devices, latency of both fixed and mobile connections |
-| nighttime_lights     | cloud-free calibrated nighttime radiance measurements                                       |
+| [worldpop_population](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones)  | population count and population density                                                     |
+| [ookla_internet_speed](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=ookla_internet_speed) | download and upload speeds, number of devices, latency of both fixed and mobile connections |
+| [nighttime_lights](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=nighttime_lights)     | cloud-free calibrated nighttime radiance measurements                                       |
 
 
 ### Informal settlement community survey tables
@@ -140,8 +140,8 @@ Finally, the dataset also includes household surveys done on partner informal se
 
 | Table                                    | Variables                                                                                                                                                                                            |
 |------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| informal_settlement_community_surveys_v1 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances                                                                                                  |
-| informal_settlement_community_surveys_v2 | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access   |
+| [informal_settlement_community_surveys_v1](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1) | family composition, occupancy type, occupation, power source, water supply, toilet access, finances                                                                                                  |
+| [informal_settlement_community_surveys_v2]((https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v2) | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access   |
 
 Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
 
@@ -159,7 +159,7 @@ The attributes contain variables designed to indicate potential wealth markers u
 This table is also released as its own, standalone dataset, TM Open Buildings, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines). 
 :::
 
-Table source:  tm_open_buildings
+Table source:  [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings)
 
 | Building Type            | Attributes                                                       |
 |--------------------------|------------------------------------------------------------------|

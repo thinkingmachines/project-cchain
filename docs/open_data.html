@@ -231,10 +231,6 @@ Tips on using the data
 <h2 class="anchored" data-anchor-id="basics">Basics</h2>
 <p>A central calendar, frequency, as well as the standard geography codes, geometry, area, and distance to coastlines are provided as tables for users.</p>
 <table class="table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 79%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -243,19 +239,19 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>calendar</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=calendar">calendar</a></td>
 <td>date</td>
 </tr>
 <tr class="even">
-<td>location</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=location">location</a></td>
 <td>PSGC admin codes and official English names from level 1 to 4</td>
 </tr>
 <tr class="odd">
-<td>frequency</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=frequency">frequency</a></td>
 <td>description of update frequency strings</td>
 </tr>
 <tr class="even">
-<td>brgy_geography</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography">brgy_geography</a></td>
 <td>total area, distance to coast, geometry</td>
 </tr>
 </tbody>
@@ -267,12 +263,6 @@ Tips on using the data
 <h3 class="anchored" data-anchor-id="disease-tables">Disease tables</h3>
 <p>Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions.</p>
 <table class="table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 60%">
-<col style="width: 11%">
-<col style="width: 11%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -283,7 +273,7 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>disease_weekly_totals</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_weekly_totals">disease_weekly_totals</a></td>
 <td>Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR)</td>
 <td>cases</td>
 <td>city</td>
@@ -301,7 +291,7 @@ Tips on using the data
 <td>baranggay</td>
 </tr>
 <tr class="even">
-<td>disease_monthly_totals</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_monthly_totals">disease_monthly_totals</a></td>
 <td>Department of Health - Field Health Services Information System (DOH-FHSIS)</td>
 <td>cases</td>
 <td>city</td>
@@ -412,10 +402,6 @@ Tips on using the data
 <h2 class="anchored" data-anchor-id="climate">Climate</h2>
 <p>The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.</p>
 <table class="table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 84%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -424,23 +410,23 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>climate_atmosphere</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere">climate_atmosphere</a></td>
 <td>Mean, minimum and maximum temperature, precipitation, heat index, wind speed, relative humidity, solar radiation, UV radiation</td>
 </tr>
 <tr class="even">
-<td>climate_air_quality</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_air_quality">climate_air_quality</a></td>
 <td>Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)</td>
 </tr>
 <tr class="odd">
-<td>climate_land</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_land">climate_land</a></td>
 <td>Normalized difference vegetation index (NDVI)</td>
 </tr>
 <tr class="even">
-<td>climate_indices</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_indices">climate_indices</a></td>
 <td>Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm)</td>
 </tr>
 <tr class="odd">
-<td>climate_timestep_check</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check">climate_timestep_check</a></td>
 <td><em>Not part of the dataset</em>, log of hourly timesteps used in aggregating raw climate parameters to daily scale</td>
 </tr>
 </tbody>
@@ -453,10 +439,6 @@ Tips on using the data
 <p>The dataset also contains variables pertaining to land characteristics and hazards over the chosen cities. The dataset sources are in the form of shapefiles representing categorical variables (hazard level, type of cover), or presence of objects (e.g.&nbsp;buildings). While these sources are high resolution, all are only static and schedule of updates is unspecified.</p>
 <p>Data sources are shapefiles depicting categorical variables like hazard levels and land cover types, or the presence of objects such as buildings. Although these sources offer high resolution, they are static, and there is no specified update schedule.</p>
 <table class="table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 83%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -465,15 +447,15 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>esa_worldcover</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=esa_worldcover">esa_worldcover</a></td>
 <td>sparse vegetation, builtup, cropland, grassland, herbaceous_wetland, mangroves, water bodies, shrubland, tree cover</td>
 </tr>
 <tr class="even">
-<td>google_open_buildings</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=google_open_buildings">google_open_buildings</a></td>
 <td>all buildings, &lt;100sqm buildings, 100-200 sqm buildings, &gt;200sqm buildings</td>
 </tr>
 <tr class="odd">
-<td>project_noah_hazards</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=project_noah_hazards">project_noah_hazards</a></td>
 <td>[low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period</td>
 </tr>
 </tbody>
@@ -483,10 +465,6 @@ Tips on using the data
 <h3 class="anchored" data-anchor-id="points-of-interest-tables">Points of interest tables</h3>
 <p>Data on points of interest (POIs) are also included, and the following were computed based on the POI coordinates: (1) total counts within barangay bounds and (2) distances to barangay centroid. Details on the definitions of the POIs can be viewed in the <a href="">OpenStreetMap documentation</a>. Additionally, accessibility measure by percent of population reachable at discrete travel times to the nearest health facility (isochrone) for the whole city and per baranggay level are provided using Mapbox Isochrone API.</p>
 <table class="table">
-<colgroup>
-<col style="width: 29%">
-<col style="width: 70%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -495,27 +473,27 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>geoportal_doh_poi_health</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=geoportal_doh_poi_health">geoportal_doh_poi_health</a></td>
 <td>health station, rural health unit, hospital, clinic, infirmary, drug abuse treatment rehab center, social hygiene clinic, birthing clinic, medical clinic</td>
 </tr>
 <tr class="even">
-<td>osm_poi_health</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_health">osm_poi_health</a></td>
 <td>clinic, dentist, doctor, hospital, optician, pharmacy</td>
 </tr>
 <tr class="odd">
-<td>osm_poi_amenity</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_amenity">osm_poi_amenity</a></td>
 <td>atm, bank, college, community centre, convenience store, fire station, kindergarten, lighthouse, market place, park, police, school, shelter, supermarket, telephone, town hall, university</td>
 </tr>
 <tr class="even">
-<td>osm_poi_water_body</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_water_body">osm_poi_water_body</a></td>
 <td>wetland, reservoir, water, riverbank, dock, river, stream, canal, drain</td>
 </tr>
 <tr class="odd">
-<td>osm_poi_sanitation</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_sanitation">osm_poi_sanitation</a></td>
 <td>drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station</td>
 </tr>
 <tr class="even">
-<td>mapbox_health_facility_brgy_isochrones, mapbox_health_facility_city_isochrones</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones">mapbox_health_facility_brgy_isochrones</a>, <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_city_isochrones">mapbox_health_facility_city_isochrones</a></td>
 <td>barangay health center, hospital, rural health unit</td>
 </tr>
 </tbody>
@@ -528,10 +506,6 @@ Tips on using the data
 <h3 class="anchored" data-anchor-id="demography-and-income-indicator-tables">Demography and income indicator tables</h3>
 <p>The dataset contains population estimates, as well as emerging remote-sensed indicators of development such as nighttime lights, and internet speeds. These data are also aggregated at the barangay level.</p>
 <table class="table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 80%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -540,15 +514,15 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>worldpop_population</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones">worldpop_population</a></td>
 <td>population count and population density</td>
 </tr>
 <tr class="even">
-<td>ookla_internet_speed</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=ookla_internet_speed">ookla_internet_speed</a></td>
 <td>download and upload speeds, number of devices, latency of both fixed and mobile connections</td>
 </tr>
 <tr class="odd">
-<td>nighttime_lights</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=nighttime_lights">nighttime_lights</a></td>
 <td>cloud-free calibrated nighttime radiance measurements</td>
 </tr>
 </tbody>
@@ -558,10 +532,6 @@ Tips on using the data
 <h3 class="anchored" data-anchor-id="informal-settlement-community-survey-tables">Informal settlement community survey tables</h3>
 <p>Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on scattered dates from 2001 to 2024. The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and encoding inconsistencies.</p>
 <table class="table">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 82%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -570,11 +540,11 @@ Tips on using the data
 </thead>
 <tbody>
 <tr class="odd">
-<td>informal_settlement_community_surveys_v1</td>
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1">informal_settlement_community_surveys_v1</a></td>
 <td>family composition, occupancy type, occupation, power source, water supply, toilet access, finances</td>
 </tr>
 <tr class="even">
-<td>informal_settlement_community_surveys_v2</td>
+<td>[informal_settlement_community_surveys_v2]((https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v2)</td>
 <td>family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access</td>
 </tr>
 </tbody>
@@ -605,7 +575,7 @@ Tips on using the data
 </div>
 </div>
 </div>
-<p>Table source: tm_open_buildings</p>
+<p>Table source: <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings">tm_open_buildings</a></p>
 <table class="table">
 <colgroup>
 <col style="width: 28%">

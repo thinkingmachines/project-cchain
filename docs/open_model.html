@@ -109,11 +109,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta property="og:description" content="">
-<meta property="og:image" content="assets/dengue_outbreak_feature_importance.png">
+<meta property="og:image" content="docs/assets/dengue_outbreak_feature_importance.png">
 <meta property="og:site_name" content="Project CCHAIN">
 <meta name="twitter:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="assets/dengue_outbreak_feature_importance.png">
+<meta name="twitter:image" content="docs/assets/dengue_outbreak_feature_importance.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -1100,7 +1100,7 @@ Train best score std: 0.007221</code></pre>
 <section id="feature-importance" class="level2">
 <h2 class="anchored" data-anchor-id="feature-importance">Feature importance</h2>
 <p><strong>SHAP (SHapley Additive exPlanations)</strong> is a method used in machine learning for explaining individual predictions. It assigns each feature an importance value by considering its contribution to the difference between the actual prediction and the average prediction. Read up more on this method <a href="https://shapash.readthedocs.io/en/latest/autodocs/shapash.explainer.html">here</a>.</p>
-<p><img src="assets/dengue_outbreak_feature_importance.png" class="img-fluid"></p>
+<p><img src="docs/assets/dengue_outbreak_feature_importance.png" class="img-fluid"></p>
 <p>From the results of SHAP, the features that drove the predictions are the cases from the previous weeks, the climate variables for temperature <code>tmax</code> and <code>tave</code>, and the mean population count.</p>
 </section>
 <section id="detected-outbreaks" class="level2">
