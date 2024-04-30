@@ -132,7 +132,7 @@ The dataset contains population estimates, as well as emerging remote-sensed ind
 | [worldpop_population](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones)  | population count and population density                                                     |
 | [ookla_internet_speed](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=ookla_internet_speed) | download and upload speeds, number of devices, latency of both fixed and mobile connections |
 | [nighttime_lights](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=nighttime_lights)     | cloud-free calibrated nighttime radiance measurements                                       |
-
+| [tm_relative_wealth_index](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_relative_wealth_index)     | gridded estimates of wealth |
 
 ### Informal settlement community survey tables
 
