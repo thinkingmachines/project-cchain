@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: docs
 
+notebook-links: false
+
 website:
   title: Project CCHAIN
   favicon: assets/icon.png
@@ -21,7 +23,7 @@ website:
       - text: "Open viz"
         file: open_viz.qmd
       - text: "Open model"
-        href: notebooks/baseline-model/baseline-model-demo.ipynb
+        href: open_model.qmd
     tools:
       - icon: github
         menu:

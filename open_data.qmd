@@ -9,9 +9,9 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 :::{.callout-warning icon=false appearance="simple"}
 ## Quick links
 
-- Data download  [here](link)
-- Notebook to link the dataset [here](link) 
-- Full documentation [here](link)
+- Access the data in the following links: [GDrive](link),[Kaggle](link),[HDX](link)
+- Notebook to link the dataset [here](https://drive.google.com/file/d/1oIRe5GH9290XZluuDFX-USSyBZhqQTN9/view?usp=drive_link) 
+- Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
 The tables are designed in a way that users can **choose variables that are most relevant** to their focus city and use case, and **link these variables** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](link), or offline using the user's own code.
@@ -26,7 +26,7 @@ The tables are designed in a way that users can **choose variables that are most
 
 ## Licensing
 
-The Project CCHAIN dataset adapted the Open Database License (ODbL). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
+The Project CCHAIN dataset adapted the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
 
 
 ## Basics
@@ -145,8 +145,9 @@ Finally, the dataset also includes household surveys done on partner informal se
 
 Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
 
+:::{.callout-warning icon=false appearance="simple"}
 To submit a request, please use this [form](https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit).
-
+:::
 
 ### Elements at risk table
 
@@ -154,10 +155,11 @@ A dataset of 12,000 building outlines was also produced by manually annotating b
 
 The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset. 
 
-
+:::{.callout-warning icon=false appearance="simple"}
+This table is also released as its own, standalone dataset, TM Open Buildings, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines). 
+:::
 
 Table source:  tm_open_buildings
-
 
 | Building Type            | Attributes                                                       |
 |--------------------------|------------------------------------------------------------------|

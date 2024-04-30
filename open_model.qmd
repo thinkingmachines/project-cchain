@@ -1,11 +1,133 @@
 ---
-title: Open Model
+title: Baseline model for predicting disease outbreak periods
 ---
 
 # Overview
 
-Linked dataset Loren Ipsum
+We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN linked dataset in a machine learning use case.
 
-# Predicting Dengue Outbreaks
+:::{.callout-warning icon=false appearance="simple"}
+Access the full model notebook here: [GDrive](https://drive.google.com/file/d/1m9bqZDkl4FdrwXjmYJCLEJQ8re4lnTIp/view?usp=drive_link), [Github](https://github.com/thinkingmachines/project-cchain)
+:::
 
-Loren Ipsum
+## Specifications 
+**Objective**: Predict dengue outbreaks for Zamboanga City at the weekly scale. 
+
+The following were included in the input data as features for the model: 
+
+| Factor            | Variables                                                                              |
+|-------------------|----------------------------------------------------------------------------------------|
+| Climate           | temperature, humidity, rainfall, solar radiation, wind speed, vegetation, air quality  |
+| Demographics      | population, population density                                                         |
+| Facilities        | clinics, hospitals, sanitation, water source,                                          |
+| Economic activity | nightlights radiance                                                                     | 
+
+For this model, we will define the training and testing set as follows:
+
+|Set                 |  Time covered                   |
+|--------------------|---------------------------------|
+| Training           | Jan 2014-Mar 2019 (75 mos)      |
+| Testing            | Apr 2014-Dec 2020 (20 mos)      |
+
+
+
+# Method
+## Generating features 
+### Defining an outbreak
+
+Based on column `case_dengue_total`, create a new column called `outbreak` containing  1 if a week is an outbreak week or 0 if not an outbreak week.
+
+For this demo, we define a disease outbreak as follows:
+
+1. The **start** of an outbreak occurs when the week's cases are equal to or higher than a threshold.
+
+    - The **threshold** is defined as the *75th percentile* of total weekly cases based on *years when a substantial number of cases* are recorded.
+
+2. The **end** of an outbreak occurs during the week when cases fall below the threshold for *at least 2 weeks*.
+
+This is implemented in the code as follows:
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#def-outbreak echo=true >}}
+
+### Adding lagged features
+
+Adding previous weeks' cases as features may help enhance the model's capability in predicting future cases.
+
+Experiment with the lagged features by adding or removing them. Here, we include lagged features based on cases from the past 1-4 weeks leading up to the current week.
+
+This is implemented in the code as follows:
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#feat-engg-lags echo=true >}}
+
+## Model training
+
+Since the training dataset has a time component, we use [`TimeSeriesSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html) from `sklearn` to properly cross-validate the model. Here is how it splits the training data in the time dimension.
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-time-series-split echo=true >}}
+
+
+The model chosen for the demo is the [random forest (RF) classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html).  It is a ensemble machine learning method that constructs multiple decision trees  from subsets of the training and averages over all these terrs to produce the final classification. Random forest classifiers are commonly used in various tasks like credit risk assessment, disease diagnosis, and customer churn prediction due to their high accuracy and ability to handle large datasets.
+
+The RF classifier model is tuned using the [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) function from `sklearn` performs model scoring by going over all combinations of specified parameter values, called the *parameter space*.
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-tuning-1 echo=true >}}
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-tuning-2 echo=true >}}
+
+# Results
+
+## Test accuracy
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-tuning-3 echo=true >}}
+
+Using our setup, the tuned model predicts weekly outbreak labels with 95.65% accuracy. 
+
+To add detail, we can also view more metrics of the RF classification predictions using `classification_report` from `sklearn`. 
+
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#results-classification-report echo=true >}}
+
+
+In our test set, we have 61 weeks that have no outbreaks and 30 weeks that have outbreaks. While the overall score is 94.5%, notice that the scores are slightly lower at 90-93% for the `outbreak=1` category than `outbreak=0`.
+
+## Feature importance
+
+**SHAP (SHapley Additive exPlanations)** is a method used in machine learning for explaining individual predictions. It assigns each feature an importance value by considering its contribution to the difference between the actual prediction and the average prediction. Read up more on this method [here](https://shapash.readthedocs.io/en/latest/autodocs/shapash.explainer.html).
+
+![](assets/dengue_outbreak_feature_importance.png)
+
+From the results of SHAP, the features that drove the predictions are the cases from the previous weeks, the climate variables for temperature `tmax` and `tave`, and the mean population count.
+
+## Detected outbreaks
+
+![](assets/dengue_outbreak_periods_sample_result.png)
+
+Based on actual data, there is only one outbreak period for the target timespan, a 30-week event from 2019-04-22 to 2019-11-11. The model predicted a 26-week outbreak period from 2019-05-20	to 2019-11-11, which was detected 4 weeks after actual, and ended on the same week.
+
+While most of the outbreak period was covered, the model still needs to be trained to be more sensitive to the start of the outbreak, which is crucial for early intervention.
+
+![](assets/dengue_outbreak_num_cases_sample_result.png)
+
+The model was able to determine outbreaks for the consectuve weeks in 2019-05-20 to 2019-11-11, when actual data records  75-380 weekly cases.
+
+For the rest of 2020, it was also able to correctly identify that there should be no outbreaks during that year.
+
+
+## Probabilities
+
+The `sklearn` `predict_proba` method calculates the probability estimates of each class produced by a model. It returns an array containing the probability (0.0 to 1.0) of a single record belonging to a particular class. The predicted probabilities can be visualized through a colored histogram of the values.
+
+![](assets/dengue_outbreak_periods_probability_sample_result.png)
+
+In this plot, the line plot represents the number of cases over time and the gradient in the background represents the predicted probablity of an outbreak for that week. The darker the color the more likely it is to be classified as an outbreak.
+
+Weeks with sudden spikes are able to identified by the model as an outbreak along with the succeeding high weeks. It can also be seen in the plot that even during the low number of cases in 2020, the model is able to predict slightly higher probability for the weeks with sudden spikes. This can indicate some potential in using the probabilities as a signal for preparations for early intervention.
+
+# Recommendations
+
+Consider the following when trying to explore modelling with our dataset.
+
+1.  Pick another classifier model, such as other tree-based models like [XGBoost](https://xgboost.readthedocs.io/en/stable/tutorials/model.html), or one with a different prediction mechanic, such as [kNN](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/). These may potentially enhance model accuracy and robustness.
+2. Experiment more with feature engineering by selecting variables with more resolved temporal scales, such as climate variables, by analyzing statistics over weekly intervals rather than just mean values.
+3. Validate the model's applicability across diverse scenarios by testing it on data from another city or disease, acknowledging potential variations in performance while emphasizing the generalizability of the methodology.
+
+For inquiries on this model, contact the developers at [lacuna-fund-project-team@thinkingmachin.es](lacuna-fund-project-team@thinkingmachin.es)
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project CCHAIN - Open Model</title>
+<title>Project CCHAIN - Baseline model for predicting disease outbreak periods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,14 +101,20 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Project CCHAIN - Open Model">
+<meta property="og:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta property="og:description" content="">
+<meta property="og:image" content="assets/dengue_outbreak_feature_importance.png">
 <meta property="og:site_name" content="Project CCHAIN">
-<meta name="twitter:title" content="Project CCHAIN - Open Model">
+<meta name="twitter:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="assets/dengue_outbreak_feature_importance.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -140,8 +180,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#predicting-dengue-outbreaks" id="toc-predicting-dengue-outbreaks" class="nav-link" data-scroll-target="#predicting-dengue-outbreaks">Predicting Dengue Outbreaks</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#specifications" id="toc-specifications" class="nav-link" data-scroll-target="#specifications">Specifications</a></li>
+  </ul></li>
+  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a>
+  <ul class="collapse">
+  <li><a href="#generating-features" id="toc-generating-features" class="nav-link" data-scroll-target="#generating-features">Generating features</a>
+  <ul class="collapse">
+  <li><a href="#defining-an-outbreak" id="toc-defining-an-outbreak" class="nav-link" data-scroll-target="#defining-an-outbreak">Defining an outbreak</a></li>
+  <li><a href="#adding-lagged-features" id="toc-adding-lagged-features" class="nav-link" data-scroll-target="#adding-lagged-features">Adding lagged features</a></li>
+  </ul></li>
+  <li><a href="#model-training" id="toc-model-training" class="nav-link" data-scroll-target="#model-training">Model training</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#test-accuracy" id="toc-test-accuracy" class="nav-link" data-scroll-target="#test-accuracy">Test accuracy</a></li>
+  <li><a href="#feature-importance" id="toc-feature-importance" class="nav-link" data-scroll-target="#feature-importance">Feature importance</a></li>
+  <li><a href="#detected-outbreaks" id="toc-detected-outbreaks" class="nav-link" data-scroll-target="#detected-outbreaks">Detected outbreaks</a></li>
+  <li><a href="#probabilities" id="toc-probabilities" class="nav-link" data-scroll-target="#probabilities">Probabilities</a></li>
+  </ul></li>
+  <li><a href="#recommendations" id="toc-recommendations" class="nav-link" data-scroll-target="#recommendations">Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -150,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Open Model</h1>
+<h1 class="title">Baseline model for predicting disease outbreak periods</h1>
 </div>
 
 
@@ -169,16 +228,915 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>Linked dataset Loren Ipsum</p>
+<p>We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN linked dataset in a machine learning use case.</p>
+<div class="callout callout-style-simple callout-warning no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Access the full model notebook here: <a href="https://drive.google.com/file/d/1m9bqZDkl4FdrwXjmYJCLEJQ8re4lnTIp/view?usp=drive_link">GDrive</a>, <a href="https://github.com/thinkingmachines/project-cchain">Github</a></p>
+</div>
+</div>
+</div>
+<section id="specifications" class="level2">
+<h2 class="anchored" data-anchor-id="specifications">Specifications</h2>
+<p><strong>Objective</strong>: Predict dengue outbreaks for Zamboanga City at the weekly scale.</p>
+<p>The following were included in the input data as features for the model:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Climate</td>
+<td>temperature, humidity, rainfall, solar radiation, wind speed, vegetation, air quality</td>
+</tr>
+<tr class="even">
+<td>Demographics</td>
+<td>population, population density</td>
+</tr>
+<tr class="odd">
+<td>Facilities</td>
+<td>clinics, hospitals, sanitation, water source,</td>
+</tr>
+<tr class="even">
+<td>Economic activity</td>
+<td>nightlights radiance</td>
+</tr>
+</tbody>
+</table>
+<p>For this model, we will define the training and testing set as follows:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Set</th>
+<th>Time covered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training</td>
+<td>Jan 2014-Mar 2019 (75 mos)</td>
+</tr>
+<tr class="even">
+<td>Testing</td>
+<td>Apr 2014-Dec 2020 (20 mos)</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="predicting-dengue-outbreaks" class="level1">
-<h1>Predicting Dengue Outbreaks</h1>
-<p>Loren Ipsum</p>
+</section>
+<section id="method" class="level1">
+<h1>Method</h1>
+<section id="generating-features" class="level2">
+<h2 class="anchored" data-anchor-id="generating-features">Generating features</h2>
+<section id="defining-an-outbreak" class="level3">
+<h3 class="anchored" data-anchor-id="defining-an-outbreak">Defining an outbreak</h3>
+<p>Based on column <code>case_dengue_total</code>, create a new column called <code>outbreak</code> containing 1 if a week is an outbreak week or 0 if not an outbreak week.</p>
+<p>For this demo, we define a disease outbreak as follows:</p>
+<ol type="1">
+<li><p>The <strong>start</strong> of an outbreak occurs when the week’s cases are equal to or higher than a threshold.</p>
+<ul>
+<li>The <strong>threshold</strong> is defined as the <em>75th percentile</em> of total weekly cases based on <em>years when a substantial number of cases</em> are recorded.</li>
+</ul></li>
+<li><p>The <strong>end</strong> of an outbreak occurs during the week when cases fall below the threshold for <em>at least 2 weeks</em>.</p></li>
+</ol>
+<p>This is implemented in the code as follows:</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-def-outbreak">
+<div id="def-outbreak" class="cell theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> &nbsp;</p>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'outbreak' initialized with zeros</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>linked_data[<span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Track weeks satisfying the threshold, and count consecutive outbreak weeks</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>consecutive_weeks_below_threshold <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>previous_outbreak <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> linked_data.iterrows():</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">"case_total_dengue"</span>] <span class="op">&gt;</span> OUTBREAK_THRESHOLD:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        consecutive_weeks_below_threshold <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        previous_outbreak <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># check if previous week was an outbreak</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if yes, continue to tag current week as outbreak</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># part of observation period</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> previous_outbreak <span class="kw">and</span> consecutive_weeks_below_threshold <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            consecutive_weeks_below_threshold <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> consecutive_weeks_below_threshold <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            previous_outbreak <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            linked_data.at[index, <span class="st">"outbreak"</span>] <span class="op">=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="adding-lagged-features" class="level3">
+<h3 class="anchored" data-anchor-id="adding-lagged-features">Adding lagged features</h3>
+<p>Adding previous weeks’ cases as features may help enhance the model’s capability in predicting future cases.</p>
+<p>Experiment with the lagged features by adding or removing them. Here, we include lagged features based on cases from the past 1-4 weeks leading up to the current week.</p>
+<p>This is implemented in the code as follows:</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-feat-engg-lags">
+<div id="cell-feat-engg-lags" class="cell" data-outputid="e23aafa7-5af7-4f58-b8ce-bd5c97c2f218">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment lines if you want to explore the other lags</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lagged_linked_data <span class="op">=</span> linked_data.assign(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># prev_1_wk_numcases=linked_data["case_total_dengue"].shift(</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#     1, fill_value=0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ),  # cases a week before</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#prev_2_wk_numcases=linked_data["case_total_dengue"].shift(</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#    2, fill_value=0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#),  # cases 2 weeks before</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    prev_3_wk_numcases<span class="op">=</span>linked_data[<span class="st">"case_total_dengue"</span>].shift(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="dv">3</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases 3 weeks before</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    prev_1_mo_numcases<span class="op">=</span>linked_data[<span class="st">"case_total_dengue"</span>].shift(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">4</span>, fill_value<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ),  <span class="co"># cases 1 month before</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lagged_linked_data.shape)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>lagged_linked_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(469, 30)</code></pre>
+</div>
+<div id="feat-engg-lags" class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+  <div id="df-ff2d6ea8-60d4-4592-9a12-250324ac1cb3" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">avg_rad_mean</th>
+<th data-quarto-table-cell-role="th">clinic_count</th>
+<th data-quarto-table-cell-role="th">clinic_nearest</th>
+<th data-quarto-table-cell-role="th">dentist_count</th>
+<th data-quarto-table-cell-role="th">dentist_nearest</th>
+<th data-quarto-table-cell-role="th">doctors_count</th>
+<th data-quarto-table-cell-role="th">doctors_nearest</th>
+<th data-quarto-table-cell-role="th">heat_index</th>
+<th data-quarto-table-cell-role="th">hospital_count</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">solar_rad</th>
+<th data-quarto-table-cell-role="th">tave</th>
+<th data-quarto-table-cell-role="th">tmax</th>
+<th data-quarto-table-cell-role="th">tmin</th>
+<th data-quarto-table-cell-role="th">uv_rad</th>
+<th data-quarto-table-cell-role="th">wind_speed</th>
+<th data-quarto-table-cell-role="th">case_total_dengue</th>
+<th data-quarto-table-cell-role="th">outbreak</th>
+<th data-quarto-table-cell-role="th">prev_3_wk_numcases</th>
+<th data-quarto-table-cell-role="th">prev_1_mo_numcases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2014-01-06</td>
+<td>0.476876</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>27.864492</td>
+<td>3.0</td>
+<td>...</td>
+<td>164.324125</td>
+<td>26.074474</td>
+<td>27.189105</td>
+<td>25.145137</td>
+<td>20.508032</td>
+<td>3.735253</td>
+<td>48.0</td>
+<td>0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2014-01-13</td>
+<td>0.476876</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>26.423877</td>
+<td>3.0</td>
+<td>...</td>
+<td>171.025991</td>
+<td>25.301183</td>
+<td>26.346243</td>
+<td>24.495746</td>
+<td>21.555577</td>
+<td>5.431501</td>
+<td>71.0</td>
+<td>0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2014-01-20</td>
+<td>0.476876</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>26.219015</td>
+<td>3.0</td>
+<td>...</td>
+<td>216.642606</td>
+<td>25.210041</td>
+<td>26.767400</td>
+<td>24.052373</td>
+<td>26.568703</td>
+<td>4.394535</td>
+<td>82.0</td>
+<td>1</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2014-01-27</td>
+<td>0.476876</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>26.089990</td>
+<td>3.0</td>
+<td>...</td>
+<td>254.635173</td>
+<td>25.179454</td>
+<td>26.913508</td>
+<td>23.807367</td>
+<td>29.716182</td>
+<td>3.747729</td>
+<td>72.0</td>
+<td>1</td>
+<td>48.0</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2014-02-03</td>
+<td>0.476876</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>0.0</td>
+<td>10000.0</td>
+<td>28.017441</td>
+<td>3.0</td>
+<td>...</td>
+<td>252.872288</td>
+<td>26.121420</td>
+<td>27.823145</td>
+<td>24.755817</td>
+<td>30.152179</td>
+<td>1.899688</td>
+<td>80.0</td>
+<td>1</td>
+<td>71.0</td>
+<td>48.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 30 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-ff2d6ea8-60d4-4592-9a12-250324ac1cb3')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-ff2d6ea8-60d4-4592-9a12-250324ac1cb3 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-ff2d6ea8-60d4-4592-9a12-250324ac1cb3');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8b63e930-8101-461f-a74d-058f2f24a050">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8b63e930-8101-461f-a74d-058f2f24a050')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8b63e930-8101-461f-a74d-058f2f24a050 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="model-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-training">Model training</h2>
+<p>Since the training dataset has a time component, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"><code>TimeSeriesSplit</code></a> from <code>sklearn</code> to properly cross-validate the model. Here is how it splits the training data in the time dimension.</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-time-series-split">
+<div id="model-time-series-split" class="cell" data-outputid="71f6559e-428a-4ebc-8f15-a59b0d627699">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Illustrate time series split.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You may experiment the splits by changing the `n_splits` parameter.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Increasing the `n_splits` would give a narrower time period for the test set.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tss <span class="op">=</span> TimeSeriesSplit(n_splits<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (split_train_index, split_test_index) <span class="kw">in</span> <span class="bu">enumerate</span>(tss.split(X_train)):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Split </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">:'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    split_X_train, split_X_test <span class="op">=</span> X_train.iloc[split_train_index, :], X_train.iloc[split_test_index, :]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    split_y_train, split_y_test <span class="op">=</span> y_train.iloc[split_test_index], y_train.iloc[split_test_index]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(split_X_train.index.<span class="bu">min</span>(), split_X_train.index.<span class="bu">max</span>())</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(split_y_train.index.<span class="bu">min</span>(), split_y_train.index.<span class="bu">max</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Split 0:
+2014-01-06 00:00:00 2014-12-01 00:00:00
+2014-12-08 00:00:00 2015-10-12 00:00:00
+Split 1:
+2014-01-06 00:00:00 2015-10-12 00:00:00
+2015-10-19 00:00:00 2016-08-22 00:00:00
+Split 2:
+2014-01-06 00:00:00 2016-08-22 00:00:00
+2016-08-29 00:00:00 2017-07-03 00:00:00
+Split 3:
+2014-01-06 00:00:00 2017-07-03 00:00:00
+2017-07-10 00:00:00 2018-05-14 00:00:00
+Split 4:
+2014-01-06 00:00:00 2018-05-14 00:00:00
+2018-05-21 00:00:00 2019-03-25 00:00:00</code></pre>
+</div>
+</div>
+</div>
+<p>The model chosen for the demo is the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">random forest (RF) classifier</a>. It is a ensemble machine learning method that constructs multiple decision trees from subsets of the training and averages over all these terrs to produce the final classification. Random forest classifiers are commonly used in various tasks like credit risk assessment, disease diagnosis, and customer churn prediction due to their high accuracy and ability to handle large datasets.</p>
+<p>The RF classifier model is tuned using the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a> function from <code>sklearn</code> performs model scoring by going over all combinations of specified parameter values, called the <em>parameter space</em>.</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-1">
+<div id="model-tuning-1" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameter space to optimize</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n_estimators"</span>: [<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"max_depth"</span>: [<span class="va">None</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>],</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-2">
+<div id="cell-model-tuning-2" class="cell" data-outputid="76edf078-1113-44e3-f167-55213f59c0be">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run GridSearch</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_grid_search <span class="op">=</span> GridSearchCV(classifier, param_grid, verbose<span class="op">=</span><span class="dv">1</span>, cv<span class="op">=</span>tss)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model_grid_search.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 25 candidates, totalling 125 fits</code></pre>
+</div>
+<div id="model-tuning-2" class="cell-output cell-output-display" data-execution_count="26">
+<style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=TimeSeriesSplit(gap=0, max_train_size=None, n_splits=5, test_size=None),
+             estimator=RandomForestClassifier(random_state=42),
+             param_grid={'max_depth': [None, 5, 10, 15, 20],
+                         'n_estimators': [50, 100, 200, 300, 500]},
+             verbose=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">GridSearchCV</label><div class="sk-toggleable__content"><pre>GridSearchCV(cv=TimeSeriesSplit(gap=0, max_train_size=None, n_splits=5, test_size=None),
+             estimator=RandomForestClassifier(random_state=42),
+             param_grid={'max_depth': [None, 5, 10, 15, 20],
+                         'n_estimators': [50, 100, 200, 300, 500]},
+             verbose=1)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(random_state=42)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(random_state=42)</pre></div></div></div></div></div></div></div></div></div></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<section id="test-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="test-accuracy">Test accuracy</h2>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-3">
+<div id="model-tuning-3" class="cell" data-outputid="e3fd0dd4-258b-438a-9df6-4d084f6977cc">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best hyperparameters: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train best score: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_score_<span class="sc">:0.4}</span><span class="ss">"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Train best score std: </span><span class="sc">{</span>np<span class="sc">.</span>std(model_grid_search.cv_results_[<span class="st">'mean_test_score'</span>])<span class="sc">:0.4}</span><span class="ss">"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best hyperparameters: {'max_depth': None, 'n_estimators': 200}
+Train best score: 0.8489
+Train best score std: 0.007221</code></pre>
+</div>
+</div>
+</div>
+<p>Using our setup, the tuned model predicts weekly outbreak labels with 95.65% accuracy.</p>
+<p>To add detail, we can also view more metrics of the RF classification predictions using <code>classification_report</code> from <code>sklearn</code>.</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-results-classification-report">
+<div id="cell-results-classification-report" class="cell" data-outputid="5fc7de8b-a6dd-41d6-db66-efc0a9a3fc89">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, output_dict<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(report).transpose()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>report_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="results-classification-report" class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+  <div id="df-9b209137-db86-4b30-88d7-77c85aa6d49c" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">precision</th>
+<th data-quarto-table-cell-role="th">recall</th>
+<th data-quarto-table-cell-role="th">f1-score</th>
+<th data-quarto-table-cell-role="th">support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.939394</td>
+<td>1.000000</td>
+<td>0.968750</td>
+<td>62.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1.000000</td>
+<td>0.866667</td>
+<td>0.928571</td>
+<td>30.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">accuracy</td>
+<td>0.956522</td>
+<td>0.956522</td>
+<td>0.956522</td>
+<td>0.956522</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">macro avg</td>
+<td>0.969697</td>
+<td>0.933333</td>
+<td>0.948661</td>
+<td>92.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">weighted avg</td>
+<td>0.959157</td>
+<td>0.956522</td>
+<td>0.955648</td>
+<td>92.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9b209137-db86-4b30-88d7-77c85aa6d49c')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9b209137-db86-4b30-88d7-77c85aa6d49c button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9b209137-db86-4b30-88d7-77c85aa6d49c');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-ad98c96f-54e2-47d2-a097-3ceaba297f5a">
+  <button class="colab-df-quickchart" onclick="quickchart('df-ad98c96f-54e2-47d2-a097-3ceaba297f5a')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-ad98c96f-54e2-47d2-a097-3ceaba297f5a button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<p>In our test set, we have 61 weeks that have no outbreaks and 30 weeks that have outbreaks. While the overall score is 94.5%, notice that the scores are slightly lower at 90-93% for the <code>outbreak=1</code> category than <code>outbreak=0</code>.</p>
+</section>
+<section id="feature-importance" class="level2">
+<h2 class="anchored" data-anchor-id="feature-importance">Feature importance</h2>
+<p><strong>SHAP (SHapley Additive exPlanations)</strong> is a method used in machine learning for explaining individual predictions. It assigns each feature an importance value by considering its contribution to the difference between the actual prediction and the average prediction. Read up more on this method <a href="https://shapash.readthedocs.io/en/latest/autodocs/shapash.explainer.html">here</a>.</p>
+<p><img src="assets/dengue_outbreak_feature_importance.png" class="img-fluid"></p>
+<p>From the results of SHAP, the features that drove the predictions are the cases from the previous weeks, the climate variables for temperature <code>tmax</code> and <code>tave</code>, and the mean population count.</p>
+</section>
+<section id="detected-outbreaks" class="level2">
+<h2 class="anchored" data-anchor-id="detected-outbreaks">Detected outbreaks</h2>
+<p><img src="assets/dengue_outbreak_periods_sample_result.png" class="img-fluid"></p>
+<p>Based on actual data, there is only one outbreak period for the target timespan, a 30-week event from 2019-04-22 to 2019-11-11. The model predicted a 26-week outbreak period from 2019-05-20 to 2019-11-11, which was detected 4 weeks after actual, and ended on the same week.</p>
+<p>While most of the outbreak period was covered, the model still needs to be trained to be more sensitive to the start of the outbreak, which is crucial for early intervention.</p>
+<p><img src="assets/dengue_outbreak_num_cases_sample_result.png" class="img-fluid"></p>
+<p>The model was able to determine outbreaks for the consectuve weeks in 2019-05-20 to 2019-11-11, when actual data records 75-380 weekly cases.</p>
+<p>For the rest of 2020, it was also able to correctly identify that there should be no outbreaks during that year.</p>
+</section>
+<section id="probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="probabilities">Probabilities</h2>
+<p>The <code>sklearn</code> <code>predict_proba</code> method calculates the probability estimates of each class produced by a model. It returns an array containing the probability (0.0 to 1.0) of a single record belonging to a particular class. The predicted probabilities can be visualized through a colored histogram of the values.</p>
+<p><img src="assets/dengue_outbreak_periods_probability_sample_result.png" class="img-fluid"></p>
+<p>In this plot, the line plot represents the number of cases over time and the gradient in the background represents the predicted probablity of an outbreak for that week. The darker the color the more likely it is to be classified as an outbreak.</p>
+<p>Weeks with sudden spikes are able to identified by the model as an outbreak along with the succeeding high weeks. It can also be seen in the plot that even during the low number of cases in 2020, the model is able to predict slightly higher probability for the weeks with sudden spikes. This can indicate some potential in using the probabilities as a signal for preparations for early intervention.</p>
+</section>
+</section>
+<section id="recommendations" class="level1">
+<h1>Recommendations</h1>
+<p>Consider the following when trying to explore modelling with our dataset.</p>
+<ol type="1">
+<li>Pick another classifier model, such as other tree-based models like <a href="https://xgboost.readthedocs.io/en/stable/tutorials/model.html">XGBoost</a>, or one with a different prediction mechanic, such as <a href="https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/">kNN</a>. These may potentially enhance model accuracy and robustness.</li>
+<li>Experiment more with feature engineering by selecting variables with more resolved temporal scales, such as climate variables, by analyzing statistics over weekly intervals rather than just mean values.</li>
+<li>Validate the model’s applicability across diverse scenarios by testing it on data from another city or disease, acknowledging potential variations in performance while emphasizing the generalizability of the methodology.</li>
+</ol>
+<p>For inquiries on this model, contact the developers at <a href="lacuna-fund-project-team@thinkingmachin.es">lacuna-fund-project-team@thinkingmachin.es</a></p>
 
 
 </section>
 
 </main> <!-- /main -->
+<script type="application/vnd.jupyter.widget-state+json">
+{"0d59c378c7b24b719bf3d4708de0a596":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"TextModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"TextModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"TextView","continuous_update":true,"description":"Input folder:","description_tooltip":null,"disabled":false,"layout":"IPY_MODEL_f9bd861885404249b9782ffce718bb10","placeholder":"Type input folder here and press ENTER","style":"IPY_MODEL_e825a98290964f629743679f932c43e1","value":"/content/gdrive/Shareddrives/[EXT] Lacuna Fund - Shared Drive/Project CCHAIN/processed/city_merged.csv"}},"e825a98290964f629743679f932c43e1":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"f9bd861885404249b9782ffce718bb10":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":"95%"}}}
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

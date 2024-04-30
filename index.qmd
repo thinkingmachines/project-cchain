@@ -16,7 +16,7 @@ The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measu
     - [Google Drive](foo.com)
     - [Kaggle](foo.com)
     - [HDX](foo.com)
-- See full data documentation on [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) 
+- See full data documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) 
 - To access the informal settlement community survey data, send your request for approval [here](https://forms.google.com)
 
 
@@ -45,6 +45,11 @@ Supported by
 ![[Wellcome Trust](https://wellcome.org/)](assets/wellcome_trust.png)
 
 :::
+
+# Licensing
+
+The Project CCHAIN dataset and all of its derivative products adapted the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
+
 
 # Contact Us
 
