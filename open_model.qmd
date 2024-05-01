@@ -7,7 +7,7 @@ title: Baseline model for predicting disease outbreak periods
 We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN linked dataset in a machine learning use case.
 
 :::{.callout-warning icon=false appearance="simple"}
-Access the full model notebook here: [GDrive](https://drive.google.com/file/d/1m9bqZDkl4FdrwXjmYJCLEJQ8re4lnTIp/view?usp=drive_link), [Github](https://github.com/thinkingmachines/project-cchain)
+Access the full model notebook here: [GDrive](https://drive.google.com/file/d/1m9bqZDkl4FdrwXjmYJCLEJQ8re4lnTIp/view?usp=drive_link)
 :::
 
 ## Specifications 

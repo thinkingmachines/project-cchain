@@ -13,9 +13,9 @@ The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measu
 # Quick links
 
 - Access the data here:
-    - [Google Drive](foo.com)
-    - [Kaggle](foo.com)
-    - [HDX](foo.com)
+    - [Google Drive](https://drive.google.com/drive/u/0/folders/1VaUIEkjZ7SJCOoy4_nXE80Mx8S5ksVFZ)
+    - [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/)
+    - [HDX](https://data.humdata.org/dataset/project-cchain)
 - See full data documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) 
 - To access the informal settlement community survey data, send your request for approval [here](https://forms.google.com)
 
