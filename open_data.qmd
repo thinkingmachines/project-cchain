@@ -9,12 +9,12 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 :::{.callout-warning icon=false appearance="simple"}
 ## Quick links
 
-- Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1uIaGePIJJCldk3jnKLwnUzrY-nrNzamG),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/?select=tm_relative_wealth_index.csv),[HDX](https://data.humdata.org/dataset/project-cchain)
-- Notebook to link the dataset [here](https://drive.google.com/file/d/1oIRe5GH9290XZluuDFX-USSyBZhqQTN9/view?usp=drive_link) 
+- Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1VaUIEkjZ7SJCOoy4_nXE80Mx8S5ksVFZ),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/?select=tm_relative_wealth_index.csv),[HDX](https://data.humdata.org/dataset/project-cchain)
+- Notebook to link the dataset [here](https://drive.google.com/drive/u/0/folders/1GI8dd9VLG_Istufofoyi-aaLJZ65ad2g) 
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
-The tables are designed in a way that users can **choose variables that are most relevant** to their focus city and use case, and **link these variables** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](https://drive.google.com/file/d/1oIRe5GH9290XZluuDFX-USSyBZhqQTN9/view?usp=drive_link), or offline using the user's own code.
+The tables are designed in a way that users can **choose variables that are most relevant** to their focus city and use case, and **link these variables** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](https://drive.google.com/drive/u/0/folders/1GI8dd9VLG_Istufofoyi-aaLJZ65ad2g), or offline using the user's own code.
 
 :::{.callout-tip icon=false appearance="simple"}
 ## Tips on using the data
