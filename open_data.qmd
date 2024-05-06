@@ -9,7 +9,7 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 :::{.callout-warning icon=false appearance="simple"}
 ## Quick links
 
-- Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1VaUIEkjZ7SJCOoy4_nXE80Mx8S5ksVFZ),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/?select=tm_relative_wealth_index.csv),[HDX](https://data.humdata.org/dataset/project-cchain)
+- Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/),[HDX](https://data.humdata.org/dataset/project-cchain)
 - Notebook to link the dataset [here](https://drive.google.com/drive/u/0/folders/1GI8dd9VLG_Istufofoyi-aaLJZ65ad2g) 
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
