@@ -78,8 +78,10 @@ The RF classifier model is tuned using the [`GridSearchCV`](https://scikit-learn
 ## Test accuracy
 
 {{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-tuning-3 echo=true >}}
+Using our training setup, the model predicted outbreak labels with 84.89% accuracy. 
 
-Using our setup, the tuned model predicts weekly outbreak labels with 95.65% accuracy. 
+{{< embed notebooks/baseline-model/baseline-model-demo.ipynb#model-tuning-4 echo=true >}}
+The tuned model predicts weekly outbreak labels with 95.65% accuracy. 
 
 To add detail, we can also view more metrics of the RF classification predictions using `classification_report` from `sklearn`. 
 
@@ -92,7 +94,7 @@ In our test set, we have 61 weeks that have no outbreaks and 30 weeks that have 
 
 **SHAP (SHapley Additive exPlanations)** is a method used in machine learning for explaining individual predictions. It assigns each feature an importance value by considering its contribution to the difference between the actual prediction and the average prediction. Read up more on this method [here](https://shapash.readthedocs.io/en/latest/autodocs/shapash.explainer.html).
 
-![](docs/assets/dengue_outbreak_feature_importance.png)
+![](assets/dengue_outbreak_feature_importance.png)
 
 From the results of SHAP, the features that drove the predictions are the cases from the previous weeks, the climate variables for temperature `tmax` and `tave`, and the mean population count.
 

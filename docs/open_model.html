@@ -109,11 +109,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta property="og:description" content="">
-<meta property="og:image" content="docs/assets/dengue_outbreak_feature_importance.png">
+<meta property="og:image" content="assets/dengue_outbreak_feature_importance.png">
 <meta property="og:site_name" content="Project CCHAIN">
 <meta name="twitter:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="docs/assets/dengue_outbreak_feature_importance.png">
+<meta name="twitter:image" content="assets/dengue_outbreak_feature_importance.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -811,7 +811,7 @@ Split 4:
 <h2 class="anchored" data-anchor-id="test-accuracy">Test accuracy</h2>
 <div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-3">
 <div id="model-tuning-3" class="cell" data-outputid="e3fd0dd4-258b-438a-9df6-4d084f6977cc">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results of model training</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best hyperparameters: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train best score: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_score_<span class="sc">:0.4}</span><span class="ss">"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -824,13 +824,27 @@ Train best score std: 0.007221</code></pre>
 </div>
 </div>
 </div>
-<p>Using our setup, the tuned model predicts weekly outbreak labels with 95.65% accuracy.</p>
+<p>Using our training setup, the model predicted outbreak labels with 84.89% accuracy.</p>
+<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-4">
+<div id="model-tuning-4" class="cell" data-outputid="1e66acc6-c64c-40d2-810e-f9f47dfadc1e">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on test data</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>best_rf_classifier_model <span class="op">=</span> model_grid_search.best_estimator_</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> best_rf_classifier_model.score(X_test, y_test)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test Accuracy:"</span>, test_accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test Accuracy: 0.9565217391304348</code></pre>
+</div>
+</div>
+</div>
+<p>The tuned model predicts weekly outbreak labels with 95.65% accuracy.</p>
 <p>To add detail, we can also view more metrics of the RF classification predictions using <code>classification_report</code> from <code>sklearn</code>.</p>
 <div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-results-classification-report">
 <div id="cell-results-classification-report" class="cell" data-outputid="5fc7de8b-a6dd-41d6-db66-efc0a9a3fc89">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, output_dict<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(report).transpose()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>report_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, output_dict<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(report).transpose()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>report_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="results-classification-report" class="cell-output cell-output-display" data-execution_count="31">
 <div>
 
@@ -1100,7 +1114,7 @@ Train best score std: 0.007221</code></pre>
 <section id="feature-importance" class="level2">
 <h2 class="anchored" data-anchor-id="feature-importance">Feature importance</h2>
 <p><strong>SHAP (SHapley Additive exPlanations)</strong> is a method used in machine learning for explaining individual predictions. It assigns each feature an importance value by considering its contribution to the difference between the actual prediction and the average prediction. Read up more on this method <a href="https://shapash.readthedocs.io/en/latest/autodocs/shapash.explainer.html">here</a>.</p>
-<p><img src="docs/assets/dengue_outbreak_feature_importance.png" class="img-fluid"></p>
+<p><img src="assets/dengue_outbreak_feature_importance.png" class="img-fluid"></p>
 <p>From the results of SHAP, the features that drove the predictions are the cases from the previous weeks, the climate variables for temperature <code>tmax</code> and <code>tave</code>, and the mean population count.</p>
 </section>
 <section id="detected-outbreaks" class="level2">

@@ -2091,7 +2091,7 @@ Split 4:
 </div>
 </div>
 <div id="model-tuning-3" class="cell" data-outputid="e3fd0dd4-258b-438a-9df6-4d084f6977cc">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results of model training</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best hyperparameters: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train best score: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_score_<span class="sc">:0.4}</span><span class="ss">"</span>)</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -2107,11 +2107,13 @@ Train best score std: 0.007221</code></pre>
 <section id="check-model-performance" class="level3">
 <h3 class="anchored" data-anchor-id="check-model-performance">6.2. Check model performance</h3>
 <p>Apply the model with the best parameters to the test set to check its performance.</p>
-<div id="cell-48" class="cell" data-outputid="1e66acc6-c64c-40d2-810e-f9f47dfadc1e">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on test data</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>best_rf_classifier_model <span class="op">=</span> model_grid_search.best_estimator_</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> best_rf_classifier_model.score(X_test, y_test)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test Accuracy:"</span>, test_accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="model-tuning-4" class="cell" data-outputid="1e66acc6-c64c-40d2-810e-f9f47dfadc1e">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model on test data</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>best_rf_classifier_model <span class="op">=</span> model_grid_search.best_estimator_</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> best_rf_classifier_model.score(X_test, y_test)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test Accuracy:"</span>, test_accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Test Accuracy: 0.9565217391304348</code></pre>
 </div>
