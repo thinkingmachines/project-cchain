@@ -10,7 +10,7 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 ## Quick links
 
 - Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/),[HDX](https://data.humdata.org/dataset/project-cchain)
-- Notebook to link the dataset [here](https://drive.google.com/drive/u/0/folders/1GI8dd9VLG_Istufofoyi-aaLJZ65ad2g) 
+- Notebook to link the dataset [here](https://drive.google.com/file/d/1koLXMzsFxovu5lX7dsNL0j6WroTwc0Vp/view?usp=drive_link) 
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
@@ -120,6 +120,8 @@ Data on points of interest (POIs) are also included, and the following were comp
 |[osm_poi_water_body](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_water_body)                                                             | wetland, reservoir, water, riverbank, dock, river, stream, canal, drain                                                                                                                      |
 | [osm_poi_sanitation](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_sanitation)                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
 | [mapbox_health_facility_brgy_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones), [mapbox_health_facility_city_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_city_isochrones)  | barangay health center, hospital, rural health unit                                                                                                                                          |
+
+The data in the isochrone tables covers 5, 15, and 30 minutes intervals, but for users seeking more granularity, we also provide 15 to 60 minutes isochrone data on a per minute interval separately in this [link](https://drive.google.com/drive/folders/1YbW1LjCyfvnHgtuCIj06zdVnINf_qiXY?usp=drive_link). 
 
 ## Socioeconomics
 
