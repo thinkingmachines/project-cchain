@@ -13,7 +13,7 @@ The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measu
 # Quick links
 
 - Access the data here:
-    - [Google Drive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf)
+    - [Google Drive](https://drive.google.com/drive/u/0/folders/0ABpy7AWmY9A_Uk9PVA)
     - [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/)
     - [HDX](https://data.humdata.org/dataset/project-cchain)
 - See full data documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) 
