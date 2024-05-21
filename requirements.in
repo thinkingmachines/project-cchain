@@ -20,6 +20,7 @@ pygeos
 pytest
 seaborn
 shap
+shapash
 tqdm
 rasterio
 rasterstats
