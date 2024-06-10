@@ -307,7 +307,7 @@ def add_ookla_features(
     # Add type_year prefix to feature names
     ookla_yearly = ookla_yearly.rename(
         {
-            col: f"{type_}_{year}_" + col
+            col: f"{type_}_" + col
             for col in ookla_yearly.columns[~ookla_yearly.columns.isin(["quadkey"])]
         },
         axis=1,
