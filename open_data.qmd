@@ -81,7 +81,8 @@ There are two data sources attributed to DOH, namely:
 For both sources, we were able to request both the DOH central level totals and the LGU level reports containing baranggay, age and sex disaggregations.
 
 :::{.callout-important icon=false appearance="simple"}
-It is important to note that PIDSR aggregate reports are incorporated into the FHSIS annual morbidity report (UP-NIH, 2011) and, as such, data from these two sources have been separated into two datasets to prevent double-counting. **Please do NOT combine cases from different data sources**.
+## **Warning**
+Note that PIDSR aggregate reports are incorporated into the FHSIS annual morbidity report (UP-NIH, 2011) and, as such, data from these two sources have been separated into two datasets to prevent double-counting. **Please do NOT combine cases from different data sources**.
 :::
 
 
@@ -90,7 +91,8 @@ It is important to note that PIDSR aggregate reports are incorporated into the F
 The PSA Vital Health Statistics records deaths and their causes through reports from provincial offices. 
 
 :::{.callout-important icon=false appearance="simple"}
- **Please do NOT combine PSA recorded deaths to those documented by DOH data sources**, as this also results to double-counting.
+## **Warning**
+ **Please do NOT combine PSA recorded deaths to deaths that are documented by DOH data sources**, as this also results to double-counting.
 :::
 
 
