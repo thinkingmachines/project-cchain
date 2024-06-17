@@ -9,9 +9,9 @@ While there is growing interest in modeling the health impacts of climate change
 
 1. **Significant data workflow logistics and multi-disciplinary expertise** is required to assemble and process health, climate, and socioeconomic data from diverse sources, formats, geographic and historical coverage and resolutions. 
 
-2. **Limited available datasets at the barangay level**, the smallest administrative unit in the Philippines, hinders the policy makers to make impactful health interventions, especially for vulnerable communities. 
+2. **Limited available datasets at the barangay level**, the smallest administrative unit in the Philippines, hinders researchers and policymakers to make impactful health interventions, especially for vulnerable communities. 
 
- With the support of the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/), the project team aims to ease entry and encourage more studies in the field by doing all the needed work in assembling an open dataset of climate, environmental, socioeconomic, and health variables.
+ With the support of the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/), the project team aims to ease entry and encourage more studies in the field by frontloading the needed work in assembling an open linked dataset of climate, environmental, socioeconomic, and health variables.
 
 It is our hope that this endeavor can promote investments in the creation of more open and analysis-ready datasets.
 
@@ -38,13 +38,14 @@ We selected **12 key cities** with a variety of geographic, socioeconomic, and c
 - JT Miclat
 
 
-[EpiMetrics, Inc. (EM)](https://epimetrics.com.ph/) is a health research institution engaged in the achievement of health equity through rigorous and creative conception, execution, translation, and communication of health systems and policy research
+[EpiMetrics, Inc. (EM)](https://epimetrics.com.ph/) is a health research institution engaged in the achievement of health equity through rigorous and creative conception, execution, translation, and communication of health systems and policy research.
 
 **Team members**
 
 - John Wong
 - Katya Baladad
 - Luis Desquitado
+- Matthew Limlengco
 
 [Manila Observatory (MO)](https://www.observatory.ph/) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
 

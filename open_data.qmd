@@ -17,10 +17,11 @@ The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years
 The tables are designed in a way that users can **choose variables that are most relevant** to their focus city and use case, and **link these variables** to form a single dataset by merging using standard geography codes and calendar dates. This can be done using the provided [linking notebook](https://drive.google.com/drive/u/0/folders/1GI8dd9VLG_Istufofoyi-aaLJZ65ad2g), or offline using the user's own code.
 
 :::{.callout-tip icon=false appearance="simple"}
-## Tips on using the data
+## **Tips on using the data**
 
 - **Focus on one location.** Starting with a detailed analysis of one location allows for a better understanding of the local dynamics, which may differ across locations.
-- **Do not use all variables at once- do a literature review first to identify possible key variables**.  to identify possible key variables. More often than not, using all variables is not necessary and may even yield subpar results.
+- **Choose one health data source.** Pick one of either a central or local data source. Using two different data health sources is not advised because it will lead to double/overcounting of disease cases.
+- **Do NOT use all variables at once- do a literature review first to identify possible key variables**. More often than not, using all variables is not necessary and may even yield subpar results.
 - **Check data availability** on your focus location and make sure they fit the requirements of your study.
 :::
 
@@ -35,55 +36,78 @@ A central calendar, frequency, as well as the standard geography codes, geometry
 
 | Table          | Variables                                                     |
 |----------------|---------------------------------------------------------------|
-| [calendar](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=calendar)      | date                                                          |
-| [location](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=location)      | PSGC admin codes and official English names from level 1 to 4 |
-| [frequency](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=frequency)       | description of update frequency strings                       |
-| [brgy_geography](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography)  | total area, distance to coast, geometry                       |
-
+| [calendar](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=calendar)      | Standard ISO 8601 dates from 2003 to 2022                                                         |
+| [location](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=location)      | [Philippine Standard Geographic Code (PSGC)](https://psa.gov.ph/classification/psgc) administrative level identifier data for chosen cities up to barangay (adm4) |
+| [frequency](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=frequency)       | Description of update frequency strings                       |                     |
+| [disease](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease)  | list of included climate and disaster sensitive diseases                       |
+| [brgy_geography](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography)  | Barangay total area, distance to coast, geometry  
 ## Health
 
 ### Disease tables
 
-Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions.
+Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions. The tables includes 17 diseases, identified as climate- and disaster-sensitive in the Philippines ([Wong et al., 2018](https://www.tandfonline.com/doi/pdf/10.1080/23288604.2017.1368432), [Wong et al., 2022](https://epimetrics.com.ph/determining-provincial-health-risk-to-climate-and-disasters-in-the-philippines/)).
+
+All disease data were encoded according to the [International Classification of Diseases (ICD-10)](https://icd.who.int/browse10/2019/en) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy. 
+
+| ICD-10 code        | Disease common name        | 
+|--------------------|----------------------------|
+| A09.0              | Acute bloody diarrhea      |
+| B15                | Hepatitis A                |
+| A00                | Cholera                    |
+| A90-A91            | Dengue fever               |
+| A27                | Leptospirosis              | 
+| A82                | Rabies                     |
+| A01                | Typhoid fever              |
+| A08                | Rotaviral enteritis        |
+| A92                | Chikunguya viral disease   |
+| E08-E14            | Diabetes                   |
+| I11                | Hypertensive heart disease |
+| I21-I22            | Ischemic heart disease     |
+| I63                | Ischemic stroke            |
+| A09                | Gastroenteritis            |
+| J45                | Asthma                     |
+| I20-I25            | Angina                     | 
+| T67                | Heat stroke                |
+
+
+#### 1. Department of Health (DOH)
+
+There are two data sources attributed to DOH, namely:
+
+ (a) **Philippine Integrated Disease Surveillance and Response (PIDSR)** -  focuses on reporting weekly cases of priority diseases, syndromes, and conditions for surveillance. Cases in this source may be suspected, probable, or confirmed (with a laboratory test).
+
+ (b) **Field Health Services Information System (FHSIS)** - measures the coverage of essential public health services, using physician-diagnosed cases from LGUs' monthly reports. This data includes disease cases that are diagnosed by a physician, and deaths attributed to the disease.
+
+For both sources, we were able to request both the DOH central level totals and the LGU level reports containing baranggay, age and sex disaggregations.
+
+:::{.callout-important icon=false appearance="simple"}
+It is important to note that PIDSR aggregate reports are incorporated into the FHSIS annual morbidity report (UP-NIH, 2011) and, as such, data from these two sources have been separated into two datasets to prevent double-counting. **Please do NOT combine cases from different data sources**.
+:::
+
+
+#### 2. Philippine Statistical Authority (PSA)
+
+The PSA Vital Health Statistics records deaths and their causes through reports from provincial offices. 
+
+:::{.callout-important icon=false appearance="simple"}
+ **Please do NOT combine PSA recorded deaths to those documented by DOH data sources**, as this also results to double-counting.
+:::
+
+
+The following are the tables that contain the disease data:
 
 | Table                  | Source                                                                                     | Disease Outcome | Spatial Coverage |
 |------------------------|--------------------------------------------------------------------------------------------|-----------------|------------------|
-| [disease_weekly_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_weekly_totals)  | Department of Health - Philippine Integrated Disease Surveillance and Response (DOH-PIDSR) | cases           | city             |
-|                        | Philippine Statistical Authority                                                           | deaths          | city             |
-|                        | City Local Government Unit Health Offices                                                  | cases, deaths   | baranggay        |
-| [disease_monthly_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_monthly_totals) | Department of Health - Field Health Services Information System (DOH-FHSIS)                | cases           | city             |
+| [disease_pidsr_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_pisdr_totals)  | PIDSR-DOH | cases           | city             |
+| [disease_psa_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_psa_totals)                         | PSA            | deaths          | city             |
+| [disease_fhsis_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_fhsis_totals)                       | FHSIS-LGU     | cases, deaths   | city        |
+| [disease_lgu_disaggregated_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_lgu_disaggregated_totals) | FHSIS-LGU, PIDSR-LGU | cases, deaths           | city or baranggay             |
 
-
-
-The dataset includes 16 diseases, identified as climate- and disaster-sensitive in the Philippines ([Wong et al., 2018](https://www.tandfonline.com/doi/pdf/10.1080/23288604.2017.1368432), [Wong et al., 2022](https://epimetrics.com.ph/determining-provincial-health-risk-to-climate-and-disasters-in-the-philippines/)), as well as some more diseases provided by the sources.
-
-
-| Disease Common Name           | ICD-10 Code | ICD-10 Description                                  |
-|-------------------------------|-------------|-----------------------------------------------------|
-| Cholera                       | A00         | Cholera                                             |
-| Typhoid fever                 | A01.0       | Typhoid and paratyphoid fevers                      |
-| Rotavirus                     | A08.0       | Rotaviral enteritis                                 |
-| Gastroenterities              | A09         | Infectious gastroenteritis and colitis, unspecified |
-| Acute bloody diarrhea         | A09.0       | Other and unspecified gastroenteritis and colitis of infectious origin |
-| Leptospirosis                 | A27         | Leptospirosis                                       |
-| Rabies                        | A82         | Rabies                                              |
-| Chikungunya                   | A92.0       | Chikungunya virus disease                           |
-| Dengue                        | A97         | Dengue fever [classical dengue]                     |
-| Hepatitis-A                   | B15         | Acute hepatitis A                                   |
-| Diabetes                      | E08-E14     | Various types of diabetes mellitus                  |
-| Hypertensive CVD              | I11         | Hypertensive heart disease                          |
-| Angina pectoris               | I20         | Angina pectoris                                     |
-| Ischemic heart disease        | I21-I22     | Acute myocardial infarction, ST and non-SET elevation myocardial infarction |
-| Asthma                        | J45         | Asthma                                              |
-| Heat stroke                   | T67         | Effects of heat and light, Heatstroke and sunstroke |
-
-
-All disease data is standardized in accordance with the International Classification of Diseases (ICD-10) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy.
-
+These tables are made publicly available by Data Use Agreements between Epimetrics and their respective data owners.
 
 ## Climate
 
-The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.
+The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from publicly available gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.
 
 | Table                  | Variables                                                                                                                           |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -138,17 +162,19 @@ The dataset contains population estimates, as well as emerging remote-sensed ind
 
 ### Informal settlement community survey tables
 
-Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on scattered dates from 2001 to 2024.  The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and encoding inconsistencies.
+Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on various dates from 2001 to 2024.  The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and correct encoding inconsistencies.
 
 | Table                                    | Variables                                                                                                                                                                                            |
 |------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [informal_settlement_community_surveys_v1](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1) | family composition, occupancy type, occupation, power source, water supply, toilet access, finances                                                                                                  |
-| [informal_settlement_community_surveys_v2](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v2) | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, disease, healthcare access   |
+| [informal_settlement_community_surveys_v2](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v2) | family composition, occupancy type, occupation, power source, water supply, toilet access, finances, education, tenure, transport, hazard experience, disaster support, diseases experienced, healthcare access   |
 
-Due to the sensitive nature of surveys and the vulnerability of the subjects involved, access to this table is regulated. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
 
-:::{.callout-warning icon=false appearance="simple"}
-To submit a request, please use this [form](https://docs.google.com/forms/d/1AhpiVEg1GGhefNpsP6pSza-U4CDqQtE-PXyge9hJnv4/edit).
+:::{.callout-important icon=false appearance="simple"}
+
+Due to the sensitive nature of surveys and the vulnerability of the subjects involved, **access to this table is regulated**. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
+
+To submit a request, please use this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
 :::
 
 ### Elements at risk table
@@ -158,7 +184,7 @@ A dataset of 12,000 building outlines was also produced by manually annotating b
 The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset. 
 
 :::{.callout-warning icon=false appearance="simple"}
-This table is also released as its own, standalone dataset, TM Open Buildings, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines). 
+This table is also released as its own, standalone dataset, **TM Open Buildings**, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines). 
 :::
 
 Table source:  [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings)
