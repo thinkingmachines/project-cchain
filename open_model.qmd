@@ -4,11 +4,16 @@ title: Baseline model for predicting disease outbreak periods
 
 # Overview
 
-We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN linked dataset in a machine learning use case.
+We created an outbreak prediction baseline model that demonstrates the use of the Project CCHAIN dataset in a machine learning use case.
 
 :::{.callout-warning icon=false appearance="simple"}
 Access the full model notebook here: [GDrive](https://drive.google.com/file/d/1y1kP8QlV3BJVz4tYwUcK8Hs7GrV8JAJo/view?usp=drive_link)
 :::
+
+## Licensing 
+
+The model code is under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), which  allows developers to freely use, modify, and share software on an "as-is" basis, meaning without any warranties. When making changes, developers are required to document changes to the original code.
+
 
 ## Specifications 
 **Objective**: Predict dengue outbreaks for Zamboanga City at the weekly scale. 

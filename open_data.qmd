@@ -4,7 +4,7 @@ title: The Project CCHAIN Linked Dataset
 
 ## Overview
 
-The **Project CCHAIN linked dataset** is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities (Dagupan, Palayan, Navotas, Mandaluyong, Muntinlupa,Legazpi, Iloilo, Mandaue, Tacloban, Zamboanga, Cagayan de Oro, Davao)
+The **Project CCHAIN dataset** is composed of 29 tables spanning 20 years (2003-2022) and encompassing health, climate, environmental, and socioeconomic variables at the barangay level across 12 Philippine cities (Dagupan, Palayan, Navotas, Mandaluyong, Muntinlupa,Legazpi, Iloilo, Mandaue, Tacloban, Zamboanga, Cagayan de Oro, Davao)
 
 :::{.callout-warning icon=false appearance="simple"}
 ## Quick links
@@ -27,7 +27,11 @@ The tables are designed in a way that users can **choose variables that are most
 
 ## Licensing
 
-The Project CCHAIN dataset adapted the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/). Under the ODbL, users are free to use, modify, and distribute the database, but they must attribute the source and share any modifications they make under the same license. This license promotes open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
+The Project CCHAIN dataset adapted the [**Creative Commons Attribution 4.0 International (CC BY 4.0)**](https://creativecommons.org/licenses/by/4.0/deed.en) license. This allows anyone to share (copy and redistribute) and adapt (remix, transform, and build upon) a work, as long as they give appropriate credit to the original creator. 
+
+ One exception, the [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license. 
+ 
+ These licenses promote open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
 
 
 ## Basics

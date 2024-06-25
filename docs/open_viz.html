@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project CCHAIN - Open Visualizations</title>
+<title>Project CCHAIN - Basic insights from the dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,10 +69,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Project CCHAIN - Open Visualizations">
+<meta property="og:title" content="Project CCHAIN - Basic insights from the dataset">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Project CCHAIN">
-<meta name="twitter:title" content="Project CCHAIN - Open Visualizations">
+<meta name="twitter:title" content="Project CCHAIN - Basic insights from the dataset">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -136,14 +136,26 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#visualizing-precipitation-and-dengue-cases-peaks-in-dagupan" id="toc-visualizing-precipitation-and-dengue-cases-peaks-in-dagupan" class="nav-link" data-scroll-target="#visualizing-precipitation-and-dengue-cases-peaks-in-dagupan">1. Visualizing precipitation and dengue cases peaks in Dagupan</a></li>
+  <li><a href="#comparing-households-with-vulnerable-populations-in-informal-settlements" id="toc-comparing-households-with-vulnerable-populations-in-informal-settlements" class="nav-link" data-scroll-target="#comparing-households-with-vulnerable-populations-in-informal-settlements">2. Comparing households with vulnerable populations in informal settlements</a></li>
+  <li><a href="#mapping-typhoid-and-access-to-water-sources-in-muntinlupa" id="toc-mapping-typhoid-and-access-to-water-sources-in-muntinlupa" class="nav-link" data-scroll-target="#mapping-typhoid-and-access-to-water-sources-in-muntinlupa">3. Mapping typhoid and access to water sources in Muntinlupa</a></li>
+  <li><a href="#surveying-hospital-access-using-5-min-isochrones" id="toc-surveying-hospital-access-using-5-min-isochrones" class="nav-link" data-scroll-target="#surveying-hospital-access-using-5-min-isochrones">4. Surveying hospital access using 5-min isochrones</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Open Visualizations</h1>
+<h1 class="title">Basic insights from the dataset</h1>
 </div>
 
 
@@ -160,9 +172,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Coming soon!</p>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Here are some exploratory work that we have produced using the Project CCHAIN dataset.</p>
+<div class="callout callout-style-simple callout-warning no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Access the notebook that generates the visualizations here: <a href="https://github.com/thinkingmachines/project-cchain/blob/main/notebooks/04_analytics/01_linked_data.ipynb">Github</a></p>
+</div>
+</div>
+</div>
+<section id="visualizing-precipitation-and-dengue-cases-peaks-in-dagupan" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-precipitation-and-dengue-cases-peaks-in-dagupan">1. Visualizing precipitation and dengue cases peaks in Dagupan</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Made using health (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_pisdr_totals">disease_pidsr_totals</a>) and climate (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere">climate_atmosphere</a>) tables.</p>
+</div>
+</div>
+</div>
+<p><img src="assets/dengue_cases_and_precipitation_dagupan.png" class="img-fluid"></p>
+<p>The graph shows a smoothened time series plot of weekly average precipitation (blue), and total dengue cases (red) overlaid with detected outbreak periods (pink shading).</p>
+<p>In Dagupan City, which falls within the Type 1 climate zone, rainfall is expected to peak between June to September each year.</p>
+<p>We see from the graph that <strong>dengue outbreaks typically occur 2-4 weeks after the peak in rainfall</strong>, indicating a lag between increased precipitation and the rise in dengue cases. While this pattern is observed, we need more statistical tests to ensure robustness of the results.</p>
+</section>
+<section id="comparing-households-with-vulnerable-populations-in-informal-settlements" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-households-with-vulnerable-populations-in-informal-settlements">2. Comparing households with vulnerable populations in informal settlements</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Made using a socioeconomic (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1">informal_settlement_community_surveys_v1</a>) table</p>
+</div>
+</div>
+</div>
+<p><img src="assets/informal_settlement_vulnerable_populations.png" class="img-fluid"></p>
+<p>To understand the distribution and needs of vulnerable groups, informal settlement survey asked if there are the followingpopulations in their households: student, senior citizens, and persons with disabilities.</p>
+<p><strong>Iloilo City has the least percentage of households with students</strong> among the surveyed cities, indicating a potential area of focus for educational outreach and support programs. The lower student presence could reflect demographic trends or migration patterns affecting school-age populations.</p>
+<p>Furthermore, there is a <strong>slightly higher proportion of senior citizens in Iloilo City compared to other cities</strong>. This demographic trend highlights the importance of senior citizen services and healthcare facilities in the area to cater to their specific needs.</p>
+<p>We note that Mandaue does not have a recorded percentage of senior citizens because it was one of the earlier surveys conducted, and it was not included in the survey questions.</p>
+</section>
+<section id="mapping-typhoid-and-access-to-water-sources-in-muntinlupa" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-typhoid-and-access-to-water-sources-in-muntinlupa">3. Mapping typhoid and access to water sources in Muntinlupa</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Made using a disease (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_lgu_disaggregated_totals">disease_lgu_disaggregated_totals</a>) and socioeconomic (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1">informal_settlement_community_surveys_v1</a>) table</p>
+</div>
+</div>
+</div>
+<p><img src="assets/typhoid_water_source_muntinlupa.png" class="img-fluid"></p>
+<p>We can also relate disease and socioeconomic factors not just across time, but across space. For example, <strong>in Muntinlupa, there are fewer typhoid cases where there is access to formal water sources</strong>, highlighting the importance of proper infrastructure.</p>
+<p>Conversely, <strong>more typhoid cases are observed in areas where water is sourced from pumps (“nakikiigib”)</strong>, underscoring the health risks associated with inadequate water supply.</p>
+<p>These spatial patterns can inform targeted interventions and resource allocation to improve public health outcomes. However, similar to the previous example, we need more statistical tests to ensure the robustness of the results and confirm these observations.</p>
+</section>
+<section id="surveying-hospital-access-using-5-min-isochrones" class="level2">
+<h2 class="anchored" data-anchor-id="surveying-hospital-access-using-5-min-isochrones">4. Surveying hospital access using 5-min isochrones</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Made using an environment (<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones">mapbox_health_facility_brgy_isochrones</a>) table</p>
+</div>
+</div>
+</div>
+<p><img src="assets/isochrone_all_cities.png" class="img-fluid"></p>
+<p>These series of maps for all cities shows how much barangay population can reached within 5 minutes away from a hospital. We define a <strong>5-min isochrone</strong> around a hospital as an area that can be reached within a 5-minute travel time, providing a visual representation of hospital accessibility to the city.</p>
+<p>In the top row, <strong>cities with better access to healthcare tend to be more compact and densely populated</strong>. On the other hand, in the bottom row, access to healthcare is often limited to the city center, leaving peripheral areas underserved.</p>
+<p>While we can interpret population access to hospitals within the city, we note that the population may opt to go to a nearby city with better facilities, as seen in the case of NCR. This behavior highlights the need for comprehensive regional planning to ensure equitable healthcare access.</p>
+<p>Reversing the emphasis towards the provider, we can treat this analysis as a** measure of a city LGU’s current capacity to provide accessible healthcare to its constituents**. This perspective underscores the importance of local government initiatives in improving healthcare infrastructure within their jurisdiction.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

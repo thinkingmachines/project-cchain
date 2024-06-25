@@ -9,9 +9,6 @@ format: html
 </br>
 The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health variables at the barangay (village) level across 12 Philippine cities. 
 
-
-This dataset and all of its derivative products is under the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/).
-
 # Quick links
 
 - Access the data here:
@@ -19,9 +16,16 @@ This dataset and all of its derivative products is under the [**Open Database Li
     - [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/)
     - [HDX](https://data.humdata.org/dataset/project-cchain)
 - See full data documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN) and documentation reports from partners [here](https://drive.google.com/drive/u/0/folders/1cATESCXBHDRyTDZT8s--UAEp7zcQ6jqV)
-- Dataset DOI: https://doi.org/10.34740/kaggle/ds/4918229
-- To access the informal settlement community survey data, send your request for approval [here](https://forms.gle/Z9rfuJFENAQfbKeM6)
+- Dataset DOI: 
+- To access the full household-level informal settlement community survey data, send your request for approval [here](https://forms.gle/Z9rfuJFENAQfbKeM6)
 
+:::{.callout-warning icon=false appearance="simple"}
+## Cite the data as:
+
+
+*Thinking Machines Data Science (2024)*. Project CCHAIN Dataset: Open validated health, climate, environment, and socioeconomic data in 12 Philippine cities. Kaggle. 
+https://doi.org/10.34740/kaggle/ds/4918229
+:::
 
 # Project Team
 
