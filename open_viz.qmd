@@ -69,6 +69,6 @@ In the top row, **cities with better access to healthcare tend to be more compac
 
 While we can interpret population access to hospitals within the city, we note that the population may opt to go to a nearby city with better facilities, as seen in the case of NCR. This behavior highlights the need for comprehensive regional planning to ensure equitable healthcare access.
 
-Reversing the emphasis towards the provider, we can treat this analysis as a** measure of a city LGU’s current capacity to provide accessible healthcare to its constituents**. This perspective underscores the importance of local government initiatives in improving healthcare infrastructure within their jurisdiction.
+Reversing the emphasis towards the provider, we can treat this analysis as a **measure of a city LGU’s current capacity to provide accessible healthcare to its constituents**. This perspective underscores the importance of local government initiatives in improving healthcare infrastructure within their jurisdiction.
 
 
