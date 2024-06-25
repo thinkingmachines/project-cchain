@@ -109,7 +109,7 @@ The following are the tables that contain the disease data:
 | [disease_fhsis_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_fhsis_totals)                       | FHSIS-LGU     | cases, deaths   | city        |
 | [disease_lgu_disaggregated_totals](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease_lgu_disaggregated_totals) | FHSIS-LGU, PIDSR-LGU | cases, deaths           | city or baranggay             |
 
-These tables are made publicly available by Data Use Agreements between Epimetrics and their respective data owners.
+These tables are made publicly available by Data Use Agreements between Epimetrics and their respective data owners. More details on the disease tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1bLQ79MbKzBub7OgZkHAVl0qmIDMK5Z2Y/view).
 
 ## Climate
 
@@ -121,7 +121,9 @@ The dataset incorporates daily climate variables that have been recognized as si
 | [climate_air_quality](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_air_quality)    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
 | [climate_land](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_land)           | Normalized difference vegetation index (NDVI)                                                                                       |
 | [climate_indices](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_indices)        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
-| [climate_timestep_check](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check) | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale                                         |
+| [climate_timestep_check](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check) | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale  |    
+
+More details on the climate tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1uEa9rvS0daSEzJI51K4Wcpeaq49SopMJ/view?usp=drive_link).                                   
 
 ## Environment 
 
@@ -137,6 +139,7 @@ Data sources are shapefiles depicting categorical variables like hazard levels a
 | [google_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=google_open_buildings)  | all buildings, <100sqm buildings, 100-200 sqm buildings, >200sqm buildings                                          |
 | [project_noah_hazards](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=project_noah_hazards)   | [low,medium,high] hazard levels for landslides; flood at 5yr,25yr,100yr return period                               |
 
+More details on these tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1BLbyrEGYAaJUDHHgB8zZLisj5WsVoGdW/view?usp=drive_link).
 
 ### Points of interest tables
 
@@ -151,7 +154,7 @@ Data on points of interest (POIs) are also included, and the following were comp
 | [osm_poi_sanitation](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_sanitation)                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
 | [mapbox_health_facility_brgy_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones), [mapbox_health_facility_city_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_city_isochrones)  | barangay health center, hospital, rural health unit                                                                                                                                          |
 
-The data in the isochrone tables covers 5, 15, and 30 minutes intervals, but for users seeking more granularity, we also provide 15 to 60 minutes isochrone data on a per minute interval separately in this [link](https://drive.google.com/drive/folders/1YbW1LjCyfvnHgtuCIj06zdVnINf_qiXY?usp=drive_link). 
+The data in the isochrone tables covers 5, 15, and 30 minutes intervals, but for users seeking more granularity, we also provide 15 to 60 minutes isochrone data on a per minute interval separately in this [link](https://drive.google.com/drive/folders/1YbW1LjCyfvnHgtuCIj06zdVnINf_qiXY?usp=drive_link). More details on these tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1BLbyrEGYAaJUDHHgB8zZLisj5WsVoGdW/view?usp=drive_link).     
 
 ## Socioeconomics
 
@@ -182,6 +185,8 @@ Due to the sensitive nature of surveys and the vulnerability of the subjects inv
 
 To submit a request, please use this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
 :::
+
+More details on how these surveys were conducted can be found in the extended documentation available [here](https://drive.google.com/file/d/1zHS62GRYCasVwBY053orzUiQqOnKYRYR/view?usp=drive_link).
 
 ### Elements at risk table
 
