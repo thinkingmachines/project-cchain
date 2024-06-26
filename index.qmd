@@ -7,7 +7,7 @@ format: html
 #### *Linking Village-Level Data on Climatic Impact-Drivers, Socioeconomic Vulnerability, and Environmental Conditions to Health Impacts across 12 Philippine Cities*
 </br>
 </br>
-The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health variables at the barangay (village) level across 12 Philippine cities. 
+The **Project CCHAIN dataset** is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of health, climate, environment, and socioeconomic variables at the barangay (village) level across 12 Philippine cities. 
 
 # Quick links
 
