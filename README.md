@@ -1,6 +1,6 @@
 <div align="center">
 
-# Lacuna fund climate health
+# The Project CCHAIN Dataset
 
 </div>
 
@@ -13,27 +13,22 @@
 
 # 📜 Description
 
-The Lacuna Fund Climate x Health project aims to develop a dataset that links health data to climate, environmental conditions, and socioeconomic vulnerabilities that spans 20 years along with a baseline ML model for 12 target cities in the Philippines.  
+The Project CCHAIN dataset is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health variables at the barangay (village) level across 12 Philippine cities.
+We provide here the code used to generate the barangay level tabular extracts from our various geospatial sources.
 
-We aim to open source the linked dataset and the baseline ML model in order for more research to be developed on the impact of environmental and societal conditions to health and to further create better policies on for communities. 
+Please see our [main documentation page](https://thinkingmachines.github.io/project-cchain) for more details
 
-# 🗄 File Organization
+# 🗄 Notebooks used
 
-## Data Directory
+1. `01-aoi_generation` - Prepares official administrative boundaries for the target cities.
+2. `02-dataset_alignment` - Contains notebooks that process various data sources (in vector, raster, and tabular formats) into consistent barangay-level tabular extracts.
+3. `03-baseline_model` - Contains notebooks for the sample outbreak detection model.
+4. `04-analytics` - Obtains insights from the produced datasets in the form of visualizations
 
-1. `01-admin-bounds` - official administrative boundaries for the target areas
-2. `02-raw` - subdivided further per partner and data source
-3. `03-processed` - subdivided further per partner and data source
-4. `04-output` - final tables that would be used for the linked dataset
-5. `05-gis` - map plots
+# 📄 Licensing
 
-## Notebooks
-
-Directory is divided based on each organization/partner in this project.
-
-<br/>
-<br/>
-
+This repository is under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), which allows all developers to freely use, modify, and share software on an “as-is” basis, meaning without any warranties. 
+When making changes, developers are required to document changes to the original code.
 
 # ⚙️ Local Setup for Development
 
