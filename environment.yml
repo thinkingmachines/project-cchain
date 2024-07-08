@@ -1,4 +1,4 @@
-name: lacuna-fund
+name: project-cchain
 channels:
   - conda-forge
   - defaults
