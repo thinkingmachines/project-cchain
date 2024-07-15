@@ -10,7 +10,7 @@ The **Project CCHAIN dataset** is composed of 29 tables spanning 20 years (2003-
 ## Quick links
 
 - Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/),[HDX](https://data.humdata.org/dataset/project-cchain)
-- Notebook to link the dataset [here](https://drive.google.com/file/d/1koLXMzsFxovu5lX7dsNL0j6WroTwc0Vp/view?usp=drive_link) 
+- Notebook to link the dataset [here](https://drive.google.com/drive/folders/123MrMXSVT6149MvJ8hGoDgN1s-YlQoH_) 
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
