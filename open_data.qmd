@@ -10,7 +10,7 @@ The **Project CCHAIN dataset** is composed of 29 tables spanning 20 years (2003-
 ## Quick links
 
 - Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/),[HDX](https://data.humdata.org/dataset/project-cchain)
-- Notebook to link the dataset [here](https://drive.google.com/drive/folders/123MrMXSVT6149MvJ8hGoDgN1s-YlQoH_) 
+- Notebook to link the dataset [here](https://drive.google.com/drive/folders/123MrMXSVT6149MvJ8hGoDgN1s-YlQoH_)
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
@@ -27,10 +27,10 @@ The tables are designed in a way that users can **choose variables that are most
 
 ## Licensing
 
-The Project CCHAIN dataset adapted the [**Creative Commons Attribution 4.0 International (CC BY 4.0)**](https://creativecommons.org/licenses/by/4.0/deed.en) license. This allows anyone to share (copy and redistribute) and adapt (remix, transform, and build upon) a work, as long as they give appropriate credit to the original creator. 
+The Project CCHAIN dataset adapted the [**Creative Commons Attribution 4.0 International (CC BY 4.0)**](https://creativecommons.org/licenses/by/4.0/deed.en) license. This allows anyone to share (copy and redistribute) and adapt (remix, transform, and build upon) a work, as long as they give appropriate credit to the original creator.
 
- One exception, the [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license. 
- 
+ One exception, the [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license.
+
  These licenses promote open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
 
 
@@ -44,22 +44,22 @@ A central calendar, frequency, as well as the standard geography codes, geometry
 | [location](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=location)      | [Philippine Standard Geographic Code (PSGC)](https://psa.gov.ph/classification/psgc) administrative level identifier data for chosen cities up to barangay (adm4) |
 | [frequency](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=frequency)       | Description of update frequency strings                       |                     |
 | [disease](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=disease)  | list of included climate and disaster sensitive diseases                       |
-| [brgy_geography](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography)  | Barangay total area, distance to coast, geometry  
+| [brgy_geography](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=brgy_geography)  | Barangay total area, distance to coast, geometry
 ## Health
 
 ### Disease tables
 
 Disease data came from local and national sources, each focusing on different disease outcomes and temporal resolutions. The tables includes 17 diseases, identified as climate- and disaster-sensitive in the Philippines ([Wong et al., 2018](https://www.tandfonline.com/doi/pdf/10.1080/23288604.2017.1368432), [Wong et al., 2022](https://epimetrics.com.ph/determining-provincial-health-risk-to-climate-and-disasters-in-the-philippines/)).
 
-All disease data were encoded according to the [International Classification of Diseases (ICD-10)](https://icd.who.int/browse10/2019/en) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy. 
+All disease data were encoded according to the [International Classification of Diseases (ICD-10)](https://icd.who.int/browse10/2019/en) and aggregated at the barangay level, ensuring the removal of all personally identifiable information to uphold data privacy.
 
-| ICD-10 code        | Disease common name        | 
+| ICD-10 code        | Disease common name        |
 |--------------------|----------------------------|
 | A09.0              | Acute bloody diarrhea      |
 | B15                | Hepatitis A                |
 | A00                | Cholera                    |
 | A90-A91            | Dengue fever               |
-| A27                | Leptospirosis              | 
+| A27                | Leptospirosis              |
 | A82                | Rabies                     |
 | A01                | Typhoid fever              |
 | A08                | Rotaviral enteritis        |
@@ -70,7 +70,7 @@ All disease data were encoded according to the [International Classification of 
 | I63                | Ischemic stroke            |
 | A09                | Gastroenteritis            |
 | J45                | Asthma                     |
-| I20-I25            | Angina                     | 
+| I20-I25            | Angina                     |
 | T67                | Heat stroke                |
 
 
@@ -92,7 +92,7 @@ Note that PIDSR aggregate reports are incorporated into the FHSIS annual morbidi
 
 #### 2. Philippine Statistical Authority (PSA)
 
-The PSA Vital Health Statistics records deaths and their causes through reports from provincial offices. 
+The PSA Vital Health Statistics records deaths and their causes through reports from provincial offices.
 
 :::{.callout-important icon=false appearance="simple"}
 ## **Warning**
@@ -121,17 +121,16 @@ The dataset incorporates daily climate variables that have been recognized as si
 | [climate_air_quality](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_air_quality)    | Primary air pollutants (NO2, CO, SO2, ozone), particular matter (PM10, PM2.5)                                                       |
 | [climate_land](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_land)           | Normalized difference vegetation index (NDVI)                                                                                       |
 | [climate_indices](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_indices)        | Percent of Normal Precipitation (PNP), 3- and 6-month standardized precipitation index (SPI6), 30 year monthly normal rainfall (mm) |
-| [climate_timestep_check](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check) | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale  |    
+| [climate_timestep_check](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_timestep_check) | *Not part of the dataset*, log of hourly timesteps used in aggregating raw climate parameters to daily scale  |
 
-More details on the climate tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1uEa9rvS0daSEzJI51K4Wcpeaq49SopMJ/view?usp=drive_link).                                   
+More details on the climate tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1uEa9rvS0daSEzJI51K4Wcpeaq49SopMJ/view?usp=drive_link).
 
-## Environment 
+## Environment
 
 ### Land and hazards tables
 
 The dataset also contains variables pertaining to land characteristics and hazards over the chosen cities. The dataset sources are in the form of shapefiles representing categorical variables (hazard level, type of cover), or presence of objects (e.g. buildings). While these sources are high resolution, all are only static and schedule of updates is unspecified.
 
-Data sources are shapefiles depicting categorical variables like hazard levels and land cover types, or the presence of objects such as buildings. Although these sources offer high resolution, they are static, and there is no specified update schedule.
 
 | Table                 | Categories                                                                                                          |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -154,7 +153,7 @@ Data on points of interest (POIs) are also included, and the following were comp
 | [osm_poi_sanitation](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=osm_poi_sanitation)                                                              | drinking water, water mill, water tower, water works, water well, sanitary dump station, toilet, recycling, waste basket, wastewater, waste transfer station                                 |
 | [mapbox_health_facility_brgy_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_brgy_isochrones), [mapbox_health_facility_city_isochrones](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=mapbox_health_facility_city_isochrones)  | barangay health center, hospital, rural health unit                                                                                                                                          |
 
-The data in the isochrone tables covers 5, 15, and 30 minutes intervals, but for users seeking more granularity, we also provide 15 to 60 minutes isochrone data on a per minute interval separately in this [link](https://drive.google.com/drive/folders/1YbW1LjCyfvnHgtuCIj06zdVnINf_qiXY?usp=drive_link). More details on these tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1BLbyrEGYAaJUDHHgB8zZLisj5WsVoGdW/view?usp=drive_link).     
+The data in the isochrone tables covers 5, 15, and 30 minutes intervals, but for users seeking more granularity, we also provide 15 to 60 minutes isochrone data on a per minute interval separately in this [link](https://drive.google.com/drive/folders/1YbW1LjCyfvnHgtuCIj06zdVnINf_qiXY?usp=drive_link). More details on these tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1BLbyrEGYAaJUDHHgB8zZLisj5WsVoGdW/view?usp=drive_link).
 
 ## Socioeconomics
 
@@ -181,7 +180,7 @@ Finally, the dataset also includes household surveys done on partner informal se
 
 :::{.callout-important icon=false appearance="simple"}
 
-Due to the sensitive nature of surveys and the vulnerability of the subjects involved, **access to this table is regulated**. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII). 
+Due to the sensitive nature of surveys and the vulnerability of the subjects involved, **access to this table is regulated**. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII).
 
 To submit a request, please use this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
 :::
@@ -190,12 +189,12 @@ More details on how these surveys were conducted can be found in the extended do
 
 ### Elements at risk table
 
-A dataset of 12,000 building outlines was also produced by manually annotating buildings over selected 250x250m tiles across the 12 cities. These tiles were carefully selected to focus on residential areas with diverse neighborhood densities, terrains, and levels of urbanization, as well as areas not yet mapped in OpenStreetMap. Each outline was drawn using a combination of visual inspection of satellite imagery, local knowledge, and validation from household survey data to cover all buildings present in the tile. 
+A dataset of 12,000 building outlines was also produced by manually annotating buildings over selected 250x250m tiles across the 12 cities. These tiles were carefully selected to focus on residential areas with diverse neighborhood densities, terrains, and levels of urbanization, as well as areas not yet mapped in OpenStreetMap. Each outline was drawn using a combination of visual inspection of satellite imagery, local knowledge, and validation from household survey data to cover all buildings present in the tile.
 
-The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset. 
+The attributes contain variables designed to indicate potential wealth markers useful for vulnerability analysis, and can also be used in computer vision models to expand the spatial coverage of the dataset.
 
 :::{.callout-warning icon=false appearance="simple"}
-This table is also released as its own, standalone dataset, **TM Open Buildings**, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines). 
+This table is also released as its own, standalone dataset, **TM Open Buildings**, which can be viewed [here](https://wiki.openstreetmap.org/wiki/TM_Open_Buildings). It is also hosted separately for download in [Kaggle](https://www.kaggle.com/datasets/thinkdatasci/tm-open-buildings-philippines) and [HDX](https://data.humdata.org/dataset/tm-open-buildings-philippines).
 :::
 
 Table source:  [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings)
@@ -205,4 +204,3 @@ Table source:  [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Pr
 | Settlement - single      | roof material, roof layout, roof area, is within gated community |
 | Settlement - dense       | none, outline drawn over extent of dense neighborhoods with overlapping rooftops    |
 | Nonsettlement            | height                                                           |
-
