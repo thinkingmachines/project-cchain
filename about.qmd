@@ -17,7 +17,7 @@ It is our hope that this endeavor can promote investments in the creation of mor
 
 ## Geographical Coverage 
 
-We selected **12 key cities** with a variety of geographic, socioeconomic, and climatological conditions. All in all, a total of **744** baranggays are covered by the dataset.
+We selected **12 key cities** with a variety of geographic, socioeconomic, and climatological conditions. All in all, a total of **879** baranggays are covered by the dataset.
 
 ![](assets/cities_covered.png)
 
