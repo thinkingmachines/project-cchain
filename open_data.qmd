@@ -125,6 +125,16 @@ The dataset incorporates daily climate variables that have been recognized as si
 
 More details on the climate tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1uEa9rvS0daSEzJI51K4Wcpeaq49SopMJ/view?usp=drive_link).
 
+We recognize that the resolution of the (coarse) global gridded data might not be enough for localized studies. In addition to these, we also offer an enhanced version of the mean, minimum, maximum temperature and rainfall produced by our [deep learning climate downscaling model](https://github.com/thinkingmachines/project-cchain-climate-downscaling), which brought down the spatial resolution from the reanalysis scale (0.25°) to local scale (0.02°).. While we provide the full downscaled output as gridded netcdf files [here](https://drive.google.com/drive/u/0/folders/1mXaFEhMYZnLzUCX3RciK5JEmguf_UHdd) for all the 12 cities, only those variables that passed our quality checks (QC) are included in this table.
+
+| Table                  | Variables                                                                                                                           |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| [climate_atmosphere_downscaled](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere_downscaled)     | mean, minimum, maximum temperature and rainfall|
+
+
+Kindly read the [documentation](https://github.com/thinkingmachines/project-cchain-climate-downscaling/) before deciding to use this data. If you are uncertain, consider using the [climate_atmosphere](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere&schema=public&view=table_structure) table instead.
+
+
 ## Environment
 
 ### Land and hazards tables
@@ -180,7 +190,7 @@ Finally, the dataset also includes household surveys done on partner informal se
 
 :::{.callout-important icon=false appearance="simple"}
 
-Due to the sensitive nature of surveys and the vulnerability of the subjects involved, **access to this table is regulated**. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII).
+The license for this table is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en). Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII).
 
 To submit a request, please use this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
 :::
