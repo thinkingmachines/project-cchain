@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing">Licensing</a></li>
+  <li><a href="#data-licensing" id="toc-data-licensing" class="nav-link" data-scroll-target="#data-licensing">Data Licensing</a></li>
   <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
   <li><a href="#health" id="toc-health" class="nav-link" data-scroll-target="#health">Health</a>
   <ul class="collapse">
@@ -224,10 +224,10 @@ Quick links
 </div>
 </div>
 </section>
-<section id="licensing" class="level2">
-<h2 class="anchored" data-anchor-id="licensing">Licensing</h2>
+<section id="data-licensing" class="level2">
+<h2 class="anchored" data-anchor-id="data-licensing">Data Licensing</h2>
 <p>The Project CCHAIN dataset adapted the <a href="https://creativecommons.org/licenses/by/4.0/deed.en"><strong>Creative Commons Attribution 4.0 International (CC BY 4.0)</strong></a> license. This allows anyone to share (copy and redistribute) and adapt (remix, transform, and build upon) a work, as long as they give appropriate credit to the original creator.</p>
-<p>One exception, the <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings">tm_open_buildings</a> table, follows the <a href="http://opendatacommons.org/licenses/odbl/1.0/"><strong>Open Database License (ODbL)</strong></a> as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0’s attribution requirement, this license requires to share any modifications they make under the same ODbL license.</p>
+<p>However, please note that there are tables with different licenses: - The <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings">tm_open_buildings</a> table, follows the <a href="http://opendatacommons.org/licenses/odbl/1.0/"><strong>Open Database License (ODbL)</strong></a> as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0’s attribution requirement, this license requires to share any modifications they make under the same ODbL license. - The survey tables done by PACSII,<a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1">informal_settlement_community_surveys_v1</a> and <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v12">informal_settlement_community_surveys_v2</a>, is under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en"><strong>CC BY-SA 4.0</strong></a> license, which like ODbL, requires to share any modifications under the same CC BY-SA 4.0 license. Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII) in this <a href="https://forms.gle/Z9rfuJFENAQfbKeM6">form</a>.</p>
 <p>These licenses promote open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.</p>
 </section>
 <section id="basics" class="level2">
@@ -461,13 +461,28 @@ Quick links
 </tbody>
 </table>
 <p>More details on the climate tables can be found in the extended documentation available <a href="https://drive.google.com/file/d/1uEa9rvS0daSEzJI51K4Wcpeaq49SopMJ/view?usp=drive_link">here</a>.</p>
+<p>We recognize that the resolution of the (coarse) global gridded data might not be enough for localized studies. In addition to these, we also offer an enhanced version of the mean, minimum, maximum temperature and rainfall produced by our <a href="https://github.com/thinkingmachines/project-cchain-climate-downscaling">deep learning climate downscaling model</a>, which brought down the spatial resolution from the reanalysis scale (0.25°) to local scale (0.02°).. While we provide the full downscaled output as gridded netcdf files <a href="https://drive.google.com/drive/u/0/folders/1mXaFEhMYZnLzUCX3RciK5JEmguf_UHdd">here</a> for all the 12 cities, only those variables that passed our quality checks (QC) are included in this table.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere_downscaled">climate_atmosphere_downscaled</a></td>
+<td>mean, minimum, maximum temperature and rainfall</td>
+</tr>
+</tbody>
+</table>
+<p>Kindly read the <a href="https://github.com/thinkingmachines/project-cchain-climate-downscaling/">documentation</a> before deciding to use this data. If you are uncertain, consider using the <a href="https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=climate_atmosphere&amp;schema=public&amp;view=table_structure">climate_atmosphere</a> table instead.</p>
 </section>
 <section id="environment" class="level2">
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <section id="land-and-hazards-tables" class="level3">
 <h3 class="anchored" data-anchor-id="land-and-hazards-tables">Land and hazards tables</h3>
 <p>The dataset also contains variables pertaining to land characteristics and hazards over the chosen cities. The dataset sources are in the form of shapefiles representing categorical variables (hazard level, type of cover), or presence of objects (e.g.&nbsp;buildings). While these sources are high resolution, all are only static and schedule of updates is unspecified.</p>
-<p>Data sources are shapefiles depicting categorical variables like hazard levels and land cover types, or the presence of objects such as buildings. Although these sources offer high resolution, they are static, and there is no specified update schedule.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -591,7 +606,7 @@ Quick links
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Due to the sensitive nature of surveys and the vulnerability of the subjects involved, <strong>access to this table is regulated</strong>. Requests for access must be submitted for review and approval by the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII).</p>
+<p>The license for this table is <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA 4.0</a>. Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc.&nbsp;(PACSII).</p>
 <p>To submit a request, please use this <a href="https://forms.gle/Z9rfuJFENAQfbKeM6">form</a>.</p>
 </div>
 </div>
