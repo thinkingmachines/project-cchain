@@ -25,11 +25,13 @@ The tables are designed in a way that users can **choose variables that are most
 - **Check data availability** on your focus location and make sure they fit the requirements of your study.
 :::
 
-## Licensing
+## Data Licensing
 
 The Project CCHAIN dataset adapted the [**Creative Commons Attribution 4.0 International (CC BY 4.0)**](https://creativecommons.org/licenses/by/4.0/deed.en) license. This allows anyone to share (copy and redistribute) and adapt (remix, transform, and build upon) a work, as long as they give appropriate credit to the original creator.
 
- One exception, the [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license.
+However, please note that there are tables with different licenses:
+- The [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license.
+- The survey tables done by PACSII,[informal_settlement_community_surveys_v1](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1) and [informal_settlement_community_surveys_v2](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v12 ), is under the [**CC BY-SA 4.0**](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license, which like ODbL, requires to share any modifications under the same CC BY-SA 4.0 license. Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII) in this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
 
  These licenses promote open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
 
