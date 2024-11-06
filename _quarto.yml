@@ -5,7 +5,7 @@ project:
 notebook-links: false
 
 website:
-  title: Project CCHAIN
+  title: Philippines - Open, validated, health, climate, environment and socioeconomic linked dataset optimized for machine learning | Project CCHAIN 
   favicon: assets/icon.png
   open-graph: true
   twitter-card: true
