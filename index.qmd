@@ -20,8 +20,9 @@ https://doi.org/10.34740/kaggle/ds/4918229
 
 You may view a sample of the dataset in its linked form through the following links:
 
-- [Zamboanga City - City Level](https://drive.google.com/file/d/14_R93BsPGu464Q5Yc2CxgryQLsi_rvif)
-- [Zamboanga City - Barangay Level](https://drive.google.com/file/d/1cZ71qCIicXuCrCH5xS1MKHYjA2TnORyp)
+- **[Zamboanga City - City Level](https://drive.google.com/file/d/14_R93BsPGu464Q5Yc2CxgryQLsi_rvif)**
+- **[Zamboanga City - Barangay Level](https://drive.google.com/file/d/1cZ71qCIicXuCrCH5xS1MKHYjA2TnORyp)**
+
 To download the full dataset, kindly accomplish the form below.
 
 <iframe src="https://projectcchain.pythonanywhere.com/" width="100%" height="800px" style="border:none;"></iframe>
