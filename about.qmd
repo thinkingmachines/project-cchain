@@ -11,7 +11,7 @@ While there is growing interest in modeling the health impacts of climate change
 
 2. **Limited available datasets at the barangay level**, the smallest administrative unit in the Philippines, hinders researchers and policymakers to make impactful health interventions, especially for vulnerable communities. 
 
-The project team aims to ease entry and encourage more studies in the field by frontloading the needed work in assembling an open linked dataset of climate, environmental, socioeconomic, and health variables. 
+ With the support of the [Lacuna Fund](https://lacunafund.org/) and [Wellcome Trust](https://wellcome.org/), the project team aims to ease entry and encourage more studies in the field by frontloading the needed work in assembling an open linked dataset of climate, environmental, socioeconomic, and health variables.
 
 It is our hope that this endeavor can promote investments in the creation of more open and analysis-ready datasets.
 
@@ -46,7 +46,6 @@ We selected **12 key cities** with a variety of geographic, socioeconomic, and c
 - Katya Baladad
 - Luis Desquitado
 - Matthew Limlengco
-- Carlos Resurreccion
 
 [Manila Observatory (MO)](https://www.observatory.ph/) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
 
@@ -56,13 +55,10 @@ We selected **12 key cities** with a variety of geographic, socioeconomic, and c
 - Julie Dado
 - Leia Tonga
 
-The [Philippine Action for Community-led Shelter Initiatives, Inc. (PACSII)](https://pacsii.org/) is a non- governmental organization that serves as the intermediary support institution of the Homeless People's Federation Philippines (HDFPI) through capacity-building, research and advocacy, resource mobilization and fund management. PACSII envisions the transformation of urban poor and informal settler communities into secure, safe, resilient, self-determining, and inclusive urban communities with sustainable economic and ecological development.
+The [Philippine Action for Community-led Shelter Initiatives, Inc. (PACSII)](https://pacsii.org/) is a non- governmental organization that serves as the intermediary support institution of the Homeless People's Federation Philippines (HDFPI) through capacity-building, research and advocacy, resource mobilization and fund management. PACSII envisions the transformation of urban poor and informal settler communities into secure, safe, resilient, self-determining, and inclusive urban
+communities with sustainable economic and ecological development.
 
 **Team members**
 
 - Ericka Nava
 - Ruby Haddad
-
-## Our Funders
-
-This work was carried out with the aid of a grant from [Lacuna Fund](https://lacunafund.org/), an initiative co-founded by [The Rockefeller Foundation](https://www.rockefellerfoundation.org/), [Google.org](https://google.org), [Canada’s International Development Research Centre](https://www.idrc-crdi.ca/en), and [GIZ](https://www.giz.de/en/html/index.html) on behalf of the German Federal Ministry for Economic Cooperation and Development (BMZ); and [Wellcome](https://wellcome.org/).
