@@ -46,6 +46,7 @@ We selected **12 key cities** with a variety of geographic, socioeconomic, and c
 - Katya Baladad
 - Luis Desquitado
 - Matthew Limlengco
+- Carlos Resurreccion
 
 [Manila Observatory (MO)](https://www.observatory.ph/) was established in 1865 and is a Jesuit scientific research institution working on atmospheric and earth science in the Philippines and the Southeast Asian region. It advocates a science-based approach to sustainable development and poverty reduction through its principal focus on the areas of climate change and disaster science.
 
@@ -62,3 +63,8 @@ communities with sustainable economic and ecological development.
 
 - Ericka Nava
 - Ruby Haddad
+
+**Our funders**
+
+This work was carried out with the aid of a grant from [Lacuna Fund](https://lacunafund.org/), an initiative co-founded by [The Rockefeller Foundation](https://www.rockefellerfoundation.org/), [Google.org](https://google.org), [Canada’s International Development Research Centre](https://www.idrc-crdi.ca/en), and [GIZ](https://www.giz.de/en/html/index.html) on behalf of the German Federal Ministry for Economic Cooperation and Development (BMZ); and [Wellcome](https://wellcome.org/).
+
