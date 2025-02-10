@@ -14,9 +14,13 @@
 # 📜 Description
 
 The Project CCHAIN dataset is a validated, open-sourced linked dataset measuring 20 years (2003-2022) of climate, environmental, socioeconomic, and health variables at the barangay (village) level across 12 Philippine cities.
+
+This work was carried out with the aid of a grant from [Lacuna Fund](https://lacunafund.org/), an initiative co-founded by [The Rockefeller Foundation](https://www.rockefellerfoundation.org/), [Google.org](https://google.org), [Canada’s International Development Research Centre](https://www.idrc-crdi.ca/en), and [GIZ](https://www.giz.de/en/html/index.html) on behalf of the German Federal Ministry for Economic Cooperation and Development (BMZ); and [Wellcome](https://wellcome.org/).
+
+
 We provide here the code used to generate the barangay level tabular extracts from our various geospatial sources.
 
-Please see our [main documentation page](https://thinkingmachines.github.io/project-cchain) for more details
+Please see our [main documentation page](https://thinkingmachines.github.io/project-cchain) for more details.
 
 # 🗄 Notebooks used
 
