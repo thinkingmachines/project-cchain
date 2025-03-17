@@ -9,6 +9,8 @@ format: html
 </br>
 The **Project CCHAIN dataset** is a validated, open-sourced linked dataset containing 20 years (2003-2022) of health, climate, environment, and socioeconomic variables at the barangay (village) level across 12 Philippine cities. 
 
+The project also includes an open deep-learning climate downscaling model code and output data for temperature and rainfall.
+
 This work was carried out with the aid of a grant from [Lacuna Fund](https://lacunafund.org/), an initiative co-founded by [The Rockefeller Foundation](https://www.rockefellerfoundation.org/), [Google.org](https://google.org), [Canada’s International Development Research Centre](https://www.idrc-crdi.ca/en), and [GIZ](https://www.giz.de/en/html/index.html) on behalf of the German Federal Ministry for Economic Cooperation and Development (BMZ); and [Wellcome](https://wellcome.org/).
 
 
@@ -19,17 +21,16 @@ This work was carried out with the aid of a grant from [Lacuna Fund](https://lac
 *Thinking Machines Data Science (2024)*. Project CCHAIN Dataset: Open validated health, climate, environment, and socioeconomic data in 12 Philippine cities. Kaggle. 
 https://doi.org/10.34740/kaggle/ds/4918229
 :::
-# Access the dataset
+# Access the dataset and model
 
 You may view a sample of the dataset in its linked form through the following links:
 
-- **[Zamboanga City - City Level](https://drive.google.com/file/d/14_R93BsPGu464Q5Yc2CxgryQLsi_rvif)**
-- **[Zamboanga City - Barangay Level](https://drive.google.com/file/d/1cZ71qCIicXuCrCH5xS1MKHYjA2TnORyp)**
+- **[City Level Sample - Zamboanga City](https://drive.google.com/file/d/14_R93BsPGu464Q5Yc2CxgryQLsi_rvif)**
+- **[Barangay Level Sample - Zamboanga City](https://drive.google.com/file/d/1cZ71qCIicXuCrCH5xS1MKHYjA2TnORyp)**
 
-To download the full dataset, kindly accomplish the form below.
+To download the full dataset and model, kindly accomplish the form below.
 
 <iframe src="https://projectcchain.pythonanywhere.com/" width="100%" height="800px" style="border:none;"></iframe>
-
 
 
 # Project Team

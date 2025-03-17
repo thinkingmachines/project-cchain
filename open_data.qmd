@@ -1,5 +1,5 @@
 ---
-title: The Project CCHAIN Linked Dataset
+title: The Project CCHAIN Dataset
 ---
 
 ## Overview
@@ -11,6 +11,7 @@ The **Project CCHAIN dataset** is composed of 29 tables spanning 20 years (2003-
 
 - Access the data in the following links: [GDrive](https://drive.google.com/drive/u/0/folders/1NF_e3YM0dVBSxlVBWRxGQXwkl59sp5Jf),[Kaggle](https://www.kaggle.com/datasets/thinkdatasci/project-cchain/),[HDX](https://data.humdata.org/dataset/project-cchain)
 - Notebook to link the dataset [here](https://drive.google.com/drive/folders/123MrMXSVT6149MvJ8hGoDgN1s-YlQoH_)
+- Climate downscaling code repository [here](https://github.com/thinkingmachines/project-cchain-climate-downscaling)
 - Full documentation [here](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN)
 :::
 
@@ -31,7 +32,8 @@ The Project CCHAIN dataset adapted the [**Creative Commons Attribution 4.0 Inter
 
 However, please note that there are tables with different licenses:
 - The [tm_open_buildings](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=tm_open_buildings) table, follows the [**Open Database License (ODbL)**](http://opendatacommons.org/licenses/odbl/1.0/) as directed by its source, OpenStreetMap. Under the ODbL, users are free to use, modify, and distribute the database, but on top of CC BY 4.0's attribution requirement, this license requires to share any modifications they make under the same ODbL license.
-- The survey tables done by PACSII,[informal_settlement_community_surveys_v1](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1) and [informal_settlement_community_surveys_v2](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v12 ), is under the [**CC BY-SA 4.0**](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license, which like ODbL, requires to share any modifications under the same CC BY-SA 4.0 license. Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII) in this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
+
+- The survey tables done by PACSII,[informal_settlement_community_surveys_v1](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v1) and [informal_settlement_community_surveys_v2](https://dbdocs.io/lacuna-fund-project-team/Project-CCHAIN?table=informal_settlement_community_surveys_v12 ), is under the [**CC BY-SA 4.0**](https://creativecommons.org/licenses/by-sa/4.0/deed.en) license, which like ODbL, requires to share any modifications under the same CC BY-SA 4.0 license.
 
  These licenses promote open data principles, fostering collaboration and innovation while ensuring proper acknowledgment and transparency in the use of database resources.
 
@@ -113,6 +115,10 @@ The following are the tables that contain the disease data:
 
 These tables are made publicly available by Data Use Agreements between Epimetrics and their respective data owners. More details on the disease tables can be found in the extended documentation available [here](https://drive.google.com/file/d/1bLQ79MbKzBub7OgZkHAVl0qmIDMK5Z2Y/view).
 
+The spatiotemporal coverage and resolution of the disease cases data varies across the cities, and have large data gaps either due to limited availability and legal restrictions. A summary of the available data per source is provided in the figure below.
+
+![](assets/health_data.png)
+
 ## Climate
 
 The dataset incorporates daily climate variables that have been recognized as significant in disease modeling (Wong et al., 2018). These variables primarily come from publicly available gridded reanalysis datasets, offering the advantages of availability over the daily scale and global spatial coverage. Data is extracted and averaged over all grids covered within the boundaries of each barangay.
@@ -182,7 +188,9 @@ The dataset contains population estimates, as well as emerging remote-sensed ind
 
 ### Informal settlement community survey tables
 
-Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on various dates from 2001 to 2024.  The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and correct encoding inconsistencies.
+Finally, the dataset also includes household surveys done on partner informal settlement communities in the cities of Muntinlupa, Davao, Iloilo, and Mandaue administered on various dates from 2001 to 2024.  These include household level data on various variables on demographics, education, livelihood, transport, DRRM awareness and social aid.
+
+The data is manually encoded from existing paper hardcopies and underwent cleansing to eliminate personally identifiable data and correct encoding inconsistencies.
 
 | Table                                    | Variables                                                                                                                                                                                            |
 |------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -191,10 +199,7 @@ Finally, the dataset also includes household surveys done on partner informal se
 
 
 :::{.callout-important icon=false appearance="simple"}
-
-The license for this table is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en). Requests for access must be submitted to the Philippine Action for Community-Led Shelter Initiatives, Inc. (PACSII).
-
-To submit a request, please use this [form](https://forms.gle/Z9rfuJFENAQfbKeM6).
+The license for this table is [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en), which requires to share any modifications under the same CC BY-SA 4.0 license.
 :::
 
 More details on how these surveys were conducted can be found in the extended documentation available [here](https://drive.google.com/file/d/1zHS62GRYCasVwBY053orzUiQqOnKYRYR/view?usp=drive_link).

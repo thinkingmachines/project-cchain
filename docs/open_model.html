@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project CCHAIN - Baseline model for predicting disease outbreak periods</title>
+<title>Philippines - Open, validated, health, climate, environment and socioeconomic linked dataset optimized for machine learning | Project CCHAIN - Baseline model for predicting disease outbreak periods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,11 +107,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
+<meta property="og:title" content="Philippines - Open, validated, health, climate, environment and socioeconomic linked dataset optimized for machine learning | Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta property="og:description" content="">
 <meta property="og:image" content="assets/dengue_outbreak_feature_importance.png">
-<meta property="og:site_name" content="Project CCHAIN">
-<meta name="twitter:title" content="Project CCHAIN - Baseline model for predicting disease outbreak periods">
+<meta property="og:site_name" content="Philippines - Open, validated, health, climate, environment and socioeconomic linked dataset optimized for machine learning | Project CCHAIN">
+<meta name="twitter:title" content="Philippines - Open, validated, health, climate, environment and socioeconomic linked dataset optimized for machine learning | Project CCHAIN - Baseline model for predicting disease outbreak periods">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="assets/dengue_outbreak_feature_importance.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -315,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The <strong>end</strong> of an outbreak occurs during the week when cases fall below the threshold for <em>at least 2 weeks</em>.</p></li>
 </ol>
 <p>This is implemented in the code as follows:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-def-outbreak">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-def-outbreak">
 <div id="def-outbreak" class="cell theorem definition">
 <p><span class="theorem-title"><strong>Definition 1</strong></span> &nbsp;</p>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'outbreak' initialized with zeros</span></span>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Adding previous weeks’ cases as features may help enhance the model’s capability in predicting future cases.</p>
 <p>Experiment with the lagged features by adding or removing them. Here, we include lagged features based on cases from the past 1-4 weeks leading up to the current week.</p>
 <p>This is implemented in the code as follows:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-feat-engg-lags">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-feat-engg-lags">
 <div id="cell-feat-engg-lags" class="cell" data-outputid="e23aafa7-5af7-4f58-b8ce-bd5c97c2f218">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment lines if you want to explore the other lags</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lagged_linked_data <span class="op">=</span> linked_data.assign(</span>
@@ -745,7 +745,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="model-training" class="level2">
 <h2 class="anchored" data-anchor-id="model-training">Model training</h2>
 <p>Since the training dataset has a time component, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"><code>TimeSeriesSplit</code></a> from <code>sklearn</code> to properly cross-validate the model. Here is how it splits the training data in the time dimension.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-time-series-split">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-time-series-split">
 <div id="model-time-series-split" class="cell" data-outputid="71f6559e-428a-4ebc-8f15-a59b0d627699">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Illustrate time series split.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You may experiment the splits by changing the `n_splits` parameter.</span></span>
@@ -778,7 +778,7 @@ Split 4:
 </div>
 <p>The model chosen for the demo is the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">random forest (RF) classifier</a>. It is a ensemble machine learning method that constructs multiple decision trees from subsets of the training and averages over all these terrs to produce the final classification. Random forest classifiers are commonly used in various tasks like credit risk assessment, disease diagnosis, and customer churn prediction due to their high accuracy and ability to handle large datasets.</p>
 <p>The RF classifier model is tuned using the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a> function from <code>sklearn</code> performs model scoring by going over all combinations of specified parameter values, called the <em>parameter space</em>.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-1">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-1">
 <div id="model-tuning-1" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameter space to optimize</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
@@ -787,7 +787,7 @@ Split 4:
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-2">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-2">
 <div id="cell-model-tuning-2" class="cell" data-outputid="76edf078-1113-44e3-f167-55213f59c0be">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run GridSearch</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_grid_search <span class="op">=</span> GridSearchCV(classifier, param_grid, verbose<span class="op">=</span><span class="dv">1</span>, cv<span class="op">=</span>tss)</span>
@@ -814,7 +814,7 @@ Split 4:
 <h1>Results</h1>
 <section id="test-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="test-accuracy">Test accuracy</h2>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-3">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-3">
 <div id="model-tuning-3" class="cell" data-outputid="e3fd0dd4-258b-438a-9df6-4d084f6977cc">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results of model training</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best hyperparameters: </span><span class="sc">{</span>model_grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -830,7 +830,7 @@ Train best score std: 0.007221</code></pre>
 </div>
 </div>
 <p>Using our training setup, the model predicted outbreak labels with 84.89% accuracy.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-4">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-model-tuning-4">
 <div id="model-tuning-4" class="cell" data-outputid="1e66acc6-c64c-40d2-810e-f9f47dfadc1e">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -845,7 +845,7 @@ Train best score std: 0.007221</code></pre>
 </div>
 <p>The tuned model predicts weekly outbreak labels with 95.65% accuracy.</p>
 <p>To add detail, we can also view more metrics of the RF classification predictions using <code>classification_report</code> from <code>sklearn</code>.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/jace/workspace/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-results-classification-report">
+<div class="quarto-embed-nb-cell" data-notebook="/Users/jcperalta/Documents/Github/project-cchain/notebooks/baseline-model/baseline-model-demo.ipynb" data-notebook-title="Using the linked dataset in a baseline model for predicting disease outbreak periods" data-notebook-cellid="cell-results-classification-report">
 <div id="cell-results-classification-report" class="cell" data-outputid="5fc7de8b-a6dd-41d6-db66-efc0a9a3fc89">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, output_dict<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>report_df <span class="op">=</span> pd.DataFrame(report).transpose()</span>
